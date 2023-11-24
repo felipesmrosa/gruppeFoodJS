@@ -8,23 +8,27 @@ import sushi from '../../images/sushi.png';
 import padaria from '../../images/padaria.png';
 import churrasco from '../../images/churrasco.png';
 
-import best from '../../images/restaurantes/bestBurguer.jpg'
-import rupper from '../../images/restaurantes/rupper.jpg'
-import santo from '../../images/restaurantes/santo.jpg'
-import xburguinho from '../../images/restaurantes/xburguinho.jpg'
-import jungle from '../../images/restaurantes/jungle.jpg'
-
 import {
     MenuInteractiveIcons,
     MenuItems,
     HighlightsForYou,
     Restaurants,
-    Restaurant 
+    Restaurant
 } from './styles'
 
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthGoogleContext } from '../../contexts/authGoogle';
 
-export function Home() {
+export function Home({
+    restaurantes,
+    setRestaurantes,
+    infos,
+    setInfos
+}) {
+    
+    const { user, signOut } = useContext(AuthGoogleContext)
+
     return (
         <div>
             <MenuInteractiveIcons>
@@ -67,54 +71,24 @@ export function Home() {
             </MenuInteractiveIcons>
 
             <HighlightsForYou>
+                <button onClick={() => signOut()}>Sair</button>
                 <h3>Destaques:</h3>
 
                 <Restaurants>
-                    <Restaurant>
-                        <Link to='/restaurant'>
-                            <img src={jungle} alt="" />
-                            <div>
-                                <h3>Jungles Burguer</h3>
-                                <p>- Hamburgueria</p>
-                            </div>
-                        </Link>
-                    </Restaurant>
-                    <Restaurant>
-                        <Link to='/restaurant'>
-                            <img src={best} alt="" />
-                            <div>
-                                <h3>Best Burguer</h3>
-                                <p>- Hamburgueria</p>
-                            </div>
-                        </Link>
-                    </Restaurant>
-                    <Restaurant>
-                        <Link to='/restaurant'>
-                            <img src={rupper} alt="" />
-                            <div>
-                                <h3>Rupper's Burguer</h3>
-                                <p>- Hamburgueria</p>
-                            </div>
-                        </Link>
-                    </Restaurant>
-                    <Restaurant>
-                        <Link to='/restaurant'>
-                            <img src={santo} alt="" />
-                            <div>
-                                <h3>Santo Burguer</h3>
-                                <p>- Hamburgueria</p>
-                            </div>
-                        </Link>
-                    </Restaurant>
-                    <Restaurant>
-                        <Link to='/restaurant'>
-                            <img src={xburguinho} alt="" />
-                            <div>
-                                <h3>XBurguinho</h3>
-                                <p>- Hamburgueria</p>
-                            </div>
-                        </Link>
-                    </Restaurant>
+                    {restaurantes.map(restaurante => {
+                        return (
+                            <Restaurant key={restaurante.id}>
+                                <Link to='home/restaurant'>
+                                    <p>{restaurante.id}</p>
+                                    <img src={restaurante.logo} alt="" />
+                                    <div>
+                                        <h3>{restaurante.nome}</h3>
+                                        <p>{restaurante.mercadoria}</p>
+                                    </div>
+                                </Link>
+                            </Restaurant>
+                        )
+                    })}
                 </Restaurants>
             </HighlightsForYou>
         </div>

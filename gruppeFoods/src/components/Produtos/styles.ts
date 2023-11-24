@@ -16,8 +16,9 @@ export const LogoRestaurante = styled.img`
 `
 
 export const ContainerProdutos = styled.div`
-    margin: 2rem 22rem;
+    margin: 2rem 15rem;
     margin-bottom: 1rem;
+    max-width: 100%;
 `
 
 export const TitleSession = styled.h3`
