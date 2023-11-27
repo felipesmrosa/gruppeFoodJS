@@ -10,7 +10,15 @@ import {
 
 import { TrashSimple, XCircle } from 'phosphor-react'
 
-export function Carrinho({ handleToggleDiv, quantity }) {
+export function Carrinho({ handleToggleDiv, quantity, cart }) {
+    const handleRemoveItem = (itemId) => {
+        const updatedCart = cart.filter(item => item.id !== itemId);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        // Força a atualização do componente para refletir a mudança no carrinho
+        // window.location.reload();
+
+        console.log(localStorage)
+    }
     return (
         <>
             <Container>
@@ -24,61 +32,19 @@ export function Carrinho({ handleToggleDiv, quantity }) {
                     </QuantidadePrecoEItem>
                 </HeaderCarrinho>
                 <hr />
-                <ProdutosNoCarrinho>
-                    <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
-                    <NomePreco>
-                        <p>name</p>
-                        <p>price</p>
-                    </NomePreco>
-                    <QuantidadeDeleter>
-                        <p>quantity</p>
-                        <button><TrashSimple /></button>
-                    </QuantidadeDeleter>
-                </ProdutosNoCarrinho>
-                <ProdutosNoCarrinho>
-                    <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
-                    <NomePreco>
-                        <p>name</p>
-                        <p>price</p>
-                    </NomePreco>
-                    <QuantidadeDeleter>
-                        <p>quantity</p>
-                        <button><TrashSimple /></button>
-                    </QuantidadeDeleter>
-                </ProdutosNoCarrinho>
-                <ProdutosNoCarrinho>
-                    <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
-                    <NomePreco>
-                        <p>name</p>
-                        <p>price</p>
-                    </NomePreco>
-                    <QuantidadeDeleter>
-                        <p>quantity</p>
-                        <button><TrashSimple /></button>
-                    </QuantidadeDeleter>
-                </ProdutosNoCarrinho>
-                <ProdutosNoCarrinho>
-                    <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
-                    <NomePreco>
-                        <p>name</p>
-                        <p>price</p>
-                    </NomePreco>
-                    <QuantidadeDeleter>
-                        <p>quantity</p>
-                        <button><TrashSimple /></button>
-                    </QuantidadeDeleter>
-                </ProdutosNoCarrinho>
-                <ProdutosNoCarrinho>
-                    <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
-                    <NomePreco>
-                        <p>name</p>
-                        <p>price</p>
-                    </NomePreco>
-                    <QuantidadeDeleter>
-                        <p>quantity</p>
-                        <button><TrashSimple /></button>
-                    </QuantidadeDeleter>
-                </ProdutosNoCarrinho>
+                {cart.map(item => (
+                    <ProdutosNoCarrinho key={item.id}>
+                        <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
+                        <NomePreco>
+                            <p>{item.nome}</p>
+                            <p>{item.price}</p>
+                        </NomePreco>
+                        <QuantidadeDeleter>
+                            <p>{item.quantity}</p>
+                            <button onClick={handleRemoveItem}><TrashSimple /></button>
+                        </QuantidadeDeleter>
+                    </ProdutosNoCarrinho>
+                ))}
             </Container>
         </>
     )

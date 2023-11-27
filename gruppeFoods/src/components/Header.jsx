@@ -16,22 +16,31 @@ import {
     ShoppingCart
 } from 'phosphor-react'
 
+import { Link } from 'react-router-dom'
+
 import { Carrinho } from './Carrinho'
 
 import logo from '../images/logo.png';
+import { Configuracoes } from './ConfiguracoesPerfil';
 
-export function Header({ quantity }) {
+export function Header({ quantity, cart }) {
     const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
+    const [mostrarPerfil, setMostrarPerfil] = useState(false);
     // const [itensNoCarrinho, setItensNoCarrinho] = useState(localStorage.getItem('produto'))
 
     // Função para alternar a visibilidade da div
     function handleToggleDiv() {
         setMostrarCarrinho(!mostrarCarrinho);
     };
+    function handleTogglePerfil() {
+        setMostrarPerfil(!mostrarPerfil);
+    }
 
     return (
         <HeaderContainer>
-            <img src={logo} alt="" />
+            <Link to="/home">
+                <img src={logo} alt="" />
+            </Link>
 
             <SearchEat>
                 <input
@@ -57,7 +66,7 @@ export function Header({ quantity }) {
                     ENTREGA
                 </Entregas>
 
-                <Perfil>
+                <Perfil onClick={handleTogglePerfil}>
                     <UserCircle />  {/* pedidos, favoritos, perfil, meus endereços, sair */}
                 </Perfil>
 
@@ -70,7 +79,12 @@ export function Header({ quantity }) {
 
                 {mostrarCarrinho && (
                     <>
-                        <Carrinho quantity={quantity} handleToggleDiv={handleToggleDiv} />
+                        <Carrinho cart={cart} quantity={quantity} handleToggleDiv={handleToggleDiv} />
+                    </>
+                )}
+                {mostrarPerfil && (
+                    <>
+                        <Configuracoes />
                     </>
                 )}
 

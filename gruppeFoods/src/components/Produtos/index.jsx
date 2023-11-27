@@ -13,26 +13,26 @@ import {
     LogoRestaurante
 } from './styles'
 
-
-
 export function Produto({
     handleAddItemInCart,
     combos,
     lanches,
     porcoes,
     sobremesas,
-    bebidas
+    bebidas,
+    nome,
+    restaurantes
 }) {
     return (
         <>
             <Dados>
                 <LogoRestaurante src="../../src/images/restaurantes/jungle.jpg" alt="" />
                 <div>
-                    <p>(restaurante.nome)</p>
+                    <p>{nome}</p>
                     <p>(restaurante.abertoOuFechado)</p>
                     <p>(restaurante.horario)</p>
-                    <p>(restaurante.endereco)</p>
-                    <p>(restaurante.taxaEntrega)</p>
+                    {/* <p>{restaurantes.endereco}</p> */}
+                    <p>Taxa de entrega: R$5</p>
                 </div>
             </Dados>
             <ContainerProdutos>

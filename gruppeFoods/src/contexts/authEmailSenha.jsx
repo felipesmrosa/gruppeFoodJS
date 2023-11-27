@@ -1,44 +1,25 @@
 import { createContext, useEffect, useState } from "react";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "../Services/firebaseConfig";
 import { Navigate } from "react-router-dom";
-const provider = new GoogleAuthProvider();
 
-export const AuthGoogleContext = createContext({})
+export const AuthContext = createContext({})
 
-export function AuthGoogleProvider({ children }) {
+export function AuthProvider({ children }) {
     const auth = getAuth(app);
 
     const [user, setUser] = useState(null);
 
     useEffect(() => {
         function loadStorageAuth() {
-            const sessionToken = sessionStorage.getItem("@AuthFirebase: token");
-            const sessionUser = sessionStorage.getItem("@AuthFirebase: user");
+            const sessionToken = sessionStorage.getItem("@AuthFirebase:token");
+            const sessionUser = sessionStorage.getItem("@AuthFirebase:user");
             if (sessionToken && sessionUser) {
-                setUser(sessionUser)
+                setUser(JSON.parse(sessionUser));
             }
         }
         loadStorageAuth();
-    }, [])
-
-
-    function signInGoogle() {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                const user = result.user;
-                setUser(user)
-                sessionStorage.setItem('@AuthFirebase: token', token)
-                sessionStorage.setItem('@AuthFirebase: user', JSON.stringify(user))
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.customData.email;
-                const credential = GoogleAuthProvider.credentialFromError(error);
-            });
-    }
+    }, []);
 
     function signInWithEmailAndPasswordHandler(email, password) {
         signInWithEmailAndPassword(auth, email, password)
@@ -70,17 +51,9 @@ export function AuthGoogleProvider({ children }) {
             });
     }
 
-    function signOut() {
-        sessionStorage.clear()
-        setUser(null)
-
-        return (
-            <Navigate to="/" />
-        )
-    }
     return (
-        <AuthGoogleContext.Provider value={{ signInWithEmailAndPasswordHandler, signUpWithEmailAndPasswordHandler, signInGoogle, signed: !!user, user, signOut }}>
+        <AuthContext.Provider value={{ signInWithEmailAndPasswordHandler, signUpWithEmailAndPasswordHandler, signed: !!user, user }}>
             {children}
-        </AuthGoogleContext.Provider>
-    )
+        </AuthContext.Provider>
+    );
 }

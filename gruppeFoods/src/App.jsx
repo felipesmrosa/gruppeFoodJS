@@ -17,17 +17,6 @@ export function App() {
   const restauranteCollection = collection(db, "restaurantes")
 
   //Variaveis do banco
-  // const [infos, setInfos] = useState({
-  //   bairro: "",
-  //   cidade: "",
-  //   cpf: "",
-  //   email: "",
-  //   endereco: "",
-  //   logo: "",
-  //   mercadoria: "",
-  //   nome: "",
-  //   telefone: "",
-  // });
   const [bairro, setBairro] = useState("")
   const [cidade, setCidade] = useState("")
   const [cpf, setCpf] = useState("")
@@ -42,9 +31,17 @@ export function App() {
   async function criarRestaurante(e) {
     e.preventDefault()
     const restaurante = await addDoc(restauranteCollection, {
-      nome
+      nome, mercadoria, email, telefone, cidade, endereco, bairro, cpf, logo
     })
-    console.log('Nome', nome)
+    console.log('Nome: ', nome)
+    console.log('Mercadoria: ', mercadoria)
+    console.log('email: ', email)
+    console.log('telefone', telefone)
+    console.log('cidade', cidade)
+    console.log('endereco', endereco)
+    console.log('bairro', bairro)
+    console.log('cpf', cpf)
+    console.log('logo', logo)
   }
 
   //Armazena os restaurantes
@@ -70,9 +67,24 @@ export function App() {
           <Router
             nome={nome}
             setNome={setNome}
-            // infos={infos}
-            // setInfos={setInfos}
 
+            bairro={bairro}
+            setBairro={setBairro}
+            cidade={cidade}
+            setCidade={setCidade}
+            cpf={cpf}
+            setCpf={setCpf}
+            email={email}
+            setEmail={setEmail}
+            endereco={endereco}
+            setEndereco={setEndereco}
+            logo={logo}
+            setLogo={setLogo}
+            mercadoria={mercadoria}
+            setMercadoria={setMercadoria}
+            telefone={telefone}
+            setTelefone={setTelefone}
+            
             restaurantes={restaurantes}
             setRestaurantes={setRestaurantes}
 

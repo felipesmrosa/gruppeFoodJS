@@ -8,8 +8,11 @@ export const HeaderContainer = styled.header`
     background-color: ${props => props.theme["gray-100"]};
 
     img {
-        width: 8%;
+        width: 75%;
         padding: 0.5rem;
+    }
+    a {
+        width: 11%;
     }
 
     nav {
@@ -78,7 +81,7 @@ export const Perfil = styled.button `
     align-items: center;
     justify-content: center;
     border: 2px solid #FF3939;
-    padding: 0.3rem;
+    padding: 0.6rem;
     border-radius: 6px;
     color: #FF3939;
     font-size: 1.85rem;

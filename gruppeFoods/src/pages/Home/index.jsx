@@ -23,10 +23,26 @@ import { AuthGoogleContext } from '../../contexts/authGoogle';
 export function Home({
     restaurantes,
     setRestaurantes,
-    infos,
-    setInfos
+    nome,
+    setNome,
+    bairro,
+    setBairro,
+    cidade,
+    setCidade,
+    cpf,
+    setCpf,
+    email,
+    setEmail,
+    endereco,
+    setEndereco,
+    logo,
+    setLogo,
+    mercadoria,
+    setMercadoria,
+    telefone,
+    setTelefone
 }) {
-    
+
     const { user, signOut } = useContext(AuthGoogleContext)
 
     return (
@@ -71,16 +87,14 @@ export function Home({
             </MenuInteractiveIcons>
 
             <HighlightsForYou>
-                <button onClick={() => signOut()}>Sair</button>
                 <h3>Destaques:</h3>
 
                 <Restaurants>
                     {restaurantes.map(restaurante => {
                         return (
                             <Restaurant key={restaurante.id}>
-                                <Link to='home/restaurant'>
-                                    <p>{restaurante.id}</p>
-                                    <img src={restaurante.logo} alt="" />
+                                <Link to={`home/restaurante/${restaurante.nome}`}>
+                                    <img src="../../src/images/restaurantes/jungle.jpg" alt="" />
                                     <div>
                                         <h3>{restaurante.nome}</h3>
                                         <p>{restaurante.mercadoria}</p>

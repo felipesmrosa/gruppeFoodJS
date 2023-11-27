@@ -1,5 +1,6 @@
 import { Produto } from '../../components/Produtos';
 import { QuantidadeJaDentroDoCarrinho } from './styles';
+import { useParams } from 'react-router-dom';
 
 export function InsideRestaurant({
     quantity,
@@ -9,12 +10,19 @@ export function InsideRestaurant({
     lanches,
     porcoes,
     sobremesas,
-    bebidas
+    bebidas,
+    restaurantes
 }) {
+
+    const { nome } = useParams();
 
     return (
         <>
+            <h1>{nome}</h1>
             <Produto
+                restaurantes={restaurantes}    
+
+                nome={nome}
                 quantity={quantity}
                 handleAddItemInCart={handleAddItemInCart}
                 handleDelItemInCart={handleDelItemInCart}

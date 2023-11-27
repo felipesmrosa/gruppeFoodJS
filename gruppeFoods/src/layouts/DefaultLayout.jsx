@@ -4,9 +4,10 @@ import { Footer } from "../components/Footer";
 import React from "react";
 
 export function DefaultLayout({ quantity, infos, setInfos }) {
+
     return (
         <div>
-            <Header quantity={quantity}/>
+            <Header cart={cart} quantity={quantity} />
             <Outlet />
             <Footer infos={infos} setInfos={setInfos} />
         </div>

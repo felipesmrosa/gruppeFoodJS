@@ -6,15 +6,30 @@ import { useEffect, useState } from 'react';
 import { Login } from './pages/Login';
 import { PrivateRoutes } from './PrivateRoutes';
 import { RegisterYourRestaurant } from './components/ContentFooter/RegisterYourRestaurant';
+import { Register } from './pages/Register';
 
 export function Router({
     restaurantes,
     setRestaurantes,
-    // infos,
-    // setInfos,
     criarRestaurante,
     nome,
-    setNome
+    setNome,
+    bairro,
+    setBairro,
+    cidade,
+    setCidade,
+    cpf,
+    setCpf,
+    email,
+    setEmail,
+    endereco,
+    setEndereco,
+    logo,
+    setLogo,
+    mercadoria,
+    setMercadoria,
+    telefone,
+    setTelefone
 }) {
 
     // Obtendo o valor do localStorage ou definindo como 0 se não existir
@@ -25,12 +40,26 @@ export function Router({
         localStorage.setItem('quantity', quantity.toString());
     }, [quantity]);
 
-    // Função para aumentar a quantidade (pode ser um botão no seu código real)
+    const [cartProduct, useCartPoduct] = useState({
+        id: 1,
+        nome: 'blablablabla',
+        price: 182874,
+        quantity: 1
+    })
+
     function handleAddItemInCart() {
+        // Recupere o carrinho existente no localStorage ou inicialize um array vazio
+        const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Adicione o novo item ao carrinho
+        const updatedCart = [...existingCart, cartProduct];
+
+        // Salve o carrinho atualizado no localStorage
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+
         setQuantity(quantity + 1);
     };
-
-    // Função para diminuir a quantidade (pode ser um botão no seu código real)
+    
     function handleDelItemInCart() {
         setQuantity(quantity - 1);
     };
@@ -211,6 +240,7 @@ export function Router({
     return (
         <Routes>
             <Route path='/' element={<Login />} />
+            <Route path='/register' element={<Register />} />
             <Route path='/home' element={<DefaultLayout quantity={quantity} />}>
                 <Route path='/home' element={<PrivateRoutes />}>
                     <Route path='/home/' element={<Home
@@ -219,12 +249,31 @@ export function Router({
                         nome={nome}
                         setNome={setNome}
 
+                        bairro={bairro}
+                        setBairro={setBairro}
+                        cidade={cidade}
+                        setCidade={setCidade}
+                        cpf={cpf}
+                        setCpf={setCpf}
+                        email={email}
+                        setEmail={setEmail}
+                        endereco={endereco}
+                        setEndereco={setEndereco}
+                        logo={logo}
+                        setLogo={setLogo}
+                        mercadoria={mercadoria}
+                        setMercadoria={setMercadoria}
+                        telefone={telefone}
+                        setTelefone={setTelefone}
+
                         restaurantes={restaurantes}
                         setRestaurantes={setRestaurantes} />} />
                     <Route
-                        path='home/restaurant'
+                        path='home/restaurante/:nome'
                         element={
                             <InsideRestaurant
+                                restaurante={restaurantes}
+
                                 combos={combos}
                                 lanches={lanches}
                                 porcoes={porcoes}
@@ -241,8 +290,24 @@ export function Router({
                             <RegisterYourRestaurant
                                 nome={nome}
                                 setNome={setNome}
-                                // infos={infos}
-                                // setInfos={setInfos}
+
+                                bairro={bairro}
+                                setBairro={setBairro}
+                                cidade={cidade}
+                                setCidade={setCidade}
+                                cpf={cpf}
+                                setCpf={setCpf}
+                                email={email}
+                                setEmail={setEmail}
+                                endereco={endereco}
+                                setEndereco={setEndereco}
+                                logo={logo}
+                                setLogo={setLogo}
+                                mercadoria={mercadoria}
+                                setMercadoria={setMercadoria}
+                                telefone={telefone}
+                                setTelefone={setTelefone}
+
                                 criarRestaurante={criarRestaurante}
                             />
                         }
