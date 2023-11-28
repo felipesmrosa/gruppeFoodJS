@@ -23,6 +23,17 @@ export function Carrinho({
     bebidas
 }) {
     const [carrinho, setCarrinho] = useState([])
+    const produtos = [
+        {combos},
+        {lanches},
+        {porcoes},
+        {sobremesas},
+        {bebidas}
+    ]
+
+    const addToCart = produtos => {
+        setCarrinho([...carrinho, produtos])
+    }
     return (
         <>
             <Container>
