@@ -14,24 +14,8 @@ export function Router({
 
     criarRestaurante,
 
-    nome,
-    setNome,
-    bairro,
-    setBairro,
-    cidade,
-    setCidade,
-    cpf,
-    setCpf,
-    email,
-    setEmail,
-    endereco,
-    setEndereco,
-    logo,
-    setLogo,
-    mercadoria,
-    setMercadoria,
-    telefone,
-    setTelefone
+    infos,
+    setInfos
 }) {
 
     // Obtendo o valor do localStorage ou definindo como 0 se não existir
@@ -61,7 +45,7 @@ export function Router({
 
         setQuantity(quantity + 1);
     };
-    
+
     function handleDelItemInCart() {
         setQuantity(quantity - 1);
     };
@@ -243,57 +227,48 @@ export function Router({
         <Routes>
             <Route path='/' element={<Login />} />
             <Route path='/reset' element={<ResetPass />} />
-            <Route path='/home' element={<DefaultLayout quantity={quantity} />}>
-                    <Route path='/home/' element={<Home restaurantes={restaurantes} />} />
-                    <Route
-                        path='home/restaurante/:nome'
-                        element={
-                            <InsideRestaurant
-                                restaurante={restaurantes}
-                                logo={logo}
-                                
-                                quantity={quantity}
+            <Route path='/home' element={<DefaultLayout
+                quantity={quantity}
+                
+                combos={combos}
+                lanches={lanches}
+                porcoes={porcoes}
+                sobremesas={sobremesas}
+                bebidas={bebidas}
+            />}>
+                <Route path='/home/' element={<Home restaurantes={restaurantes} />} />
+                <Route
+                    path='home/restaurante/:nome'
+                    element={
+                        <InsideRestaurant
+                            restaurante={restaurantes}
 
-                                //Temporário
-                                combos={combos}
-                                lanches={lanches}
-                                porcoes={porcoes}
-                                sobremesas={sobremesas}
-                                bebidas={bebidas}
+                            quantity={quantity}
 
-                                handleDelItemInCart={handleDelItemInCart}
-                                handleAddItemInCart={handleAddItemInCart}
-                            />}
-                    />
-                    <Route
-                        path='home/registerRestaurant'
-                        element={
-                            <RegisterYourRestaurant
-                                nome={nome}
-                                setNome={setNome}
-                                bairro={bairro}
-                                setBairro={setBairro}
-                                cidade={cidade}
-                                setCidade={setCidade}
-                                cpf={cpf}
-                                setCpf={setCpf}
-                                email={email}
-                                setEmail={setEmail}
-                                endereco={endereco}
-                                setEndereco={setEndereco}
-                                logo={logo}
-                                setLogo={setLogo}
-                                mercadoria={mercadoria}
-                                setMercadoria={setMercadoria}
-                                telefone={telefone}
-                                setTelefone={setTelefone}
+                            //Temporário
+                            combos={combos}
+                            lanches={lanches}
+                            porcoes={porcoes}
+                            sobremesas={sobremesas}
+                            bebidas={bebidas}
 
-                                criarRestaurante={criarRestaurante}
-                            />
-                        }
-                    >
-                    </Route>
+                            handleDelItemInCart={handleDelItemInCart}
+                            handleAddItemInCart={handleAddItemInCart}
+                        />}
+                />
+                <Route
+                    path='home/registerRestaurant'
+                    element={
+                        <RegisterYourRestaurant
+                            infos={infos}
+                            setInfos={setInfos}
+
+                            criarRestaurante={criarRestaurante}
+                        />
+                    }
+                >
                 </Route>
+            </Route>
         </Routes >
     )
 }

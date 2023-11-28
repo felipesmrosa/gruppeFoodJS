@@ -12,7 +12,6 @@ export function InsideRestaurant({
     sobremesas,
     bebidas,
     restaurantes,
-    logo
 }) {
 
     const { nome } = useParams();
@@ -21,7 +20,6 @@ export function InsideRestaurant({
         <>
             <Produto
                 restaurantes={restaurantes}   
-                logo={logo} 
 
                 nome={nome}
                 quantity={quantity}

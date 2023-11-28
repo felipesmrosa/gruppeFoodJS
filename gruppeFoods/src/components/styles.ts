@@ -22,7 +22,7 @@ export const HeaderContainer = styled.header`
     }
 `
 
-export const SearchEat = styled.div`
+export const SearchEat = styled.form`
     input {
         outline: none;
         border-radius: 8px 0px 0px 8px;
@@ -63,6 +63,7 @@ export const ButtonCarrinho = styled.button`
     color: ${props => props.theme["red-100"]};
     font-size: 1.15rem;
     background-color: transparent;
+    position: relative;
 `
 
 export const Entregas = styled.button `
@@ -96,10 +97,12 @@ export const QuantidadeJaDentroDoCarrinho = styled.span`
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     font-size: 0.95rem;
     position: absolute;
-    left: 86.8%;
-    top: 4%;
+    left: 88%;
+    bottom: 66%;
+    color: ${props => props.theme['white-100']};
 ` 
 
 

@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import {
     ContainerProdutos,
     Combos,
@@ -12,36 +13,22 @@ import {
     Dados,
     LogoRestaurante
 } from './styles'
+import { Provider } from '../context/provider'
 
 export function Produto({
-    handleAddItemInCart,
     combos,
     lanches,
     porcoes,
     sobremesas,
     bebidas,
-    nome,
-    restaurantes,
-    logo
 }) {
+    const { cartItem, setCartItem } = useContext(Provider);
+
+    function handleAddCart() {
+        setCartItem([ ...cartItem, combos ])
+    }
     return (
         <>
-            <Dados>
-                {/* <LogoRestaurante src={logo} alt="" />
-                <div>
-                    <p>{nome}</p>
-                    <p>(restaurante.abertoOuFechado)</p>
-                    <p>18h30 - 23h30</p>
-                    <p>{logo}</p>
-                    <p>Taxa de entrega: R$5</p>
-                </div> */}
-                {restaurantes.map((restaurante) => (
-                    <div key={restaurante.id}>
-                        <p>{restaurante.nome}</p>
-                        <img src={restaurante.logo} alt="" />
-                    </div>
-                ))}
-            </Dados>
             <ContainerProdutos>
                 <TitleSession>Combos</TitleSession>
                 <Combos>
@@ -52,7 +39,7 @@ export function Produto({
                                 <h3>{combo.name}</h3>
                                 <p>${combo.price}</p>
                             </div>
-                            <AddCart onClick={handleAddItemInCart}>
+                            <AddCart onClick={handleAddCart}>
                                 add to cart
                             </AddCart>
                         </ProductCard>

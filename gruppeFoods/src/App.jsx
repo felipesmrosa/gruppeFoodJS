@@ -15,22 +15,27 @@ export function App() {
   const db = getFirestore(app)
   const restauranteCollection = collection(db, "restaurantes")
 
-  //Variaveis do banco
-  const [bairro, setBairro] = useState("")
-  const [cidade, setCidade] = useState("")
-  const [cpf, setCpf] = useState("")
-  const [email, setEmail] = useState("")
-  const [endereco, setEndereco] = useState("")
-  const [logo, setLogo] = useState("")
-  const [mercadoria, setMercadoria] = useState("")
-  const [nome, setNome] = useState("")
-  const [telefone, setTelefone] = useState("")
+  //Array com as váriaveis do banco de dados
+  const [infos, setInfos] = useState({
+    nome: '',
+    mercadoria: '',
+    email: '',
+    telefone: '',
+    cidade: '',
+    endereco: '',
+    bairro: '',
+    cpf: '',
+    logo: ''
+  });
 
-  //Criar Restaurante
+  //infos.bairro | infos.cidade | infos.cpf | infos.email | infos.endereco | infos.logo | infos.mercadoria | infos.nome | infos.telefone
+  //setInfos((prevState) => ({ ...prevState, cidade: "Itajaí", bairro: "Cordeiros" }))
+
+  //Criar Restaurante no Banco de Dados
   async function criarRestaurante(e) {
     e.preventDefault()
     const restaurante = await addDoc(restauranteCollection, {
-      nome, mercadoria, email, telefone, cidade, endereco, bairro, cpf, logo:logo
+      nome, mercadoria, email, telefone, cidade, endereco, bairro, cpf, logo: logo
     })
   }
 
@@ -51,35 +56,19 @@ export function App() {
   }, []);
 
   return (
-      <ThemeProvider theme={defaultTheme}>
-        <BrowserRouter>
-          <Router
-            nome={nome}
-            setNome={setNome}
-            bairro={bairro}
-            setBairro={setBairro}
-            cidade={cidade}
-            setCidade={setCidade}
-            cpf={cpf}
-            setCpf={setCpf}
-            email={email}
-            setEmail={setEmail}
-            endereco={endereco}
-            setEndereco={setEndereco}
-            logo={logo}
-            setLogo={setLogo}
-            mercadoria={mercadoria}
-            setMercadoria={setMercadoria}
-            telefone={telefone}
-            setTelefone={setTelefone}
+    <ThemeProvider theme={defaultTheme}>
+      <BrowserRouter>
+        <Router
+          infos={infos}
+          setInfos={setInfos}
 
-            restaurantes={restaurantes}
-            setRestaurantes={setRestaurantes}
+          restaurantes={restaurantes}
+          setRestaurantes={setRestaurantes}
 
-            criarRestaurante={criarRestaurante}
-          />
-        </BrowserRouter>
-        <GlobalStyle />
-      </ThemeProvider>
+          criarRestaurante={criarRestaurante}
+        />
+      </BrowserRouter>
+      <GlobalStyle />
+    </ThemeProvider>
   )
 }

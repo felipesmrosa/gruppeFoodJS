@@ -23,9 +23,19 @@ import { Carrinho } from './Carrinho'
 import logo from '../images/logo.png';
 import { Configuracoes } from './ConfiguracoesPerfil';
 
-export function Header({ quantity, cart }) {
+export function Header({
+    quantity,
+    cart,
+    combos,
+    lanches,
+    porcoes,
+    sobremesas,
+    bebidas
+}) {
     const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
     const [mostrarPerfil, setMostrarPerfil] = useState(false);
+
+    const [searchValue, setSearchValue] = useState('');
     // const [itensNoCarrinho, setItensNoCarrinho] = useState(localStorage.getItem('produto'))
 
     // Função para alternar a visibilidade da div
@@ -36,17 +46,24 @@ export function Header({ quantity, cart }) {
         setMostrarPerfil(!mostrarPerfil);
     }
 
+    function handleSearch(e) {
+        e.preventDefault()
+    }
+
     return (
         <HeaderContainer>
             <Link to="/home">
                 <img src={logo} alt="" />
             </Link>
 
-            <SearchEat>
+            <SearchEat onSubmit={handleSearch}>
                 <input
                     type="text"
                     list='search'
                     placeholder='Pesquise'
+                    onChange={({ target }) => setSearchValue(target.value)}
+                    value={searchValue}
+                    required
                 />
 
                 <datalist id="search">
@@ -71,15 +88,23 @@ export function Header({ quantity, cart }) {
                 </Perfil>
 
                 <ButtonCarrinho onClick={handleToggleDiv}>
-                    <ShoppingCart />
-                    CARRINHO
+                    <ShoppingCart /> CARRINHO
+                    <QuantidadeJaDentroDoCarrinho>1</QuantidadeJaDentroDoCarrinho>
                 </ButtonCarrinho>
-
-                {quantity > 0 && <QuantidadeJaDentroDoCarrinho>{quantity}</QuantidadeJaDentroDoCarrinho>}
 
                 {mostrarCarrinho && (
                     <>
-                        <Carrinho cart={cart} quantity={quantity} handleToggleDiv={handleToggleDiv} />
+                        <Carrinho
+                            cart={cart}
+                            quantity={quantity}
+                            handleToggleDiv={handleToggleDiv}
+                            cart={cart}
+                            combos={combos}
+                            lanches={lanches}
+                            porcoes={porcoes}
+                            sobremesas={sobremesas}
+                            bebidas={bebidas}
+                        />
                     </>
                 )}
                 {mostrarPerfil && (
