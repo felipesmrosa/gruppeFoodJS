@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import React from "react";
 
-export function DefaultLayout({ quantity, infos, setInfos }) {
+export function DefaultLayout({ cart, quantity, infos, setInfos }) {
 
     return (
         <div>

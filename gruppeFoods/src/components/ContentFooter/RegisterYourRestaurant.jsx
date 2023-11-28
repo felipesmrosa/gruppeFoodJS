@@ -1,4 +1,7 @@
 import { Formulario } from '../styles';
+import { imgDB } from '../../Services/firebaseConfig';
+import { v4 } from "uuid"
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 export function RegisterYourRestaurant({
     criarRestaurante,
@@ -21,6 +24,17 @@ export function RegisterYourRestaurant({
     telefone,
     setTelefone
 }) {
+
+    function handleUpload(e) {
+        console.log(e.target.files[0])
+        const imgs = ref(imgDB, `Imgs${v4()}`)
+        uploadBytes(imgs, e.target.files[0]).then(data => {
+            console.log(data, "imgs")
+            getDownloadURL(data.ref).then(val=> {
+                setLogo(val)
+            })
+        })
+    }
     return (
         <>
             <Formulario>
@@ -93,8 +107,7 @@ export function RegisterYourRestaurant({
                 <input
                     type="file"
                     placeholder='Logo do Restaurante'
-                    onChange={(e) => setLogo(e.target.value)}
-                    defaultValue={logo}
+                    onChange={(e) => handleUpload(e)}
                     required
                 />
                 <button

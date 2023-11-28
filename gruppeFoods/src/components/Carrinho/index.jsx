@@ -32,7 +32,19 @@ export function Carrinho({ handleToggleDiv, quantity, cart }) {
                     </QuantidadePrecoEItem>
                 </HeaderCarrinho>
                 <hr />
-                {cart.map(item => (
+                <ProdutosNoCarrinho>
+                        <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
+                        <NomePreco>
+                            <p>Lanche01</p>
+                            <p>$12</p>
+                        </NomePreco>
+                        <QuantidadeDeleter>
+                            <p>1</p>
+                            <button onClick={handleRemoveItem}><TrashSimple /></button>
+                        </QuantidadeDeleter>
+                    </ProdutosNoCarrinho>
+
+                {/* {cart.map(item => (
                     <ProdutosNoCarrinho key={item.id}>
                         <img src="../../src/images/comidas/lanches/Lanche01.jpg" alt="" />
                         <NomePreco>
@@ -44,7 +56,7 @@ export function Carrinho({ handleToggleDiv, quantity, cart }) {
                             <button onClick={handleRemoveItem}><TrashSimple /></button>
                         </QuantidadeDeleter>
                     </ProdutosNoCarrinho>
-                ))}
+                ))} */}
             </Container>
         </>
     )

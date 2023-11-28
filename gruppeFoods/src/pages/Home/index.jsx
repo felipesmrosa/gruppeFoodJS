@@ -17,33 +17,10 @@ import {
 } from './styles'
 
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthGoogleContext } from '../../contexts/authGoogle';
 
 export function Home({
-    restaurantes,
-    setRestaurantes,
-    nome,
-    setNome,
-    bairro,
-    setBairro,
-    cidade,
-    setCidade,
-    cpf,
-    setCpf,
-    email,
-    setEmail,
-    endereco,
-    setEndereco,
-    logo,
-    setLogo,
-    mercadoria,
-    setMercadoria,
-    telefone,
-    setTelefone
+    restaurantes
 }) {
-
-    const { user, signOut } = useContext(AuthGoogleContext)
 
     return (
         <div>
@@ -94,7 +71,7 @@ export function Home({
                         return (
                             <Restaurant key={restaurante.id}>
                                 <Link to={`home/restaurante/${restaurante.nome}`}>
-                                    <img src="../../src/images/restaurantes/jungle.jpg" alt="" />
+                                    <img src={restaurante.logo} alt="" />
                                     <div>
                                         <h3>{restaurante.nome}</h3>
                                         <p>{restaurante.mercadoria}</p>

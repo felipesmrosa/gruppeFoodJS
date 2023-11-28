@@ -11,16 +11,17 @@ export function InsideRestaurant({
     porcoes,
     sobremesas,
     bebidas,
-    restaurantes
+    restaurantes,
+    logo
 }) {
 
     const { nome } = useParams();
 
     return (
         <>
-            <h1>{nome}</h1>
             <Produto
-                restaurantes={restaurantes}    
+                restaurantes={restaurantes}   
+                logo={logo} 
 
                 nome={nome}
                 quantity={quantity}

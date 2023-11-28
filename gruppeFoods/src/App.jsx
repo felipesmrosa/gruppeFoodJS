@@ -9,7 +9,6 @@ import { GlobalStyle } from "./styles/global";
 import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore'
 import { useEffect, useState } from "react";
 import { app } from "./Services/firebaseConfig";
-import { AuthGoogleProvider } from "./contexts/authGoogle";
 
 export function App() {
   //Firebase
@@ -31,17 +30,8 @@ export function App() {
   async function criarRestaurante(e) {
     e.preventDefault()
     const restaurante = await addDoc(restauranteCollection, {
-      nome, mercadoria, email, telefone, cidade, endereco, bairro, cpf, logo
+      nome, mercadoria, email, telefone, cidade, endereco, bairro, cpf, logo:logo
     })
-    console.log('Nome: ', nome)
-    console.log('Mercadoria: ', mercadoria)
-    console.log('email: ', email)
-    console.log('telefone', telefone)
-    console.log('cidade', cidade)
-    console.log('endereco', endereco)
-    console.log('bairro', bairro)
-    console.log('cpf', cpf)
-    console.log('logo', logo)
   }
 
   //Armazena os restaurantes
@@ -61,13 +51,11 @@ export function App() {
   }, []);
 
   return (
-    <AuthGoogleProvider>
       <ThemeProvider theme={defaultTheme}>
         <BrowserRouter>
           <Router
             nome={nome}
             setNome={setNome}
-
             bairro={bairro}
             setBairro={setBairro}
             cidade={cidade}
@@ -84,7 +72,7 @@ export function App() {
             setMercadoria={setMercadoria}
             telefone={telefone}
             setTelefone={setTelefone}
-            
+
             restaurantes={restaurantes}
             setRestaurantes={setRestaurantes}
 
@@ -93,6 +81,5 @@ export function App() {
         </BrowserRouter>
         <GlobalStyle />
       </ThemeProvider>
-    </AuthGoogleProvider>
   )
 }

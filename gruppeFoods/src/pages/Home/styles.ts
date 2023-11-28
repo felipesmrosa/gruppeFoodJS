@@ -11,6 +11,7 @@ export const MenuItems = styled.div `
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     img {
         width: 21%;

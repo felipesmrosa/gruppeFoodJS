@@ -21,19 +21,26 @@ export function Produto({
     sobremesas,
     bebidas,
     nome,
-    restaurantes
+    restaurantes,
+    logo
 }) {
     return (
         <>
             <Dados>
-                <LogoRestaurante src="../../src/images/restaurantes/jungle.jpg" alt="" />
+                {/* <LogoRestaurante src={logo} alt="" />
                 <div>
                     <p>{nome}</p>
                     <p>(restaurante.abertoOuFechado)</p>
-                    <p>(restaurante.horario)</p>
-                    {/* <p>{restaurantes.endereco}</p> */}
+                    <p>18h30 - 23h30</p>
+                    <p>{logo}</p>
                     <p>Taxa de entrega: R$5</p>
-                </div>
+                </div> */}
+                {restaurantes.map((restaurante) => (
+                    <div key={restaurante.id}>
+                        <p>{restaurante.nome}</p>
+                        <img src={restaurante.logo} alt="" />
+                    </div>
+                ))}
             </Dados>
             <ContainerProdutos>
                 <TitleSession>Combos</TitleSession>

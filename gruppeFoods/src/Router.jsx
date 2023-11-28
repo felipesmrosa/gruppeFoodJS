@@ -4,14 +4,16 @@ import { DefaultLayout } from './layouts/DefaultLayout'
 import { InsideRestaurant } from './pages/InsideRestaurant'
 import { useEffect, useState } from 'react';
 import { Login } from './pages/Login';
-import { PrivateRoutes } from './PrivateRoutes';
 import { RegisterYourRestaurant } from './components/ContentFooter/RegisterYourRestaurant';
-import { Register } from './pages/Register';
+import { ResetPass } from './pages/ResetPass';
+
 
 export function Router({
     restaurantes,
     setRestaurantes,
+
     criarRestaurante,
+
     nome,
     setNome,
     bairro,
@@ -40,12 +42,12 @@ export function Router({
         localStorage.setItem('quantity', quantity.toString());
     }, [quantity]);
 
-    const [cartProduct, useCartPoduct] = useState({
-        id: 1,
-        nome: 'blablablabla',
-        price: 182874,
-        quantity: 1
-    })
+    // const [cartProduct, useCartPoduct] = useState({
+    //     id: 1,
+    //     nome: 'blablablabla',
+    //     price: 182874,
+    //     quantity: 1
+    // })
 
     function handleAddItemInCart() {
         // Recupere o carrinho existente no localStorage ou inicialize um array vazio
@@ -240,47 +242,26 @@ export function Router({
     return (
         <Routes>
             <Route path='/' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route path='/reset' element={<ResetPass />} />
             <Route path='/home' element={<DefaultLayout quantity={quantity} />}>
-                <Route path='/home' element={<PrivateRoutes />}>
-                    <Route path='/home/' element={<Home
-                        // infos={infos}
-                        // setInfos={setInfos}
-                        nome={nome}
-                        setNome={setNome}
-
-                        bairro={bairro}
-                        setBairro={setBairro}
-                        cidade={cidade}
-                        setCidade={setCidade}
-                        cpf={cpf}
-                        setCpf={setCpf}
-                        email={email}
-                        setEmail={setEmail}
-                        endereco={endereco}
-                        setEndereco={setEndereco}
-                        logo={logo}
-                        setLogo={setLogo}
-                        mercadoria={mercadoria}
-                        setMercadoria={setMercadoria}
-                        telefone={telefone}
-                        setTelefone={setTelefone}
-
-                        restaurantes={restaurantes}
-                        setRestaurantes={setRestaurantes} />} />
+                    <Route path='/home/' element={<Home restaurantes={restaurantes} />} />
                     <Route
                         path='home/restaurante/:nome'
                         element={
                             <InsideRestaurant
                                 restaurante={restaurantes}
+                                logo={logo}
+                                
+                                quantity={quantity}
 
+                                //Temporário
                                 combos={combos}
                                 lanches={lanches}
                                 porcoes={porcoes}
                                 sobremesas={sobremesas}
                                 bebidas={bebidas}
+
                                 handleDelItemInCart={handleDelItemInCart}
-                                quantity={quantity}
                                 handleAddItemInCart={handleAddItemInCart}
                             />}
                     />
@@ -290,7 +271,6 @@ export function Router({
                             <RegisterYourRestaurant
                                 nome={nome}
                                 setNome={setNome}
-
                                 bairro={bairro}
                                 setBairro={setBairro}
                                 cidade={cidade}
@@ -312,11 +292,8 @@ export function Router({
                             />
                         }
                     >
-
                     </Route>
                 </Route>
-
-            </Route>
         </Routes >
     )
 }
