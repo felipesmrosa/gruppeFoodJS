@@ -22,6 +22,7 @@ import { Carrinho } from './Carrinho'
 
 import logo from '../images/logo.png';
 import { Configuracoes } from './ConfiguracoesPerfil';
+import { Modal } from './Carrinho/ModalPagamento';
 
 export function Header({
     quantity,
@@ -30,7 +31,22 @@ export function Header({
     lanches,
     porcoes,
     sobremesas,
-    bebidas
+    bebidas,
+    carrinho,
+    setCarrinho,
+    adicionarAoCarrinho,
+    removerDoCarrinho,
+    porcoesCarrinho,
+    setPorcoesCarrinho,
+    historico,
+    setHistorico,
+    setPedidoFinalizado,
+    formaDePagamento,
+    setFormaDePagamento,
+    mostrarModal,
+    setMostrarModal,
+    precoTotalGeral,
+    totalItensGeral
 }) {
     const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
     const [mostrarPerfil, setMostrarPerfil] = useState(false);
@@ -89,7 +105,7 @@ export function Header({
 
                 <ButtonCarrinho onClick={handleToggleDiv}>
                     <ShoppingCart /> CARRINHO
-                    <QuantidadeJaDentroDoCarrinho>1</QuantidadeJaDentroDoCarrinho>
+                    <QuantidadeJaDentroDoCarrinho>{totalItensGeral}</QuantidadeJaDentroDoCarrinho>
                 </ButtonCarrinho>
 
                 {mostrarCarrinho && (
@@ -98,12 +114,26 @@ export function Header({
                             cart={cart}
                             quantity={quantity}
                             handleToggleDiv={handleToggleDiv}
-                            cart={cart}
+                            carrinho={carrinho}
+                            setCarrinho={setCarrinho}
+                            adicionarAoCarrinho={adicionarAoCarrinho}
+                            removerDoCarrinho={removerDoCarrinho}
+                            porcoesCarrinho={porcoesCarrinho}
+                            setPorcoesCarrinho={setPorcoesCarrinho}
+                            setPedidoFinalizado={setPedidoFinalizado}
                             combos={combos}
                             lanches={lanches}
                             porcoes={porcoes}
                             sobremesas={sobremesas}
                             bebidas={bebidas}
+                            historico={historico}
+                            setHistorico={setHistorico}
+                            formaDePagamento={formaDePagamento}
+                            setFormaDePagamento={setFormaDePagamento}
+                            mostrarModal={mostrarModal}
+                            setMostrarModal={setMostrarModal}
+                            precoTotalGeral={precoTotalGeral}
+                            totalItensGeral={totalItensGeral}
                         />
                     </>
                 )}
@@ -113,6 +143,17 @@ export function Header({
                     </>
                 )}
 
+                {mostrarModal && (
+                    <center>
+                        <Modal
+                            mostrarModal={mostrarModal}
+                            setMostrarModal={setMostrarModal}
+
+                            totalItensGeral={totalItensGeral}
+                            precoTotalGeral={precoTotalGeral}
+                        />
+                    </center>
+                )}
             </MenuNavigator>
         </HeaderContainer>
     )

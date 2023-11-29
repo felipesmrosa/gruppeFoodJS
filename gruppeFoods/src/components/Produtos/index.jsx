@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import {
     ContainerProdutos,
     Combos,
@@ -13,7 +13,6 @@ import {
     Dados,
     LogoRestaurante
 } from './styles'
-import { Provider } from '../context/provider'
 
 export function Produto({
     combos,
@@ -21,12 +20,15 @@ export function Produto({
     porcoes,
     sobremesas,
     bebidas,
+    carrinho,
+    setCarrinho,
+    adicionarAoCarrinho,
+    removerDoCarrinho,
+    porcoesCarrinho,
+    setPorcoesCarrinho,
+    restaurantes
 }) {
-    const { cartItem, setCartItem } = useContext(Provider);
-
-    function handleAddCart() {
-        setCartItem([ ...cartItem, combos ])
-    }
+    console.log(restaurantes, 'Restaurantes')
     return (
         <>
             <ContainerProdutos>
@@ -39,7 +41,7 @@ export function Produto({
                                 <h3>{combo.name}</h3>
                                 <p>${combo.price}</p>
                             </div>
-                            <AddCart onClick={handleAddCart}>
+                            <AddCart onClick={() => adicionarAoCarrinho(combo, 'combo')}>
                                 add to cart
                             </AddCart>
                         </ProductCard>
@@ -55,7 +57,7 @@ export function Produto({
                                 <h3>{lanche.name}</h3>
                                 <p>${lanche.price}</p>
                             </div>
-                            <AddCart onClick={handleAddItemInCart}>
+                            <AddCart>
                                 add to cart
                             </AddCart>
                         </ProductCard>
@@ -71,7 +73,7 @@ export function Produto({
                                 <h3>{porcao.name}</h3>
                                 <p>${porcao.price}</p>
                             </div>
-                            <AddCart onClick={handleAddItemInCart}>
+                            <AddCart onClick={() => adicionarAoCarrinho(porcao, 'porcao')}>
                                 add to cart
                             </AddCart>
                         </ProductCard>
@@ -87,7 +89,7 @@ export function Produto({
                                 <h3>{sobremesa.name}</h3>
                                 <p>${sobremesa.price}</p>
                             </div>
-                            <AddCart onClick={handleAddItemInCart}>
+                            <AddCart>
                                 add to cart
                             </AddCart>
                         </ProductCard>
@@ -103,7 +105,7 @@ export function Produto({
                                 <h3>{bebida.name}</h3>
                                 <p>${bebida.price}</p>
                             </div>
-                            <AddCart onClick={handleAddItemInCart}>
+                            <AddCart>
                                 add to cart
                             </AddCart>
                         </ProductCard>

@@ -45,23 +45,6 @@ export function RegisterYourRestaurant({
                     onChange={(e) => setNome(e.target.value)}
                     required
                 />
-                <select
-                    defaultValue={mercadoria}
-                    onChange={(e) => setMercadoria(e.target.value)}
-                    name="selectMercadoria"
-                    required
-                >
-                    <option value="0">Sua Mercadoria</option>
-                    <option value="Pizzaria">Pizzaria</option>
-                    <option value="Lanchonete">Lanchonete</option>
-                    <option value="Mercado">Mercado</option>
-                    <option value="Conveniencia">Conveniencia</option>
-                    <option value="FastFood">FastFood</option>
-                    <option value="Confeitaria">Confeitaria</option>
-                    <option value="Sushiaria">Sushiaria</option>
-                    <option value="Padaria">Padaria</option>
-                    <option value="Churrascaria">Churrascaria</option>
-                </select>
                 <input
                     type="text"
                     placeholder='Email do Restaurante'

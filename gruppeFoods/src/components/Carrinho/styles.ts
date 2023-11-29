@@ -43,6 +43,7 @@ export const ProdutosNoCarrinho = styled.div`
     border: 2px solid;
     padding: 0.1rem 0.3rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

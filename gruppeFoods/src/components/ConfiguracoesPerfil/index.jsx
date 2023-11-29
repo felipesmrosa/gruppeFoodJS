@@ -5,21 +5,28 @@ import { useNavigate } from 'react-router-dom'
 import {
     Container
 } from './styles'
+import { HistoricoDeCompras } from './HistoricoDeCompras'
 
 export function Configuracoes() {
 
     const history = useNavigate()
 
-    function handleClick() {
+    function Historico() {
+        history('home/historico')
+    }
+
+    function LogOut() {
         signOut(database).then(val => {
             console.log(val)
             history('/')
         })
-    } 
+    }
 
     return (
         <Container>
-            <button onClick={handleClick}>Sair</button>
+            <button onClick={Historico}>Historico</button>
+
+            <button onClick={LogOut}>Sair</button>
         </Container>
     )
 }

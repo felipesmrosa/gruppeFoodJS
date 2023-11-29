@@ -3,6 +3,8 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import {
     BotaoCadastrarLogar,
     ContainerFragment,
@@ -23,12 +25,9 @@ export function Login() {
 
         if (type == 'Cadastrar') {
             createUserWithEmailAndPassword(database, email, password).then(data => {
-                console.log(data, "authData")
-                alert(
-                    email + ': cadastrado com sucesso! \n Clique no botão LOGAR e acesse sua conta!'
-                )
+                console.log(data, "authData")          
             }).catch(err => {
-                alert('Email ou senha já cadastrado')
+                alert('Email já cadastrado')
                 history('/')
                 setLogin(true)
             })
@@ -67,6 +66,7 @@ export function Login() {
                 <div className={login == true ? 'ativarCor' : 'pointer'} onClick={() => setLogin(true)}>Logar</div>
                 <div className={login == false ? 'ativarCor' : 'pointer'} onClick={() => setLogin(false)}>Cadastrar</div>
             </BotaoCadastrarLogar>
+            <ToastContainer/>
         </ContainerFragment>
     )
 }

@@ -4,14 +4,18 @@ import { useParams } from 'react-router-dom';
 
 export function InsideRestaurant({
     quantity,
-    handleAddItemInCart,
-    handleDelItemInCart,
     combos,
     lanches,
     porcoes,
     sobremesas,
     bebidas,
     restaurantes,
+    carrinho,
+    setCarrinho,
+    adicionarAoCarrinho,
+    removerDoCarrinho,
+    porcoesCarrinho,
+    setPorcoesCarrinho
 }) {
 
     const { nome } = useParams();
@@ -19,17 +23,22 @@ export function InsideRestaurant({
     return (
         <>
             <Produto
-                restaurantes={restaurantes}   
+                restaurantes={restaurantes}
 
                 nome={nome}
                 quantity={quantity}
-                handleAddItemInCart={handleAddItemInCart}
-                handleDelItemInCart={handleDelItemInCart}
                 combos={combos}
                 lanches={lanches}
                 porcoes={porcoes}
                 sobremesas={sobremesas}
                 bebidas={bebidas}
+
+                carrinho={carrinho}
+                setCarrinho={setCarrinho}
+                adicionarAoCarrinho={adicionarAoCarrinho}
+                removerDoCarrinho={removerDoCarrinho}
+                porcoesCarrinho={porcoesCarrinho}
+                setPorcoesCarrinho={setPorcoesCarrinho}
             />
 
             {quantity > 0 && <QuantidadeJaDentroDoCarrinho>{quantity}</QuantidadeJaDentroDoCarrinho>}
