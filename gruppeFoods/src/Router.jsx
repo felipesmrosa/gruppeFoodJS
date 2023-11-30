@@ -77,140 +77,140 @@ export function Router({
             price: 128
         }
     ]
-    const lanches = [
-        {
-            id: 1,
-            src: '/src/images/comidas/lanches/Lanche01.jpg',
-            name: "Lanche 01",
-            price: 10
-        },
-        {
-            id: 2,
-            src: '/src/images/comidas/lanches/Lanche02.jpg',
-            name: "Lanche 02",
-            price: 11
-        },
-        {
-            id: 3,
-            src: '/src/images/comidas/lanches/Lanche03.jpg',
-            name: "Lanche 03",
-            price: 17
-        },
-        {
-            id: 4,
-            src: '/src/images/comidas/lanches/Lanche04.jpg',
-            name: "Lanche 04",
-            price: 13
-        },
-        {
-            id: 5,
-            src: '/src/images/comidas/lanches/Lanche05.jpg',
-            name: "Lanche 05",
-            price: 12
-        },
-    ]
+    // const lanches = [
+    //     {
+    //         id: 1,
+    //         src: '/src/images/comidas/lanches/Lanche01.jpg',
+    //         name: "Lanche 01",
+    //         price: 10
+    //     },
+    //     {
+    //         id: 2,
+    //         src: '/src/images/comidas/lanches/Lanche02.jpg',
+    //         name: "Lanche 02",
+    //         price: 11
+    //     },
+    //     {
+    //         id: 3,
+    //         src: '/src/images/comidas/lanches/Lanche03.jpg',
+    //         name: "Lanche 03",
+    //         price: 17
+    //     },
+    //     {
+    //         id: 4,
+    //         src: '/src/images/comidas/lanches/Lanche04.jpg',
+    //         name: "Lanche 04",
+    //         price: 13
+    //     },
+    //     {
+    //         id: 5,
+    //         src: '/src/images/comidas/lanches/Lanche05.jpg',
+    //         name: "Lanche 05",
+    //         price: 12
+    //     },
+    // ]
     const porcoes = [
         {
-            id: 6,
+            id: 7,
             src: '/src/images/comidas/porcoes/porcao01.jpg',
             name: "Porção 01",
             price: 10
         },
         {
-            id: 7,
+            id: 8,
             src: '/src/images/comidas/porcoes/porcao02.jpg',
             name: "Porção 02",
             price: 11
         },
         {
-            id: 8,
+            id: 9,
             src: '/src/images/comidas/porcoes/porcao03.jpg',
             name: "Porção 03",
             price: 17
         },
         {
-            id: 9,
+            id: 10,
             src: '/src/images/comidas/porcoes/porcao04.jpg',
             name: "Porção 04",
             price: 13
         },
         {
-            id: 10,
+            id: 11,
             src: '/src/images/comidas/porcoes/porcao05.jpg',
             name: "Porção 05",
             price: 12
         },
         {
-            id: 11,
+            id: 12,
             src: '/src/images/comidas/porcoes/porcao05.jpg',
             name: "Porção 42",
             price: 521
         }
     ]
-    const sobremesas = [
-        {
-            id: 1,
-            src: '/src/images/comidas/sobremesas/sobremesa01.jpg',
-            name: "Sobremesa 01",
-            price: 10
-        },
-        {
-            id: 2,
-            src: '/src/images/comidas/sobremesas/sobremesa02.jpg',
-            name: "Sobremesa 02",
-            price: 11
-        },
-        {
-            id: 3,
-            src: '/src/images/comidas/sobremesas/sobremesa03.jpg',
-            name: "Sobremesa 03",
-            price: 17
-        },
-        {
-            id: 4,
-            src: '/src/images/comidas/sobremesas/sobremesa04.jpg',
-            name: "Sobremesa 04",
-            price: 13
-        },
-        {
-            id: 5,
-            src: '/src/images/comidas/sobremesas/sobremesa05.jpg',
-            name: "Sobremesa 05",
-            price: 12
-        },
-    ]
-    const bebidas = [
-        {
-            id: 1,
-            src: '/src/images/comidas/bebidas/bebidas01.jpg',
-            name: "Bebida 01",
-            price: 10
-        },
-        {
-            id: 2,
-            src: '/src/images/comidas/bebidas/bebidas02.jpg',
-            name: "Bebida 02",
-            price: 11
-        },
-        {
-            id: 3,
-            src: '/src/images/comidas/bebidas/bebidas03.jpg',
-            name: "Bebida 03",
-            price: 17
-        },
-        {
-            id: 4,
-            src: '/src/images/comidas/bebidas/bebidas04.jpg',
-            name: "Bebida 04",
-            price: 13
-        },
-        {
-            id: 5,
-            src: '/src/images/comidas/bebidas/bebidas05.jpg',
-            name: "Bebida 05",
-            price: 12
-        },
-    ]
+    // const sobremesas = [
+    //     {
+    //         id: 1,
+    //         src: '/src/images/comidas/sobremesas/sobremesa01.jpg',
+    //         name: "Sobremesa 01",
+    //         price: 10
+    //     },
+    //     {
+    //         id: 2,
+    //         src: '/src/images/comidas/sobremesas/sobremesa02.jpg',
+    //         name: "Sobremesa 02",
+    //         price: 11
+    //     },
+    //     {
+    //         id: 3,
+    //         src: '/src/images/comidas/sobremesas/sobremesa03.jpg',
+    //         name: "Sobremesa 03",
+    //         price: 17
+    //     },
+    //     {
+    //         id: 4,
+    //         src: '/src/images/comidas/sobremesas/sobremesa04.jpg',
+    //         name: "Sobremesa 04",
+    //         price: 13
+    //     },
+    //     {
+    //         id: 5,
+    //         src: '/src/images/comidas/sobremesas/sobremesa05.jpg',
+    //         name: "Sobremesa 05",
+    //         price: 12
+    //     },
+    // ]
+    // const bebidas = [
+    //     {
+    //         id: 1,
+    //         src: '/src/images/comidas/bebidas/bebidas01.jpg',
+    //         name: "Bebida 01",
+    //         price: 10
+    //     },
+    //     {
+    //         id: 2,
+    //         src: '/src/images/comidas/bebidas/bebidas02.jpg',
+    //         name: "Bebida 02",
+    //         price: 11
+    //     },
+    //     {
+    //         id: 3,
+    //         src: '/src/images/comidas/bebidas/bebidas03.jpg',
+    //         name: "Bebida 03",
+    //         price: 17
+    //     },
+    //     {
+    //         id: 4,
+    //         src: '/src/images/comidas/bebidas/bebidas04.jpg',
+    //         name: "Bebida 04",
+    //         price: 13
+    //     },
+    //     {
+    //         id: 5,
+    //         src: '/src/images/comidas/bebidas/bebidas05.jpg',
+    //         name: "Bebida 05",
+    //         price: 12
+    //     },
+    // ]
 
     return (
         <Routes>
@@ -239,11 +239,7 @@ export function Router({
                 totalItensGeral={totalItensGeral}
                 precoTotalGeral={precoTotalGeral}
 
-                combos={combos}
-                lanches={lanches}
                 porcoes={porcoes}
-                sobremesas={sobremesas}
-                bebidas={bebidas}
             />}>
                 <Route path='home/historico' element={
                     <HistoricoDeCompras
@@ -257,19 +253,20 @@ export function Router({
                     restaurantes={restaurantes}
                     mostrarModal={mostrarModal}
                     setMostrarModal={setMostrarModal}
+                    
                 />} />
                 <Route
                     path='home/restaurante/:nome'
                     element={
                         <InsideRestaurant
-                            restaurante={restaurantes}
-
+                            restaurantes={restaurantes}
+                            
                             //Temporário
                             combos={combos}
-                            lanches={lanches}
+                            // lanches={lanches}
                             porcoes={porcoes}
-                            sobremesas={sobremesas}
-                            bebidas={bebidas}
+                            // sobremesas={sobremesas}
+                            // bebidas={bebidas}
 
                             carrinho={carrinho}
                             setCarrinho={setCarrinho}

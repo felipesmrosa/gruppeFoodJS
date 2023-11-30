@@ -10,8 +10,10 @@ import {
     TitleSession,
     ImagemComida,
     AddCart,
-    Dados,
-    LogoRestaurante
+    InfosRestaurante,
+    LogoRestaurante,
+    Demonho,
+    InformacoesDoRestaurante
 } from './styles'
 
 export function Produto({
@@ -26,29 +28,56 @@ export function Produto({
     removerDoCarrinho,
     porcoesCarrinho,
     setPorcoesCarrinho,
-    restaurantes
+    restaurantes,
+    nome
 }) {
-    console.log(restaurantes, 'Restaurantes')
+
     return (
         <>
             <ContainerProdutos>
-                <TitleSession>Combos</TitleSession>
-                <Combos>
-                    {combos.map((combo) => (
-                        <ProductCard key={combo.id}>
-                            <ImagemComida src={combo.src} alt={combo.name} />
-                            <div>
-                                <h3>{combo.name}</h3>
-                                <p>${combo.price}</p>
-                            </div>
-                            <AddCart onClick={() => adicionarAoCarrinho(combo, 'combo')}>
-                                add to cart
-                            </AddCart>
-                        </ProductCard>
-                    ))}
-                </Combos>
 
-                <TitleSession>Lanches</TitleSession>
+                <InfosRestaurante>
+                    {restaurantes.filter(restau => restau.nome == nome).map(restauranteFiltrado => (
+                        <div key={restauranteFiltrado.id}>
+                            <InformacoesDoRestaurante>
+                                <LogoRestaurante src={restauranteFiltrado.logo} alt="" />
+                                <p>{restauranteFiltrado.nome}</p>
+                                <p>{restauranteFiltrado.endereco}, {restauranteFiltrado.bairro} - {restauranteFiltrado.cidade}</p>
+                                <br />
+                                <p>Telefone para Contato</p>
+                                <p>{restauranteFiltrado.telefone}</p>
+                                <br />
+                                <p>Horário de funcionamento</p>
+                                <p>{restauranteFiltrado.horarioFuncionamento[0]} - {restauranteFiltrado.horarioFuncionamento[1]}</p>
+                            </InformacoesDoRestaurante>
+
+                            <TitleSession>Combos:</TitleSession>
+                            <Demonho>
+                                {restauranteFiltrado.cardapio.map((item, index) => (
+                                    <>
+                                        <Combos key={index}>
+                                            {item.combos.map((combo, comboIndex) => (
+                                                <ProductCard key={comboIndex}>
+                                                    <ImagemComida src={combo.src} alt={combo.name} />
+                                                    <div>
+                                                        <p>{combo.id}</p>
+                                                        <h3>{combo.name}</h3>
+                                                        <p>${combo.price}</p>
+                                                    </div>
+                                                    <AddCart onClick={() => adicionarAoCarrinho(combo, 'combo')}>
+                                                        add to cart
+                                                    </AddCart>
+                                                </ProductCard>
+                                            ))}
+                                        </Combos>
+                                    </>
+                                ))}
+                            </Demonho>
+                        </div>
+                    ))}
+                </InfosRestaurante>
+
+                {/* <TitleSession>Lanches</TitleSession>
                 <Lanches>
                     {lanches.map((lanche) => (
                         <ProductCard key={lanche.id}>
@@ -62,7 +91,7 @@ export function Produto({
                             </AddCart>
                         </ProductCard>
                     ))}
-                </Lanches>
+                </Lanches> */}
 
                 <TitleSession>Porções</TitleSession>
                 <Porcoes>
@@ -80,7 +109,7 @@ export function Produto({
                     ))}
                 </Porcoes>
 
-                <TitleSession>Sobremesas</TitleSession>
+                {/* <TitleSession>Sobremesas</TitleSession>
                 <Sobremesas>
                     {sobremesas.map((sobremesa) => (
                         <ProductCard key={sobremesa.id}>
@@ -110,8 +139,8 @@ export function Produto({
                             </AddCart>
                         </ProductCard>
                     ))}
-                </Bebidas>
-            </ContainerProdutos>
+                </Bebidas> */}
+            </ContainerProdutos >
         </>
     )
 }

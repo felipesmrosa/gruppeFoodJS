@@ -39,8 +39,11 @@ export function Carrinho({
     mostrarModal,
     setMostrarModal,
     precoTotalGeral,
-    totalItensGeral
+    totalItensGeral,
+    restaurantes
 }) {
+
+    console.log(restaurantes, 'meu deus')
     const produtos = [
         { combos },
         { lanches },
@@ -72,8 +75,7 @@ export function Carrinho({
         tipo === 'combo' ? setCarrinho(novoCarrinho) : setPorcoesCarrinho(novoCarrinho);
     };
 
-    const finalizarPedido = () => {
-
+    function AbrirModal() {
         const carrinhoLocalStorage = localStorage.getItem('carrinho');
 
         if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
@@ -88,51 +90,10 @@ export function Carrinho({
                 theme: "colored",
             });
             return;
-        }
-
-        const historicoCompras = JSON.parse(localStorage.getItem('historicoCompras')) || [];
-        const carrinho = JSON.parse(carrinhoLocalStorage);
-
-        if (formaDePagamento === 'cartao') {
-            // Lógica para validar os dados do cartão...
-            // Se estiver tudo certo com os dados do cartão, continuar o processo de finalização do pedido
         } else {
-            // Continuar o processo de finalização do pedido para pagamento em dinheiro
+            setMostrarModal(true)
         }
-        setMostrarModal(true)
-
-        toast.success('Pedido realizado com sucesso!', {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        });
-
-        const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
-
-        const novoHistorico = [...historicoCompras, novaCompra];
-
-        localStorage.setItem('historicoCompras', JSON.stringify(novoHistorico));
-        localStorage.removeItem('carrinho');
-    };
-
-
-    const handleContinuar = () => {
-        if (formaDePagamento === 'cartao') {
-            // Lógica para validar os dados do cartão...
-            // Se estiver tudo certo com os dados do cartão, prosseguir com o pedido
-            finalizarPedido();
-        } else {
-            // Se for pagamento em dinheiro, prosseguir com o pedido
-            finalizarPedido();
-        }
-    };
-
-    console.log(totalItensGeral)
+    }
 
     return (
         <>
@@ -188,7 +149,7 @@ export function Carrinho({
                     </ProdutosNoCarrinho>
                 ))}
                 <hr />
-                <button onClick={finalizarPedido}>
+                <button onClick={AbrirModal}>
                     Finalizar Pedido
                 </button>
             </Container>

@@ -9,13 +9,35 @@ import {
     FecharModal
 } from './styles'
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 export function Modal({
+    quantity,
+    cart,
+    combos,
+    lanches,
+    porcoes,
+    sobremesas,
+    bebidas,
+    carrinho,
+    setCarrinho,
+    adicionarAoCarrinho,
+    removerDoCarrinho,
+    porcoesCarrinho,
+    setPorcoesCarrinho,
+    historico,
+    setHistorico,
+    setPedidoFinalizado,
+    formaDePagamento,
+    setFormaDePagamento,
     mostrarModal,
     setMostrarModal,
-    totalItensGeral,
-    precoTotalGeral
+    precoTotalGeral,
+    totalItensGeral
 }) {
+    const navegar = useNavigate()
     const [pagamento, setPagamento] = useState(true)
     const [simSelecionado, setSimSelecionado] = useState(false);
     const [naoSelecionado, setNaoSelecionado] = useState(false);
@@ -36,6 +58,60 @@ export function Modal({
         } else {
             setNaoSelecionado(false);
         }
+    };
+
+
+    const finalizarPedido = (e) => {
+        e.preventDefault()
+
+        const carrinhoLocalStorage = localStorage.getItem('carrinho');
+
+        if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
+            toast.error('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            return;
+        }
+
+        const historicoCompras = JSON.parse(localStorage.getItem('historicoCompras')) || [];
+        const carrinho = JSON.parse(carrinhoLocalStorage);
+
+        if (formaDePagamento === 'cartao') {
+            // Lógica para validar os dados do cartão...
+            // Se estiver tudo certo com os dados do cartão, continuar o processo de finalização do pedido
+        } else {
+            // Continuar o processo de finalização do pedido para pagamento em dinheiro
+        }
+        setMostrarModal(true)
+
+        toast.success('Pedido realizado com sucesso!', {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+
+        const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
+
+        const novoHistorico = [...historicoCompras, novaCompra];
+
+        localStorage.setItem('historicoCompras', JSON.stringify(novoHistorico));
+        localStorage.removeItem('carrinho');
+
+        setTimeout(() => {
+            navegar('home/historico');
+        }, 1200);
     };
 
     return (
@@ -72,31 +148,33 @@ export function Modal({
                         <input type="number" placeholder='Mês' name="vencimento" id="vencimento" />
                         <input type="number" placeholder='Ano' name="vencimento" id="vencimento" />
 
-                        <button>Concluir Pedido</button>
+                        <button onClick={finalizarPedido}>Concluir Pedido</button>
                     </FormularioCartao>
                 )}
                 {!pagamento && (
                     <>
                         <div>
                             <h1>Precisa de troco?</h1>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={simSelecionado}
-                                    onChange={handleSimChange}
-                                />
-                                SIM
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={naoSelecionado}
-                                    onChange={handleNaoChange}
-                                />
-                                NÃO
-                            </label>
+                            <form>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={simSelecionado}
+                                        onChange={handleSimChange}
+                                    />
+                                    SIM
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={naoSelecionado}
+                                        onChange={handleNaoChange}
+                                    />
+                                    NÃO
+                                </label>
+                            </form>
                         </div>
-                        <button>Concluir Pedido</button>
+                        <button onClick={finalizarPedido}>Concluir Pedido</button>
                     </>
                 )}
             </Container>

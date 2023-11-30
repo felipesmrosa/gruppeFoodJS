@@ -6,28 +6,12 @@ export function HistoricoDeCompras({
     setHistorico
 }) {
 
-    useEffect(() => {
-        const redirecionarParaHistorico = localStorage.getItem('redirecionarParaHistorico');
-
-        // Verifica se o redirecionamento para o histórico após confirmação do pedido foi marcado
-        if (redirecionarParaHistorico) {
-            // Remove o indicador após a verificação
-            localStorage.removeItem('redirecionarParaHistorico');
-
-            // Recarrega a página para atualizar os dados no histórico
-            setTimeout(() => {
-                window.location.reload();
-            }, 500);
-        }
-    }, []);
-
     const resetarHistorico = () => {
         localStorage.removeItem('historicoCompras');
         setHistorico([]);
     };
 
     console.log(historico)
-
 
     return (
         <div>
@@ -42,7 +26,8 @@ export function HistoricoDeCompras({
                         <ul>
                             {compra.itens.map((item, idx) => (
                                 <li key={idx}>
-                                    <img src={item.src} alt="" /> {item.name} - R$ {item.price} - Quantidade: {item.quantidade}
+                                    <img src={item.src} alt="" />
+                                    {item.name} - R$ {item.price} - Quantidade: {item.quantidade}
                                 </li>
                             ))}
                         </ul>

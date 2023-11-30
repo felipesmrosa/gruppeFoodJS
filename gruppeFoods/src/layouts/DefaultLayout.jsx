@@ -31,8 +31,12 @@ export function DefaultLayout({
     setMostrarModal,
 
     totalItensGeral,
-    precoTotalGeral
+    precoTotalGeral,
+
+    restaurantes
 }) {
+
+    console.log(restaurantes, 'oi')
 
     return (
         <div>
@@ -53,6 +57,8 @@ export function DefaultLayout({
                 removerDoCarrinho={removerDoCarrinho}
                 porcoesCarrinho={porcoesCarrinho}
                 setPorcoesCarrinho={setPorcoesCarrinho}
+
+                restaurantes={restaurantes}
 
                 setPedidoFinalizado={setPedidoFinalizado}
 

@@ -13,6 +13,8 @@ import { app } from "./Services/firebaseConfig";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import moment from 'moment-timezone';
+
 export function App() {
   //Firebase
   const db = getFirestore(app)
@@ -21,7 +23,6 @@ export function App() {
   //Array com as váriaveis do banco de dados
   const [infos, setInfos] = useState({
     nome: '',
-    mercadoria: '',
     email: '',
     telefone: '',
     cidade: '',
@@ -38,7 +39,7 @@ export function App() {
   async function criarRestaurante(e) {
     e.preventDefault()
     const restaurante = await addDoc(restauranteCollection, {
-      nome, mercadoria, email, telefone, cidade, endereco, bairro, cpf, logo: logo
+      nome, email, telefone, cidade, endereco, bairro, cpf, logo: logo
     })
   }
 
@@ -89,7 +90,12 @@ export function App() {
   const adicionarAoCarrinho = (item, tipo) => {
     const carrinhoAtual = tipo === 'combo' ? carrinho : porcoesCarrinho;
 
-    const itemNoCarrinho = carrinhoAtual.find((i) => i.id === item.id);
+    const itemNoCarrinho = carrinhoAtual.find((i) => {
+      return i.id === item.id
+    });
+    console.clear()
+    console.log(item, 'item')
+    console.log(itemNoCarrinho, 'itemNoCarrinho')
 
     if (itemNoCarrinho) {
       const novoCarrinho = carrinhoAtual.map((i) =>
@@ -121,16 +127,14 @@ export function App() {
   //Olhar se tem dados salvos, se tiver, renderizar em tela
   useEffect(() => {
     const getRestaurantes = async () => {
-      //Armazena a listagem de restaurantes do firebase
-      //getDocs pega a referencia no banco de dados
-      const data = await getDocs(restauranteCollection)
-      setRestaurantes(
-        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      )
+      // Obtém dados dos restaurantes do Firebase
+      const data = await getDocs(restauranteCollection);
+      const restaurantesData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setRestaurantes(restaurantesData);
     };
+
     getRestaurantes();
   }, []);
-  console.log(restaurantes)
 
   const [mostrarModal, setMostrarModal] = useState(false)
 

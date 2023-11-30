@@ -8,9 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 
 export function Home({
-    restaurantes,
-    mostrarModal,
-    setMostrarModal
+    restaurantes
 }) {
 
     return (
@@ -20,7 +18,7 @@ export function Home({
                 <Restaurants>
                     {restaurantes.map(restaurante => {
                         return (
-                            <Restaurant key={restaurante.id}>
+                            < Restaurant key={restaurante.id} >
                                 <Link to={`home/restaurante/${restaurante.nome}`}>
                                     <img src={restaurante.logo} alt="" />
                                     <div>
@@ -33,6 +31,6 @@ export function Home({
                     })}
                 </Restaurants>
             </HighlightsForYou>
-        </div>
+        </div >
     )
 }

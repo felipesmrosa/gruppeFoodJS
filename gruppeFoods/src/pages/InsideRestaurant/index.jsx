@@ -15,7 +15,7 @@ export function InsideRestaurant({
     adicionarAoCarrinho,
     removerDoCarrinho,
     porcoesCarrinho,
-    setPorcoesCarrinho
+    setPorcoesCarrinho,
 }) {
 
     const { nome } = useParams();
@@ -26,6 +26,7 @@ export function InsideRestaurant({
                 restaurantes={restaurantes}
 
                 nome={nome}
+
                 quantity={quantity}
                 combos={combos}
                 lanches={lanches}

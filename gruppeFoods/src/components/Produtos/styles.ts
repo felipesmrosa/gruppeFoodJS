@@ -10,15 +10,42 @@ export const Dados = styled.div`
         text-align: center;
     }
 `
-export const LogoRestaurante = styled.img`
-    border-radius: 50%; 
-    width: 9%;
-`
 
+export const Demonho = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+export const LogoRestaurante = styled.img`
+    border-radius: 50%;
+    width: 18vh;
+    height: 18vh;
+`
+export const InformacoesDoRestaurante = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`
 export const ContainerProdutos = styled.div`
     margin: 2rem 15rem;
     margin-bottom: 1rem;
     max-width: 100%;
+`
+
+export const InfosRestaurante = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    flex-direction: column;
+`
+
+export const Teste = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 `
 
 export const TitleSession = styled.h3`
@@ -36,9 +63,10 @@ export const ImagemComida = styled.img`
 
 export const Combos = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: start;
+    justify-content: space-evenly;
     margin-bottom: 2rem;
+    gap: 1rem;
 `
 
 export const ProductCard = styled.div`

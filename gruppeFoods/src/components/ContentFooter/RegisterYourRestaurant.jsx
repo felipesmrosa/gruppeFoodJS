@@ -19,10 +19,11 @@ export function RegisterYourRestaurant({
     setEndereco,
     logo,
     setLogo,
-    mercadoria,
-    setMercadoria,
     telefone,
-    setTelefone
+    setTelefone,
+
+    infos,
+    setInfos
 }) {
 
     function handleUpload(e) {
@@ -41,49 +42,49 @@ export function RegisterYourRestaurant({
                 <input
                     type="text"
                     placeholder="Nome do Restaurante"
-                    defaultValue={nome}
-                    onChange={(e) => setNome(e.target.value)}
+                    defaultValue={infos.nome}
+                    onChange={(e) => setInfos(e.target.value)}
                     required
                 />
                 <input
                     type="text"
                     placeholder='Email do Restaurante'
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setInfos(e.target.value)}
                     defaultValue={email}
                     required
                 />
                 <input
                     type="text"
                     placeholder='Telefone do Restaurante'
-                    onChange={(e) => setTelefone(e.target.value)}
+                    onChange={(e) => setInfos(e.target.value)}
                     defaultValue={telefone}
                     required
                 />
                 <input
                     type="text"
                     placeholder='Cidade'
-                    onChange={(e) => setCidade(e.target.value)}
+                    onChange={(e) => setInfos(e.target.value)}
                     defaultValue={cidade}
                     required
                 />
                 <input
                     type="text"
                     placeholder='Endereço'
-                    onChange={(e) => setEndereco(e.target.value)}
+                    onChange={(e) => setInfos(e.target.value)}
                     defaultValue={endereco}
                     required
                 />
                 <input
                     type="text"
                     placeholder='Bairro'
-                    onChange={(e) => setBairro(e.target.value)}
+                    onChange={(e) => setInfos(e.target.value)}
                     defaultValue={bairro}
                     required
                 />
                 <input
                     type="text"
                     placeholder='CPF'
-                    onChange={(e) => setCpf(e.target.value)}
+                    onChange={(e) => setInfos(e.target.value)}
                     defaultValue={cpf}
                     required
                 />

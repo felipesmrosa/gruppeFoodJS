@@ -46,8 +46,10 @@ export function Header({
     mostrarModal,
     setMostrarModal,
     precoTotalGeral,
-    totalItensGeral
+    totalItensGeral,
+    restaurantes
 }) {
+    console.log(restaurantes, 'tudo bem?')
     const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
     const [mostrarPerfil, setMostrarPerfil] = useState(false);
 
@@ -111,6 +113,8 @@ export function Header({
                 {mostrarCarrinho && (
                     <>
                         <Carrinho
+                            restaurantes={restaurantes}
+
                             cart={cart}
                             quantity={quantity}
                             handleToggleDiv={handleToggleDiv}
@@ -146,6 +150,26 @@ export function Header({
                 {mostrarModal && (
                     <center>
                         <Modal
+                            cart={cart}
+                            quantity={quantity}
+                            handleToggleDiv={handleToggleDiv}
+                            carrinho={carrinho}
+                            setCarrinho={setCarrinho}
+                            adicionarAoCarrinho={adicionarAoCarrinho}
+                            removerDoCarrinho={removerDoCarrinho}
+                            porcoesCarrinho={porcoesCarrinho}
+                            setPorcoesCarrinho={setPorcoesCarrinho}
+                            setPedidoFinalizado={setPedidoFinalizado}
+                            combos={combos}
+                            lanches={lanches}
+                            porcoes={porcoes}
+                            sobremesas={sobremesas}
+                            bebidas={bebidas}
+                            historico={historico}
+                            setHistorico={setHistorico}
+                            formaDePagamento={formaDePagamento}
+                            setFormaDePagamento={setFormaDePagamento}
+
                             mostrarModal={mostrarModal}
                             setMostrarModal={setMostrarModal}
 
