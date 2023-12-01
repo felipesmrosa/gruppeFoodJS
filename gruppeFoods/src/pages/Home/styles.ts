@@ -29,9 +29,12 @@ export const HighlightsForYou = styled.div `
 export const Restaurants = styled.div `
     display: flex;
     align-items: center;
-    justify-content: start;
-    gap: 1.5rem;
+    justify-content: center;
+    gap: 0.75rem;
     margin: 1rem 0;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-direction: row;
 `
 
 export const Restaurant = styled.div `
@@ -40,15 +43,14 @@ export const Restaurant = styled.div `
     justify-content: center;
     flex-direction: column;
     text-align: center;
-
-    img {
-        width: 75%;
-        border-radius: 18px;
-    }
-
     a {
         text-decoration: none;
         font-size: 1rem;
         text-transform: none;
     }
+`
+export const Logo = styled.img`
+    width: 20vh;
+    height: 20vh;
+    border-radius: 20px;
 `

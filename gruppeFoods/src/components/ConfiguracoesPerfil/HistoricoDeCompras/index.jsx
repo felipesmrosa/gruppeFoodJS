@@ -22,7 +22,6 @@ export function HistoricoDeCompras({
                     <li key={index}>
                         <p>Data da Compra: {compra.data}</p>
                         <p>Status da Entrega: Entregue</p>
-                        <p>Restaurante:</p>
                         <ul>
                             {compra.itens.map((item, idx) => (
                                 <li key={idx}>

@@ -49,7 +49,6 @@ export function Header({
     totalItensGeral,
     restaurantes
 }) {
-    console.log(restaurantes, 'tudo bem?')
     const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
     const [mostrarPerfil, setMostrarPerfil] = useState(false);
 

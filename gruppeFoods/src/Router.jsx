@@ -36,7 +36,8 @@ export function Router({
     setMostrarModal,
 
     totalItensGeral,
-    precoTotalGeral
+    precoTotalGeral,
+    handleLogoChange
 }) {
 
     const combos = [
@@ -288,6 +289,7 @@ export function Router({
                             adicionarAoCarrinho={adicionarAoCarrinho}
 
                             criarRestaurante={criarRestaurante}
+                            handleLogoChange={handleLogoChange}
                         />
                     }
                 >

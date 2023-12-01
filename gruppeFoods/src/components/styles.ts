@@ -66,7 +66,7 @@ export const ButtonCarrinho = styled.button`
     position: relative;
 `
 
-export const Entregas = styled.button `
+export const Entregas = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,7 +77,7 @@ export const Entregas = styled.button `
     font-size: 1.15rem;
     background-color: transparent;
 `
-export const Perfil = styled.button `
+export const Perfil = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +103,7 @@ export const QuantidadeJaDentroDoCarrinho = styled.span`
     left: 88%;
     bottom: 66%;
     color: ${props => props.theme['white-100']};
-` 
+`
 
 
 // FOOTER
@@ -120,17 +120,48 @@ export const Formulario = styled.form`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: .2rem;
+    width: 30%;
+    gap: 0.2rem;
+
+    fieldset {
+        padding: 1rem;
+        border-radius: 18px;
+    }
 
     input, select {
         width: 100%;
-        height: 2rem;
+        height: 3rem;
         padding: 0 1rem;
-        border-radius: 8px;
-        border: 1px solid ${props => props.theme["gray-900"]};
+        margin-bottom: 0.3rem;
+        border: none;
         background-color: transparent;
+        border-bottom: 1px solid;
     }
     input[type="file"] {
-        border: none;
+        display: none;
     }
+    label {
+        cursor: pointer;
+    }
+`
+export const Cadastro = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem 0px;
+`
+export const LogoDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0.7rem 0;
+`
+export const ButtonCadastrarRestaurante = styled.button`
+    cursor: pointer;
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 18px;
+    border: none;
 `

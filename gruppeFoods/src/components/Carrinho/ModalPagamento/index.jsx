@@ -101,7 +101,7 @@ export function Modal({
             progress: undefined,
             theme: "colored",
         });
-
+        
         const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
 
         const novoHistorico = [...historicoCompras, novaCompra];
@@ -110,8 +110,12 @@ export function Modal({
         localStorage.removeItem('carrinho');
 
         setTimeout(() => {
+            setMostrarModal(false)
+        }, 1000)
+        setTimeout(() => {
             navegar('home/historico');
-        }, 1200);
+            window.location.reload()
+        }, 1000);
     };
 
     return (

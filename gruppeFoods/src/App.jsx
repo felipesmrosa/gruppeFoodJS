@@ -9,6 +9,7 @@ import { GlobalStyle } from "./styles/global";
 import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore'
 import { useEffect, useState } from "react";
 import { app } from "./Services/firebaseConfig";
+import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +20,7 @@ export function App() {
   //Firebase
   const db = getFirestore(app)
   const restauranteCollection = collection(db, "restaurantes")
+  const storage = getStorage();
 
   //Array com as váriaveis do banco de dados
   const [infos, setInfos] = useState({
@@ -29,19 +31,69 @@ export function App() {
     endereco: '',
     bairro: '',
     cpf: '',
-    logo: ''
+    logo: '',
+    horarioFuncionamentoI: '',
+    horarioFuncionamentoF: '',
   });
 
   //infos.bairro | infos.cidade | infos.cpf | infos.email | infos.endereco | infos.logo | infos.mercadoria | infos.nome | infos.telefone
   //setInfos((prevState) => ({ ...prevState, cidade: "Itajaí", bairro: "Cordeiros" }))
+  const handleLogoChange = (e) => {
+    if (e.target.files[0]) {
+      setInfos({ ...infos, logo: e.target.files[0] });
+    }
+  };
 
   //Criar Restaurante no Banco de Dados
   async function criarRestaurante(e) {
-    e.preventDefault()
-    const restaurante = await addDoc(restauranteCollection, {
-      nome, email, telefone, cidade, endereco, bairro, cpf, logo: logo
-    })
+    e.preventDefault();
+
+    const { nome, email, telefone, cidade, endereco, bairro, cpf, horarioFuncionamentoI, horarioFuncionamentoF } = infos;
+
+    if (nome && email && telefone && cidade && endereco && bairro && cpf && infos.logo && horarioFuncionamentoI && horarioFuncionamentoF) {
+      try {
+        const storageRef = ref(storage, `logosDosRestaurantes/${infos.logo.name}`);
+        await uploadBytes(storageRef, infos.logo);
+
+        const imageUrl = await getDownloadURL(storageRef);
+        const restauranteData = {
+          nome: infos.nome,
+          email: infos.email,
+          telefone: infos.telefone,
+          cidade: infos.cidade,
+          endereco: infos.endereco,
+          bairro: infos.bairro,
+          cpf: infos.cpf,
+          logo: imageUrl,
+          horarioFuncionamentoI: infos.horarioFuncionamentoI,
+          horarioFuncionamentoF: infos.horarioFuncionamentoF
+        };
+        const docRef = await addDoc(collection(db, 'restaurantes'), restauranteData);
+        console.log('Restaurante criado com sucesso:', docRef.id);
+        // Restante do seu código...
+      } catch (error) {
+        console.error('Erro ao criar restaurante:', error);
+        // Trate o erro de acordo com sua lógica de aplicação
+      }
+    } else {
+      console.log(nome, 'nome')
+      console.log(email, 'email')
+      console.log(telefone, 'telefone')
+      console.log(cidade, 'cidade')
+      console.log(endereco, 'endereco')
+      console.log(bairro, 'bairro')
+      console.log(cpf, 'cpf')
+      console.log(logo, 'logo')
+      console.log(horarioFuncionamentoI, 'horarioFuncionamentoI')
+      console.log(horarioFuncionamentoF, 'horarioFuncionamentoF')
+
+      console.log('Preencha todos os campos obrigatórios');
+      // Ou exiba uma mensagem para o usuário informando sobre campos obrigatórios não preenchidos
+    }
   }
+  // const adicionarHorarioFuncionamento = (horario) => {
+  //   setInfos({ ...infos, horarioFuncionamento: [...infos.horarioFuncionamento, horario] });
+  // };
 
   const [carrinho, setCarrinho] = useState([]);
   const [porcoesCarrinho, setPorcoesCarrinho] = useState([]);
@@ -88,14 +140,22 @@ export function App() {
   }, [porcoesCarrinho]);
 
   const adicionarAoCarrinho = (item, tipo) => {
+    toast.success(`${item.name} adicionado ao carrinho!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
     const carrinhoAtual = tipo === 'combo' ? carrinho : porcoesCarrinho;
 
     const itemNoCarrinho = carrinhoAtual.find((i) => {
       return i.id === item.id
     });
-    console.clear()
-    console.log(item, 'item')
-    console.log(itemNoCarrinho, 'itemNoCarrinho')
 
     if (itemNoCarrinho) {
       const novoCarrinho = carrinhoAtual.map((i) =>
@@ -142,6 +202,8 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <Router
+          handleLogoChange={handleLogoChange}
+
           historico={historico}
           setHistorico={setHistorico}
           infos={infos}
@@ -173,6 +235,22 @@ export function App() {
         />
       </BrowserRouter>
       <GlobalStyle />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
+      <ToastContainer />
     </ThemeProvider>
+
   )
 }

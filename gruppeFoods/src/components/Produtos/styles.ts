@@ -63,10 +63,13 @@ export const ImagemComida = styled.img`
 
 export const Combos = styled.div`
     display: flex;
-    align-items: start;
-    justify-content: space-evenly;
-    margin-bottom: 2rem;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-direction: row;
 `
 
 export const ProductCard = styled.div`
