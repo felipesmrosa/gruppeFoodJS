@@ -12,7 +12,7 @@ import {
     AddCart,
     InfosRestaurante,
     LogoRestaurante,
-    Demonho,
+    Cardapio,
     InformacoesDoRestaurante
 } from './styles'
 
@@ -52,7 +52,7 @@ export function Produto({
                             </InformacoesDoRestaurante>
 
                             <TitleSession>Combos:</TitleSession>
-                            <Demonho>
+                            <Cardapio>
                                 {restauranteFiltrado.cardapio.map((item, index) => (
                                     <>
                                         <Combos key={index}>
@@ -72,7 +72,7 @@ export function Produto({
                                         </Combos>
                                     </>
                                 ))}
-                            </Demonho>
+                            </Cardapio>
                         </div>
                     ))}
                 </InfosRestaurante>

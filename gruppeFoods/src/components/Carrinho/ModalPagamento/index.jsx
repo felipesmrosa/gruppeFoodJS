@@ -6,7 +6,8 @@ import {
     FormularioCartao,
     Localizacao,
     ItemUmDoLadoDoOutro,
-    FecharModal
+    FecharModal,
+    VencimentoDoCartao
 } from './styles'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -60,7 +61,6 @@ export function Modal({
         }
     };
 
-
     const finalizarPedido = (e) => {
         e.preventDefault()
 
@@ -83,17 +83,11 @@ export function Modal({
         const historicoCompras = JSON.parse(localStorage.getItem('historicoCompras')) || [];
         const carrinho = JSON.parse(carrinhoLocalStorage);
 
-        if (formaDePagamento === 'cartao') {
-            // Lógica para validar os dados do cartão...
-            // Se estiver tudo certo com os dados do cartão, continuar o processo de finalização do pedido
-        } else {
-            // Continuar o processo de finalização do pedido para pagamento em dinheiro
-        }
         setMostrarModal(true)
 
         toast.success('Pedido realizado com sucesso!', {
             position: "top-right",
-            autoClose: 1000,
+            autoClose: 800,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -101,7 +95,7 @@ export function Modal({
             progress: undefined,
             theme: "colored",
         });
-        
+
         const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
 
         const novoHistorico = [...historicoCompras, novaCompra];
@@ -111,11 +105,11 @@ export function Modal({
 
         setTimeout(() => {
             setMostrarModal(false)
-        }, 1000)
+        }, 800)
         setTimeout(() => {
             navegar('home/historico');
             window.location.reload()
-        }, 1000);
+        }, 800);
     };
 
     return (
@@ -133,9 +127,17 @@ export function Modal({
                 </ItemUmDoLadoDoOutro>
 
                 <Localizacao>
-                    <label htmlFor="localizacao">Aonde você está?</label>
-                    <input type="text" placeholder='Endereço' />
-                    <input type="text" placeholder='Complemento' />
+                    <form>
+                        <label htmlFor="localizacao">Aonde você está?</label>
+                        <input
+                            type="text"
+                            placeholder='Endereço'
+                        />
+                        <input
+                            type="text"
+                            placeholder='Complemento'
+                        />
+                    </form>
                 </Localizacao>
 
                 <h1>{pagamento ? 'Forma de pagamento: Cartão' : 'Forma de pagamento: Dinheiro'}</h1>
@@ -143,15 +145,34 @@ export function Modal({
                     <FormularioCartao>
                         <br />
                         <label htmlFor="cartao">Digitos do Cartão</label>
-                        <input name="cartao" placeholder="0000 0000 0000 0000" type="text" />
+                        <input
+                            name="cartao"
+                            placeholder="0000 0000 0000 0000"
+                            type="text"
+                        />
+
+                        <VencimentoDoCartao>
+                            <label htmlFor="vencimento">Vencimento</label>
+                            <input
+                                type="number"
+                                placeholder='Mês'
+                                name="vencimento"
+                                id="vencimento"
+                            />
+                            <input
+                                type="number"
+                                placeholder='Ano'
+                                name="vencimento"
+                                id="vencimento"
+                            />
+                        </VencimentoDoCartao>
 
                         <label htmlFor="cartao">CVV</label>
-                        <input name="cvv" placeholder="000" type="number" />
-
-                        <label htmlFor="vencimento">Vencimento</label>
-                        <input type="number" placeholder='Mês' name="vencimento" id="vencimento" />
-                        <input type="number" placeholder='Ano' name="vencimento" id="vencimento" />
-
+                        <input
+                            name="cvv"
+                            placeholder="000"
+                            type="number"
+                        />
                         <button onClick={finalizarPedido}>Concluir Pedido</button>
                     </FormularioCartao>
                 )}

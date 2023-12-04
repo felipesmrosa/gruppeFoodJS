@@ -21,7 +21,43 @@ export const HeaderContainer = styled.header`
         gap: 1.5rem;
     }
 `
+export const ProdutosDoRestaurante = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+`
+export const ButtonCadastroDeProdutos = styled.button`
+    width: 50%;    
+    border: none;
+    height: 2.3rem;
+    border-radius: 16px;
+`
+export const ButtonTPC = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    p {
+        border: 2px solid #f9a01b;
+        border-radius: 50%;
+        width: 3vh;
+        height: 3vh;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+    }
+    svg {
+        width: 80%;
+    }
+`
+export const CadastrarCardapio = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 2rem 0;
+    gap: 2rem;
+`
 export const SearchEat = styled.form`
     input {
         outline: none;

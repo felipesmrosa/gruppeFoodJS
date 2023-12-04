@@ -11,7 +11,7 @@ export const Dados = styled.div`
     }
 `
 
-export const Demonho = styled.div`
+export const Cardapio = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;

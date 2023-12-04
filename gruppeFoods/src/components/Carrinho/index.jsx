@@ -6,7 +6,8 @@ import {
     QuantidadePrecoEItem,
     ProdutosNoCarrinho,
     NomePreco,
-    QuantidadeDeleter
+    QuantidadeDeleter,
+    ButtonFinalizarPedido
 } from './styles'
 
 import { TrashSimple, XCircle } from 'phosphor-react'
@@ -149,9 +150,9 @@ export function Carrinho({
                     </ProdutosNoCarrinho>
                 ))}
                 <hr />
-                <button onClick={AbrirModal}>
+                <ButtonFinalizarPedido onClick={AbrirModal}>
                     Finalizar Pedido
-                </button>
+                </ButtonFinalizarPedido>
             </Container>
             <ToastContainer
                 position="top-right"

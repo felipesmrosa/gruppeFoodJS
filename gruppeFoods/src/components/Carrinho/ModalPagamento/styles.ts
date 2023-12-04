@@ -11,6 +11,13 @@ export const Headerzinho = styled.div`
     justify-content: center;
     gap: 15.8rem;
 `
+export const VencimentoDoCartao = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    margin: 0.3rem 0;
+`
 export const ItemUmDoLadoDoOutro = styled.div`
     display: flex;
     align-items: center;

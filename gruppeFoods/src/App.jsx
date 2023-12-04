@@ -22,6 +22,12 @@ export function App() {
   const restauranteCollection = collection(db, "restaurantes")
   const storage = getStorage();
 
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState(null)
+  const [src, setSrc] = useState('')
+
+  const [cardapioArray, serCardapioArray] = useState([])
+
   //Array com as váriaveis do banco de dados
   const [infos, setInfos] = useState({
     nome: '',
@@ -34,6 +40,7 @@ export function App() {
     logo: '',
     horarioFuncionamentoI: '',
     horarioFuncionamentoF: '',
+    cardapio: [{}]
   });
 
   //infos.bairro | infos.cidade | infos.cpf | infos.email | infos.endereco | infos.logo | infos.mercadoria | infos.nome | infos.telefone
@@ -48,9 +55,32 @@ export function App() {
   async function criarRestaurante(e) {
     e.preventDefault();
 
-    const { nome, email, telefone, cidade, endereco, bairro, cpf, horarioFuncionamentoI, horarioFuncionamentoF } = infos;
+    const {
+      nome,
+      email,
+      telefone,
+      cidade,
+      endereco,
+      bairro,
+      cpf,
+      horarioFuncionamentoI,
+      horarioFuncionamentoF,
+      cardapio
+    } = infos;
 
-    if (nome && email && telefone && cidade && endereco && bairro && cpf && infos.logo && horarioFuncionamentoI && horarioFuncionamentoF) {
+    if (
+      nome &&
+      email &&
+      telefone &&
+      cidade &&
+      endereco &&
+      bairro &&
+      cpf &&
+      infos.logo &&
+      horarioFuncionamentoI &&
+      horarioFuncionamentoF &&
+      cardapio
+    ) {
       try {
         const storageRef = ref(storage, `logosDosRestaurantes/${infos.logo.name}`);
         await uploadBytes(storageRef, infos.logo);
@@ -66,31 +96,39 @@ export function App() {
           cpf: infos.cpf,
           logo: imageUrl,
           horarioFuncionamentoI: infos.horarioFuncionamentoI,
-          horarioFuncionamentoF: infos.horarioFuncionamentoF
+          horarioFuncionamentoF: infos.horarioFuncionamentoF,
+          cardapio: infos.cardapio // Aqui você está adicionando o campo cardápio ao documento do restaurante
         };
+
         const docRef = await addDoc(collection(db, 'restaurantes'), restauranteData);
         console.log('Restaurante criado com sucesso:', docRef.id);
+        console.log('cardapio:', cardapio);
         // Restante do seu código...
       } catch (error) {
         console.error('Erro ao criar restaurante:', error);
         // Trate o erro de acordo com sua lógica de aplicação
       }
     } else {
-      console.log(nome, 'nome')
-      console.log(email, 'email')
-      console.log(telefone, 'telefone')
-      console.log(cidade, 'cidade')
-      console.log(endereco, 'endereco')
-      console.log(bairro, 'bairro')
-      console.log(cpf, 'cpf')
-      console.log(logo, 'logo')
-      console.log(horarioFuncionamentoI, 'horarioFuncionamentoI')
-      console.log(horarioFuncionamentoF, 'horarioFuncionamentoF')
-
+      console.log('nome:', nome);
+      console.log('email:', email);
+      console.log('telefone:', telefone);
+      console.log('cidade:', cidade);
+      console.log('endereco:', endereco);
+      console.log('bairro:', bairro);
+      console.log('cpf:', cpf);
+      // console.log('logo:', logo);
+      console.log('horarioFuncionamentoI:', horarioFuncionamentoI);
+      console.log('horarioFuncionamentoF:', horarioFuncionamentoF);
+      console.log('cardapio:', cardapio);
       console.log('Preencha todos os campos obrigatórios');
       // Ou exiba uma mensagem para o usuário informando sobre campos obrigatórios não preenchidos
     }
   }
+
+  const adicionarCardapio = (menu) => {
+    setInfos({ ...infos, cardapio: [...infos.cardapio, menu] })
+  }
+
   // const adicionarHorarioFuncionamento = (horario) => {
   //   setInfos({ ...infos, horarioFuncionamento: [...infos.horarioFuncionamento, horario] });
   // };
@@ -232,6 +270,14 @@ export function App() {
           setRestaurantes={setRestaurantes}
 
           criarRestaurante={criarRestaurante}
+          adicionarCardapio={adicionarCardapio}
+
+          name={name}
+          price={price}
+          src={src}
+          setName={setName}
+          setPrice={setPrice}
+          setSrc={setSrc}
         />
       </BrowserRouter>
       <GlobalStyle />

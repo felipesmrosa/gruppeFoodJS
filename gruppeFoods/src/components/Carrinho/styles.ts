@@ -17,6 +17,18 @@ export const Container = styled.div`
     overflow-y: scroll;
 `
 
+export const ButtonFinalizarPedido = styled.button`
+    width: 80%;
+    margin: 1rem 1.8rem;
+    height: 2rem;
+    border-radius: 18px;
+    border: none;
+    background: #ff3939;
+    color: #f9a01b;
+    text-transform: uppercase;
+    font-weight: 700;
+`
+
 export const FecharCarrinho = styled.button`
     background-color: transparent;
     font-size: 3.25rem;
