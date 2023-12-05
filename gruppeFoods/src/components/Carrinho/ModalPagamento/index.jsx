@@ -7,7 +7,9 @@ import {
     Localizacao,
     ItemUmDoLadoDoOutro,
     FecharModal,
-    VencimentoDoCartao
+    VencimentoDoCartao,
+    Mes,
+    Ano
 } from './styles'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -149,21 +151,22 @@ export function Modal({
                             name="cartao"
                             placeholder="0000 0000 0000 0000"
                             type="text"
+                            required
                         />
 
                         <VencimentoDoCartao>
                             <label htmlFor="vencimento">Vencimento</label>
-                            <input
-                                type="number"
+                            <Mes
+                                type="text"
                                 placeholder='Mês'
                                 name="vencimento"
-                                id="vencimento"
+                                required
                             />
-                            <input
-                                type="number"
+                            <Ano
+                                type="text"
                                 placeholder='Ano'
                                 name="vencimento"
-                                id="vencimento"
+                                required
                             />
                         </VencimentoDoCartao>
 
@@ -172,6 +175,7 @@ export function Modal({
                             name="cvv"
                             placeholder="000"
                             type="number"
+                            required
                         />
                         <button onClick={finalizarPedido}>Concluir Pedido</button>
                     </FormularioCartao>

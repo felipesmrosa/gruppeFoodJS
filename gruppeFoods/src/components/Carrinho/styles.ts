@@ -57,6 +57,7 @@ export const ProdutosNoCarrinho = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: flex;
+    gap: 2rem;
     align-items: center;
     justify-content: space-between;
 
@@ -76,4 +77,45 @@ export const QuantidadeDeleter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    gap: .4rem;
+`
+export const DetalhesModal = styled.p`
+    position: absolute;
+    left: 75%;
+    top: 10.3rem;
+    cursor: pointer;
+`
+export const Minus = styled.button`
+    background: transparent;
+    border: 2px solid #f9a01b;
+    border-radius: 50%;
+    display: flex;
+    width: 3vh;
+    height: 3vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+`
+export const Plus = styled.button`
+    background: transparent;
+    border: 2px solid #f9a01b;
+    border-radius: 50%;
+    display: flex;
+    width: 3vh;
+    height: 3vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+`
+export const Del = styled.button`
+    background: transparent;
+    border: none;
+    color: #ff3939;
+    display: flex;
+
+    svg {
+        width: 3vh;
+        height: 3vh;
+    }
 `

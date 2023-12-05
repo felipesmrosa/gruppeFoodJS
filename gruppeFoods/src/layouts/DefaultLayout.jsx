@@ -29,6 +29,8 @@ export function DefaultLayout({
     setFormaDePagamento,
     mostrarModal,
     setMostrarModal,
+    mostrarDetalhes,
+    setMostrarDetalhes,
 
     totalItensGeral,
     precoTotalGeral,
@@ -47,9 +49,11 @@ export function DefaultLayout({
                 porcoes={porcoes}
                 sobremesas={sobremesas}
                 bebidas={bebidas}
-                
+
                 mostrarModal={mostrarModal}
                 setMostrarModal={setMostrarModal}
+                mostrarDetalhes={mostrarDetalhes}
+                setMostrarDetalhes={setMostrarDetalhes}
 
                 carrinho={carrinho}
                 setCarrinho={setCarrinho}

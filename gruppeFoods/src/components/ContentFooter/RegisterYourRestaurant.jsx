@@ -24,7 +24,10 @@ export function RegisterYourRestaurant({
     setPrice,
     price,
     setSrc,
-    src
+    src,
+    novoItem,
+    handleChange,
+    handleProductChange
 }) {
 
     const [cadastrarCardapio, setCadastrarCardapio] = useState(false)
@@ -147,27 +150,31 @@ export function RegisterYourRestaurant({
                                             Nome do Produto:
                                             <input
                                                 type="text"
+                                                name='nameItem'
                                                 placeholder="Nome do Produto"
-                                                value={name}
-                                                onChange={(e) => setName(e.target.value)}
+                                                value={novoItem.nameItem}
+                                                onChange={handleChange}
                                             />
                                         </label>
                                         <label>
                                             Preço:
                                             <input
                                                 type="number"
+                                                name='priceItem'
                                                 placeholder="Preço do Produto"
-                                                value={price}
-                                                onChange={(e) => setPrice(e.target.value)}
+                                                value={novoItem.priceItem}
+                                                onChange={handleChange}
                                             />
                                         </label>
-                                        {/* <label>
+                                        <label>
                                             <Paperclip />
                                             Enviar foto do produto
                                             <input
                                                 type="file"
+                                                value={novoItem.src}
+                                                onChange={handleChange}
                                             />
-                                        </label> */}
+                                        </label>
                                         <ButtonTPC>
                                             {inputs.length > 1 && (
                                                 <p onClick={handleRemoveInput}>

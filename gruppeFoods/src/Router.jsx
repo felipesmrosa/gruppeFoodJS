@@ -34,10 +34,13 @@ export function Router({
 
     mostrarModal,
     setMostrarModal,
+    mostrarDetalhes,
+    setMostrarDetalhes,
 
     totalItensGeral,
     precoTotalGeral,
     handleLogoChange,
+    handleProductChange,
     handleNomeChange,
     handlePriceChange,
     adicionarItem,
@@ -48,7 +51,9 @@ export function Router({
     setSrc,
     name,
     price,
-    src
+    src,
+    novoItem,
+    handleChange,
 }) {
 
     return (
@@ -67,6 +72,8 @@ export function Router({
 
                 mostrarModal={mostrarModal}
                 setMostrarModal={setMostrarModal}
+                mostrarDetalhes={mostrarDetalhes}
+                setMostrarDetalhes={setMostrarDetalhes}
 
                 historico={historico}
                 setHistorico={setHistorico}
@@ -119,13 +126,9 @@ export function Router({
 
                             criarRestaurante={criarRestaurante}
                             handleLogoChange={handleLogoChange}
-                            adicionarCardapio={adicionarCardapio}
-                            setName={setName}
-                            setPrice={setPrice}
-                            setSrc={setSrc}
-                            name={name}
-                            price={price}
-                            src={src}
+                            novoItem={novoItem}
+                            handleChange={handleChange}
+                            handleProductChange={handleProductChange}
                         />
                     }
                 >

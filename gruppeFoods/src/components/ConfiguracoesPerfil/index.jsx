@@ -3,7 +3,8 @@ import { database } from '../../Services/firebaseConfig'
 import { useNavigate } from 'react-router-dom'
 
 import {
-    Container
+    Container,
+    Botao
 } from './styles'
 import { HistoricoDeCompras } from './HistoricoDeCompras'
 
@@ -24,9 +25,8 @@ export function Configuracoes() {
 
     return (
         <Container>
-            <button onClick={Historico}>Historico</button>
-
-            <button onClick={LogOut}>Sair</button>
+            <Botao onClick={Historico}>Historico</Botao>
+            <Botao onClick={LogOut}>Sair</Botao>
         </Container>
     )
 }

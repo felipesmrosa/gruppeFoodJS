@@ -26,7 +26,7 @@ export function HistoricoDeCompras({
                             {compra.itens.map((item, idx) => (
                                 <li key={idx}>
                                     <img src={item.src} alt="" />
-                                    {item.name} - R$ {item.price} - Quantidade: {item.quantidade}
+                                    {item.nameItem} - R$ {item.priceItem} - Quantidade: {item.quantidade}
                                 </li>
                             ))}
                         </ul>

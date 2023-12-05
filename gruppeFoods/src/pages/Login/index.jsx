@@ -23,7 +23,7 @@ export function Login() {
         const email = e.target.email.value
         const password = e.target.password.value
 
-        if (type == 'Cadastrar') {
+        if (type === 'Cadastrar') {
             createUserWithEmailAndPassword(database, email, password).then(data => {
                 console.log(data, "authData")          
             }).catch(err => {
@@ -34,6 +34,7 @@ export function Login() {
         } else {
             signInWithEmailAndPassword(database, email, password).then(data => {
                 console.log(data, "authData")
+                sessionStorage.setItem('userEmail', email); // Salvando o e-mail na sessão
                 history('/home')
             }).catch(err => {
                 alert('Email ou senha incorreto')
@@ -63,8 +64,8 @@ export function Login() {
             </Formulario>
             <p onClick={handleResetPassword}>Esqueceu sua senha?</p>
             <BotaoCadastrarLogar>
-                <div className={login == true ? 'ativarCor' : 'pointer'} onClick={() => setLogin(true)}>Logar</div>
-                <div className={login == false ? 'ativarCor' : 'pointer'} onClick={() => setLogin(false)}>Cadastrar</div>
+                <div className={login ? 'ativarCor' : 'pointer'} onClick={() => setLogin(true)}>Logar</div>
+                <div className={!login ? 'ativarCor' : 'pointer'} onClick={() => setLogin(false)}>Cadastrar</div>
             </BotaoCadastrarLogar>
             <ToastContainer/>
         </ContainerFragment>

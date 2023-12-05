@@ -15,6 +15,7 @@ export const Cardapio = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
 `
 export const LogoRestaurante = styled.img`
     border-radius: 50%;

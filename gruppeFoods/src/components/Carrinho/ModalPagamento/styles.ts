@@ -25,6 +25,20 @@ export const ItemUmDoLadoDoOutro = styled.div`
     gap: 3.7rem;
     margin: 1.25rem 0;
 `
+export const Mes = styled.input`
+    width: 19%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+`
+export const Ano = styled.input`
+    width: 19%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+`
 export const FecharModal = styled.button`
     background-color: transparent;
     border: none;

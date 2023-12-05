@@ -14,8 +14,6 @@ import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import moment from 'moment-timezone';
-
 export function App() {
   //Firebase
   const db = getFirestore(app)
@@ -40,10 +38,21 @@ export function App() {
     logo: '',
     horarioFuncionamentoI: '',
     horarioFuncionamentoF: '',
-    cardapio: [{}]
+    cardapio: []
   });
 
-  //infos.bairro | infos.cidade | infos.cpf | infos.email | infos.endereco | infos.logo | infos.mercadoria | infos.nome | infos.telefone
+
+  const [novoItem, setNovoItem] = useState({
+    nameItem: '',
+    priceItem: '',
+    src: ''
+  });
+
+  const handleChange = (e) => {
+    setNovoItem({ ...novoItem, [e.target.name]: e.target.value });
+  };
+
+  //infos.bairro | infos.cidade | infos.cpf | infos.email | infos.endereco | infos.logo | infos.mercadoria | infos.name | infos.telefone
   //setInfos((prevState) => ({ ...prevState, cidade: "Itajaí", bairro: "Cordeiros" }))
   const handleLogoChange = (e) => {
     if (e.target.files[0]) {
@@ -54,6 +63,12 @@ export function App() {
   //Criar Restaurante no Banco de Dados
   async function criarRestaurante(e) {
     e.preventDefault();
+
+    setInfos({
+      ...infos,
+      cardapio: [...infos.cardapio, novoItem],
+    });
+    setNovoItem({ nameItem: '', priceItem: '', src: '' });
 
     const {
       nome,
@@ -142,11 +157,11 @@ export function App() {
 
   // Calculando o total de itens e o preço total dos combos
   const totalItensCombos = carrinho.reduce((total, item) => total + item.quantidade, 0)
-  const precoTotalCombos = carrinho.reduce((total, item) => total + item.price * item.quantidade, 0);
+  const precoTotalCombos = carrinho.reduce((total, item) => total + item.priceItem * item.quantidade, 0);
 
   // Calculando o total de itens e o preço total das porções
   const totalItensPorcoes = porcoesCarrinho.reduce((total, item) => total + item.quantidade, 0);
-  const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + item.price * item.quantidade, 0);
+  const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + item.priceItem * item.quantidade, 0);
 
   // Calculando o total de itens e o preço total geral
   const totalItensGeral = totalItensCombos + totalItensPorcoes;
@@ -178,9 +193,9 @@ export function App() {
   }, [porcoesCarrinho]);
 
   const adicionarAoCarrinho = (item, tipo) => {
-    toast.success(`${item.name} adicionado ao carrinho!`, {
+    toast.success(`${item.nameItem} adicionado ao carrinho!`, {
       position: "top-right",
-      autoClose: 2000,
+      autoClose: 450,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -235,6 +250,7 @@ export function App() {
   }, []);
 
   const [mostrarModal, setMostrarModal] = useState(false)
+  const [mostrarDetalhes, setMostrarDetalhes] = useState(false)
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -249,6 +265,8 @@ export function App() {
 
           mostrarModal={mostrarModal}
           setMostrarModal={setMostrarModal}
+          mostrarDetalhes={mostrarDetalhes}
+          setMostrarDetalhes={setMostrarDetalhes}
 
           totalItensGeral={totalItensGeral}
           precoTotalGeral={precoTotalGeral}
@@ -278,6 +296,9 @@ export function App() {
           setName={setName}
           setPrice={setPrice}
           setSrc={setSrc}
+
+          novoItem={novoItem}
+          handleChange={handleChange}
         />
       </BrowserRouter>
       <GlobalStyle />

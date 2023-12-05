@@ -51,25 +51,20 @@ export function Produto({
                                 <p>{restauranteFiltrado.horarioFuncionamentoI} - {restauranteFiltrado.horarioFuncionamentoF}</p>
                             </InformacoesDoRestaurante>
 
-                            <TitleSession>Combos:</TitleSession>
+                            <TitleSession>Mais pedidos:</TitleSession>
                             <Cardapio>
                                 {restauranteFiltrado.cardapio.map((item, index) => (
                                     <>
-                                        <Combos key={index}>
-                                            {item.combos.map((combo, comboIndex) => (
-                                                <ProductCard key={comboIndex}>
-                                                    <ImagemComida src={combo.src} alt={combo.name} />
-                                                    <div>
-                                                        <p>{combo.id}</p>
-                                                        <h3>{combo.name}</h3>
-                                                        <p>${combo.price}</p>
-                                                    </div>
-                                                    <AddCart onClick={() => adicionarAoCarrinho(combo, 'combo')}>
-                                                        add to cart
-                                                    </AddCart>
-                                                </ProductCard>
-                                            ))}
-                                        </Combos>
+                                        <ProductCard key={index}>
+                                            <ImagemComida src={item.src} alt={item.nameItem} />
+                                            <div>
+                                                <h3>{item.nameItem}</h3>
+                                                <p>${item.priceItem}</p>
+                                            </div>
+                                            <AddCart onClick={() => adicionarAoCarrinho(item, 'combo')}>
+                                                add to cart
+                                            </AddCart>
+                                        </ProductCard>
                                     </>
                                 ))}
                             </Cardapio>

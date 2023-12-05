@@ -7,7 +7,11 @@ import {
     ProdutosNoCarrinho,
     NomePreco,
     QuantidadeDeleter,
-    ButtonFinalizarPedido
+    ButtonFinalizarPedido,
+    DetalhesModal,
+    Minus,
+    Plus,
+    Del
 } from './styles'
 
 import { TrashSimple, XCircle } from 'phosphor-react'
@@ -38,6 +42,7 @@ export function Carrinho({
     formaDePagamento,
     setFormaDePagamento,
     mostrarModal,
+    setMostrarDetalhes,
     setMostrarModal,
     precoTotalGeral,
     totalItensGeral,
@@ -82,7 +87,7 @@ export function Carrinho({
         if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
             toast.error('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.', {
                 position: "top-right",
-                autoClose: 1500,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -94,6 +99,9 @@ export function Carrinho({
         } else {
             setMostrarModal(true)
         }
+    }
+    function AbrirDetalhes() {
+        setMostrarDetalhes(true)
     }
 
     return (
@@ -115,38 +123,20 @@ export function Carrinho({
                     <ProdutosNoCarrinho key={item.id}>
                         <img src={item.src} alt={item.name} />
                         <NomePreco>
-                            <p>{item.name}</p>
-                            <p>${item.price}</p>
+                            <p>{item.nameItem}</p>
+                            <p>${item.priceItem}</p>
                         </NomePreco>
                         <QuantidadeDeleter>
                             {item.quantidade > 1 && (
-                                <button onClick={() => diminuirQuantidade(item.id, 'combo')}>-</button>
+                                <Minus onClick={() => diminuirQuantidade(item.id, 'combo')}>-</Minus>
                             )}
                             <p>{item.quantidade}</p>
                             {item.quantidade < 10 && (
-                                <button onClick={() => aumentarQuantidade(item.id, 'combo')}>+</button>
+                                <Plus onClick={() => aumentarQuantidade(item.id, 'combo')}>+</Plus>
                             )}
-                            <button onClick={() => removerDoCarrinho(item.id, 'combo')}><TrashSimple /></button>
+                            <Del onClick={() => removerDoCarrinho(item.id, 'combo')}><TrashSimple size={32} weight="bold" /></Del>
                         </QuantidadeDeleter>
-                    </ProdutosNoCarrinho>
-                ))}
-                {porcoesCarrinho.map((item) => (
-                    <ProdutosNoCarrinho key={item.id}>
-                        <img src={item.src} alt={item.name} />
-                        <NomePreco>
-                            <p>{item.name}</p>
-                            <p>${item.price}</p>
-                        </NomePreco>
-                        <QuantidadeDeleter>
-                            {item.quantidade > 1 && (
-                                <button onClick={() => diminuirQuantidade(item.id)}>-</button>
-                            )}
-                            <p>{item.quantidade}</p>
-                            {item.quantidade < 10 && (
-                                <button onClick={() => aumentarQuantidade(item.id)}>+</button>
-                            )}
-                            <button onClick={() => removerDoCarrinho(item.id)}><TrashSimple /></button>
-                        </QuantidadeDeleter>
+                        <DetalhesModal onClick={AbrirDetalhes}>Detalhes</DetalhesModal>
                     </ProdutosNoCarrinho>
                 ))}
                 <hr />

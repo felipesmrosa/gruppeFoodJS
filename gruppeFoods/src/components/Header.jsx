@@ -23,6 +23,7 @@ import { Carrinho } from './Carrinho'
 import logo from '../images/logo.png';
 import { Configuracoes } from './ConfiguracoesPerfil';
 import { Modal } from './Carrinho/ModalPagamento';
+import { Detalhes } from './Carrinho/ModalDetalhes';
 
 export function Header({
     quantity,
@@ -45,6 +46,8 @@ export function Header({
     setFormaDePagamento,
     mostrarModal,
     setMostrarModal,
+    mostrarDetalhes,
+    setMostrarDetalhes,
     precoTotalGeral,
     totalItensGeral,
     restaurantes
@@ -73,33 +76,7 @@ export function Header({
                 <img src={logo} alt="" />
             </Link>
 
-            <SearchEat onSubmit={handleSearch}>
-                <input
-                    type="text"
-                    list='search'
-                    placeholder='Pesquise'
-                    onChange={({ target }) => setSearchValue(target.value)}
-                    value={searchValue}
-                    required
-                />
-
-                <datalist id="search">
-                    <option value="Jungle Burguer" />
-                    <option value="Santo Burguer" />
-                    <option value="Best Burguer" />
-                </datalist>
-
-                <button>
-                    <MagnifyingGlass />
-                </button>
-            </SearchEat>
-
             <MenuNavigator>
-                <Entregas>
-                    <MapPin />
-                    ENTREGA
-                </Entregas>
-
                 <Perfil onClick={handleTogglePerfil}>
                     <UserCircle />  {/* pedidos, favoritos, perfil, meus endereços, sair */}
                 </Perfil>
@@ -135,6 +112,8 @@ export function Header({
                             setFormaDePagamento={setFormaDePagamento}
                             mostrarModal={mostrarModal}
                             setMostrarModal={setMostrarModal}
+                            mostrarDetalhes={mostrarDetalhes}
+                            setMostrarDetalhes={setMostrarDetalhes}
                             precoTotalGeral={precoTotalGeral}
                             totalItensGeral={totalItensGeral}
                         />
@@ -174,6 +153,13 @@ export function Header({
 
                             totalItensGeral={totalItensGeral}
                             precoTotalGeral={precoTotalGeral}
+                        />
+                    </center>
+                )}
+                {mostrarDetalhes && (
+                    <center>
+                        <Detalhes 
+                            setMostrarDetalhes={setMostrarDetalhes}
                         />
                     </center>
                 )}
