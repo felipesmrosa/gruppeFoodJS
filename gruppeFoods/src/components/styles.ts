@@ -27,10 +27,18 @@ export const ProdutosDoRestaurante = styled.div`
     gap: 0.5rem;
 `
 export const ButtonCadastroDeProdutos = styled.button`
-    width: 50%;    
-    border: none;
+    width: 56%;
     height: 2.3rem;
     border-radius: 16px;
+    background: transparent;
+    color: #ff3939;
+    border: 3px solid #ff3939;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 export const ButtonTPC = styled.div`
     display: flex;
@@ -200,4 +208,8 @@ export const ButtonCadastrarRestaurante = styled.button`
     padding: 0.6rem;
     border-radius: 18px;
     border: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: #ff3939;
+    color: #f9a01b;
 `

@@ -27,6 +27,7 @@ export const InformacoesDoRestaurante = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-bottom: 3rem;
 `
 export const ContainerProdutos = styled.div`
     margin: 2rem 15rem;

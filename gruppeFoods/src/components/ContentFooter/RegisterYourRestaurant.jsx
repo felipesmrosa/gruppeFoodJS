@@ -50,89 +50,102 @@ export function RegisterYourRestaurant({
                 <Formulario onSubmit={criarRestaurante}>
                     <fieldset>
                         <legend>Cadastre seu restaurante!</legend>
-                        <label>Nome do Restaurante</label>
-                        <input
-                            type="text"
-                            placeholder='Nome do Restaurante'
-                            defaultValue={infos.nome}
-                            onChange={(e) => setInfos({ ...infos, nome: e.target.value })}
-                            required
-                        />
-                        <label>Email do Restaurante</label>
-                        <input
-                            type="text"
-                            placeholder='Email do Restaurante'
-                            onChange={(e) => setInfos({ ...infos, email: e.target.value })}
-                            defaultValue={infos.email}
-                            required
-                        />
-                        <label>Telefone do Restaurante</label>
-                        <input
-                            type="text"
-                            placeholder='Telefone do Restaurante'
-                            onChange={(e) => setInfos({ ...infos, telefone: e.target.value })}
-                            defaultValue={infos.telefone}
-                            required
-                        />
-                        <label>Cidade</label>
-                        <input
-                            type="text"
-                            placeholder='Cidade'
-                            onChange={(e) => setInfos({ ...infos, cidade: e.target.value })}
-                            defaultValue={infos.cidade}
-                            required
-                        />
-                        <label>Endereço</label>
-                        <input
-                            type="text"
-                            placeholder='Endereço'
-                            onChange={(e) => setInfos({ ...infos, endereco: e.target.value })}
-                            defaultValue={infos.endereco}
-                            required
-                        />
-                        <label>Bairro</label>
-                        <input
-                            type="text"
-                            placeholder='Bairro'
-                            onChange={(e) => setInfos({ ...infos, bairro: e.target.value })}
-                            defaultValue={infos.bairro}
-                            required
-                        />
-                        <label>CPF</label>
-                        <input
-                            type="text"
-                            placeholder='CPF'
-                            onChange={(e) => setInfos({ ...infos, cpf: e.target.value })}
-                            defaultValue={infos.cpf}
-                            required
-                        />
-
-                        <label htmlFor="time">Inicio do expediente</label>
-                        <input
-                            id='time'
-                            name='time'
-                            type="time"
-                            onChange={(e) => setInfos({ ...infos, horarioFuncionamentoI: e.target.value })}
-                        />
-                        <label>Final do expediente</label>
-                        <input
-                            id='timeFim'
-                            name='timeFim'
-                            type="time"
-                            onChange={(e) => setInfos({ ...infos, horarioFuncionamentoF: e.target.value })}
-                        />
-
-                        <LogoDiv>
-                            <label for="arquivo"><Paperclip size={32} />Enviar Logo</label>
+                        <label htmlFor='restaurante'>Nome do Restaurante
                             <input
-                                id='arquivo'
-                                name='arquivo'
-                                type="file"
-                                placeholder='Logo do Restaurante'
-                                onChange={handleLogoChange}
-                                accept='image/*'
+                                id='restaurante'
+                                type="text"
+                                placeholder='Nome do Restaurante'
+                                defaultValue={infos.nome}
+                                onChange={(e) => setInfos({ ...infos, nome: e.target.value })}
                                 required
                             />
+                        </label>
+                        <label htmlFor='email'>Email do Restaurante
+                            <input
+                                id='email'
+                                type="text"
+                                placeholder='Email do Restaurante'
+                                onChange={(e) => setInfos({ ...infos, email: e.target.value })}
+                                defaultValue={infos.email}
+                                required
+                            />
+                        </label>
+                        <label htmlFor='telefone'>Telefone do Restaurante
+                            <input
+                                id='telefone'
+                                type="text"
+                                placeholder='Telefone do Restaurante'
+                                onChange={(e) => setInfos({ ...infos, telefone: e.target.value })}
+                                defaultValue={infos.telefone}
+                                required
+                            />
+                        </label>
+                        <label htmlFor='cidade'>Cidade
+                            <input
+                                id='cidade'
+                                type="text"
+                                placeholder='Cidade'
+                                onChange={(e) => setInfos({ ...infos, cidade: e.target.value })}
+                                defaultValue={infos.cidade}
+                                required
+                            />
+                        </label>
+                        <label htmlFor='endereco'>Endereço
+                            <input
+                                id='endereco'
+                                type="text"
+                                placeholder='Endereço'
+                                onChange={(e) => setInfos({ ...infos, endereco: e.target.value })}
+                                defaultValue={infos.endereco}
+                                required
+                            />
+                        </label>
+                        <label htmlFor='bairro'>Bairro
+                            <input
+                                id='bairro'
+                                type="text"
+                                placeholder='Bairro'
+                                onChange={(e) => setInfos({ ...infos, bairro: e.target.value })}
+                                defaultValue={infos.bairro}
+                                required
+                            />
+                        </label>
+                        <label htmlFor='cpf'>CPF
+                            <input
+                                id='cpf'
+                                type="text"
+                                placeholder='CPF'
+                                onChange={(e) => setInfos({ ...infos, cpf: e.target.value })}
+                                defaultValue={infos.cpf}
+                                required
+                            />
+                        </label>
+                        <label htmlFor="time">Inicio do expediente
+                            <input
+                                id='time'
+                                name='time'
+                                type="time"
+                                onChange={(e) => setInfos({ ...infos, horarioFuncionamentoI: e.target.value })}
+                            />
+                        </label>
+                        <label htmlFor='timeFim'>Final do expediente
+                            <input
+                                id='timeFim'
+                                name='timeFim'
+                                type="time"
+                                onChange={(e) => setInfos({ ...infos, horarioFuncionamentoF: e.target.value })}
+                            />
+                        </label>
+                        <LogoDiv>
+                            <label for="arquivo"><Paperclip size={32} />Enviar Logo
+                                <input
+                                    id='arquivo'
+                                    type="file"
+                                    onChange={handleLogoChange}
+                                    accept='image/*'
+                                    required
+                                />
+                            </label>
                         </LogoDiv>
 
                         {!cadastrarCardapio && (
@@ -146,9 +159,10 @@ export function RegisterYourRestaurant({
                             <CadastrarCardapio>
                                 {inputs.map((value, index) => (
                                     <ProdutosDoRestaurante key={index}>
-                                        <label>
+                                        <label htmlFor='product'>
                                             Nome do Produto:
                                             <input
+                                                id='product'
                                                 type="text"
                                                 name='nameItem'
                                                 placeholder="Nome do Produto"
@@ -156,9 +170,10 @@ export function RegisterYourRestaurant({
                                                 onChange={handleChange}
                                             />
                                         </label>
-                                        <label>
+                                        <label htmlFor='price'>
                                             Preço:
                                             <input
+                                                id='price'
                                                 type="number"
                                                 name='priceItem'
                                                 placeholder="Preço do Produto"
@@ -166,11 +181,13 @@ export function RegisterYourRestaurant({
                                                 onChange={handleChange}
                                             />
                                         </label>
-                                        <label>
+                                        <label htmlFor='imageSRC'>
                                             <Paperclip />
                                             Enviar foto do produto
                                             <input
+                                                id='imageSRC'
                                                 type="file"
+                                                name='src'
                                                 value={novoItem.src}
                                                 onChange={handleChange}
                                             />

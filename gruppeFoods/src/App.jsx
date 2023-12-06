@@ -42,15 +42,7 @@ export function App() {
   });
 
 
-  const [novoItem, setNovoItem] = useState({
-    nameItem: '',
-    priceItem: '',
-    src: ''
-  });
 
-  const handleChange = (e) => {
-    setNovoItem({ ...novoItem, [e.target.name]: e.target.value });
-  };
 
   //infos.bairro | infos.cidade | infos.cpf | infos.email | infos.endereco | infos.logo | infos.mercadoria | infos.name | infos.telefone
   //setInfos((prevState) => ({ ...prevState, cidade: "Itajaí", bairro: "Cordeiros" }))
@@ -60,15 +52,33 @@ export function App() {
     }
   };
 
+
+  const [novoItem, setNovoItem] = useState({
+    nameItem: '',
+    priceItem: '',
+    src: ''
+  });
+  const handleChange = (e) => {
+    setNovoItem({ ...novoItem, [e.target.name]: e.target.value });
+  };
   //Criar Restaurante no Banco de Dados
   async function criarRestaurante(e) {
     e.preventDefault();
 
+
+    infos.cardapio.push(novoItem)
+    console.log('infos.cardapio')
+    console.log(infos.cardapio)
+    console.log('infos.cardapio')
+
     setInfos({
       ...infos,
-      cardapio: [...infos.cardapio, novoItem],
+      cardapio: infos.cardapio,
     });
+
     setNovoItem({ nameItem: '', priceItem: '', src: '' });
+
+    console.log('infos depois', infos)
 
     const {
       nome,
@@ -94,7 +104,7 @@ export function App() {
       infos.logo &&
       horarioFuncionamentoI &&
       horarioFuncionamentoF &&
-      cardapio
+      infos.cardapio[{}]
     ) {
       try {
         const storageRef = ref(storage, `logosDosRestaurantes/${infos.logo.name}`);
@@ -131,22 +141,27 @@ export function App() {
       console.log('endereco:', endereco);
       console.log('bairro:', bairro);
       console.log('cpf:', cpf);
-      // console.log('logo:', logo);
+      console.log('logo:', infos.logo);
       console.log('horarioFuncionamentoI:', horarioFuncionamentoI);
       console.log('horarioFuncionamentoF:', horarioFuncionamentoF);
       console.log('cardapio:', cardapio);
-      console.log('Preencha todos os campos obrigatórios');
-      // Ou exiba uma mensagem para o usuário informando sobre campos obrigatórios não preenchidos
+
+      toast('Preencha todos os campos obrigatórios', {
+        position: "top-right",
+        autoClose: 800,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }
 
   const adicionarCardapio = (menu) => {
     setInfos({ ...infos, cardapio: [...infos.cardapio, menu] })
   }
-
-  // const adicionarHorarioFuncionamento = (horario) => {
-  //   setInfos({ ...infos, horarioFuncionamento: [...infos.horarioFuncionamento, horario] });
-  // };
 
   const [carrinho, setCarrinho] = useState([]);
   const [porcoesCarrinho, setPorcoesCarrinho] = useState([]);
@@ -304,7 +319,7 @@ export function App() {
       <GlobalStyle />
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={800}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -312,7 +327,7 @@ export function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="colored"
       />
       {/* Same as */}
       <ToastContainer />

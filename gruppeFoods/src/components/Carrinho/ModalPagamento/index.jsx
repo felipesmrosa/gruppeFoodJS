@@ -130,15 +130,16 @@ export function Modal({
 
                 <Localizacao>
                     <form>
-                        <label htmlFor="localizacao">Aonde você está?</label>
-                        <input
-                            type="text"
-                            placeholder='Endereço'
-                        />
-                        <input
-                            type="text"
-                            placeholder='Complemento'
-                        />
+                        <label htmlFor="localizacao">Aonde você está?
+                            <input
+                                type="text"
+                                placeholder='Endereço'
+                            />
+                            <input
+                                type="text"
+                                placeholder='Complemento'
+                            />
+                        </label>
                     </form>
                 </Localizacao>
 
@@ -146,37 +147,41 @@ export function Modal({
                 {pagamento && (
                     <FormularioCartao>
                         <br />
-                        <label htmlFor="cartao">Digitos do Cartão</label>
-                        <input
-                            name="cartao"
-                            placeholder="0000 0000 0000 0000"
-                            type="text"
-                            required
-                        />
+                        <label htmlFor="cartao">Digitos do Cartão
+                            <input
+                                name="cartao"
+                                placeholder="0000 0000 0000 0000"
+                                type="text"
+                                required
+                            />
+                        </label>
 
                         <VencimentoDoCartao>
-                            <label htmlFor="vencimento">Vencimento</label>
-                            <Mes
-                                type="text"
-                                placeholder='Mês'
-                                name="vencimento"
-                                required
-                            />
-                            <Ano
-                                type="text"
-                                placeholder='Ano'
-                                name="vencimento"
-                                required
-                            />
+                            <label htmlFor="vencimento">Vencimento
+                                <Mes
+                                    type="text"
+                                    placeholder='Mês'
+                                    name="vencimento"
+                                    required
+                                />
+
+                                <Ano
+                                    type="text"
+                                    placeholder='Ano'
+                                    name="vencimento"
+                                    required
+                                />
+                            </label>
                         </VencimentoDoCartao>
 
-                        <label htmlFor="cartao">CVV</label>
-                        <input
-                            name="cvv"
-                            placeholder="000"
-                            type="number"
-                            required
-                        />
+                        <label htmlFor="cartao">CVV
+                            <input
+                                name="cvv"
+                                placeholder="000"
+                                type="number"
+                                required
+                            />
+                        </label>
                         <button onClick={finalizarPedido}>Concluir Pedido</button>
                     </FormularioCartao>
                 )}
