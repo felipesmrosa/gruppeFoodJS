@@ -18,6 +18,13 @@ export const SalvarPedidoButton = styled.button`
     text-transform: uppercase;
     font-weight: 700;
     font-size: 1.2rem;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        color: #ff3939;
+        background-color: #f9981d;
+        border: 2px solid #f9981d;
+    }
 `
 export const TextoDeObservacao = styled.textarea`
     width: 92%;

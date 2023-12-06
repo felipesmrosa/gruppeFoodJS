@@ -26,6 +26,27 @@ export const ProdutosDoRestaurante = styled.div`
     flex-direction: column;
     gap: 0.5rem;
 `
+export const Legenda = styled.legend`
+    font-size: 28px;
+    font-weight: 500;
+    text-transform: uppercase;
+`
+export const FecharProdutos = styled.p`
+    border: 2px solid #f9a01b;
+    border-radius: 50%;
+    width: 4vh;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+`
+export const FecharProdutosHeader = styled.header`
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+`
 export const ButtonCadastroDeProdutos = styled.button`
     width: 56%;
     height: 2.3rem;
@@ -39,6 +60,11 @@ export const ButtonCadastroDeProdutos = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all .1s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 `
 export const ButtonTPC = styled.div`
     display: flex;
@@ -46,13 +72,13 @@ export const ButtonTPC = styled.div`
     justify-content: space-between;
 
     p {
-        border: 2px solid #f9a01b;
+        border: 3px solid #f9a01b;
         border-radius: 50%;
         width: 3vh;
         height: 3vh;
         display: flex;
         align-items: center;
-        justify-content: center; 
+        justify-content: center;
     }
     svg {
         width: 80%;
@@ -96,7 +122,6 @@ export const MenuNavigator = styled.div`
         font-size: .875rem;
     }
 `
-
 export const ButtonCarrinho = styled.button`
     display: flex;
     align-items: center;
@@ -109,7 +134,6 @@ export const ButtonCarrinho = styled.button`
     background-color: transparent;
     position: relative;
 `
-
 export const Entregas = styled.button`
     display: flex;
     align-items: center;
@@ -168,15 +192,16 @@ export const Formulario = styled.form`
     gap: 0.2rem;
 
     fieldset {
-        padding: 1rem;
+        padding: 1rem 2rem;
         border-radius: 18px;
+        border: 2.5px solid #000;
     }
 
     input, select {
         width: 100%;
-        height: 3rem;
+        height: 2.7rem;
         padding: 0 1rem;
-        margin-bottom: 0.3rem;
+        margin-bottom: 1rem;
         border: none;
         background-color: transparent;
         border-bottom: 1px solid;
@@ -212,4 +237,9 @@ export const ButtonCadastrarRestaurante = styled.button`
     font-weight: 700;
     background: #ff3939;
     color: #f9a01b;
+    transition: all .1s ease-in-out;
+
+    &:hover {
+        transform: scale(1.01);
+    }
 `

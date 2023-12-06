@@ -7,13 +7,24 @@ import {
     CadastrarCardapio,
     ButtonTPC,
     ButtonCadastroDeProdutos,
-    ProdutosDoRestaurante
+    ProdutosDoRestaurante,
+    FecharProdutos,
+    Legenda,
+    FecharProdutosHeader
 } from '../styles';
 
 import { Paperclip, Plus, TrashSimple, X } from 'phosphor-react'
 
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { app } from '../../Services/firebaseConfig';
+
 export function RegisterYourRestaurant({
     criarRestaurante,
+
+    handleImageChange,
 
     infos,
     setInfos,
@@ -27,7 +38,9 @@ export function RegisterYourRestaurant({
     src,
     novoItem,
     handleChange,
-    handleProductChange
+    handleProductChange,
+    enviarImagem,
+    handleProduct,
 }) {
 
     const [cadastrarCardapio, setCadastrarCardapio] = useState(false)
@@ -46,10 +59,9 @@ export function RegisterYourRestaurant({
     return (
         <>
             <Cadastro>
-
                 <Formulario onSubmit={criarRestaurante}>
                     <fieldset>
-                        <legend>Cadastre seu restaurante!</legend>
+                        <Legenda>Cadastre seu restaurante!</Legenda>
                         <label htmlFor='restaurante'>Nome do Restaurante
                             <input
                                 id='restaurante'
@@ -148,7 +160,7 @@ export function RegisterYourRestaurant({
                             </label>
                         </LogoDiv>
 
-                        {!cadastrarCardapio && (
+                        {/* {!cadastrarCardapio && (
                             <CadastrarCardapio>
                                 <ButtonCadastroDeProdutos onClick={() => setCadastrarCardapio(true)}>
                                     Cadastrar Produtos <Plus />
@@ -158,64 +170,82 @@ export function RegisterYourRestaurant({
                         {cadastrarCardapio && (
                             <CadastrarCardapio>
                                 {inputs.map((value, index) => (
-                                    <ProdutosDoRestaurante key={index}>
-                                        <label htmlFor='product'>
-                                            Nome do Produto:
-                                            <input
-                                                id='product'
-                                                type="text"
-                                                name='nameItem'
-                                                placeholder="Nome do Produto"
-                                                value={novoItem.nameItem}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                        <label htmlFor='price'>
-                                            Preço:
-                                            <input
-                                                id='price'
-                                                type="number"
-                                                name='priceItem'
-                                                placeholder="Preço do Produto"
-                                                value={novoItem.priceItem}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                        <label htmlFor='imageSRC'>
-                                            <Paperclip />
-                                            Enviar foto do produto
-                                            <input
-                                                id='imageSRC'
-                                                type="file"
-                                                name='src'
-                                                value={novoItem.src}
-                                                onChange={handleChange}
-                                            />
-                                        </label>
-                                        <ButtonTPC>
-                                            {inputs.length > 1 && (
-                                                <p onClick={handleRemoveInput}>
-                                                    <TrashSimple />
-                                                </p>
+                                    <>
+                                        <FecharProdutosHeader>
+                                            {inputs.length >= 1 && (
+                                                <FecharProdutos title='Fechar' onClick={() => setCadastrarCardapio(false)}>
+                                                    <X />
+                                                </FecharProdutos>
                                             )}
-                                            <p onClick={handleAddInput}>
-                                                <Plus />
-                                            </p>
-                                            <p onClick={() => setCadastrarCardapio(false)}>
-                                                <X />
-                                            </p>
-                                        </ButtonTPC>
-                                    </ProdutosDoRestaurante>
+                                        </FecharProdutosHeader >
+                                        <ProdutosDoRestaurante key={index}>
+                                            <label htmlFor='product'>
+                                                Nome do Produto:
+                                                <input
+                                                    id='product'
+                                                    type="text"
+                                                    name='nameItem'
+                                                    placeholder="Nome do Produto"
+                                                    value={novoItem.nameItem}
+                                                    onChange={handleChange}
+                                                />
+                                            </label>
+                                            <label htmlFor='price'>
+                                                Preço:
+                                                <input
+                                                    id='price'
+                                                    type="number"
+                                                    name='priceItem'
+                                                    placeholder="Preço do Produto"
+                                                    value={novoItem.priceItem}
+                                                    onChange={handleChange}
+                                                />
+                                            </label>
+                                            <label htmlFor='imageSRC'>
+                                                <Paperclip />
+                                                Foto do produto
+                                                <input
+                                                    id='imageSRC'
+                                                    type="file"
+                                                    name='src'
+                                                    onChange={handleProduct}
+                                                />
+                                            </label>
+                                            <ButtonTPC>
+                                                <p title='Adicionar Produto' onClick={handleAddInput}>
+                                                    <Plus />
+                                                </p>
+                                                {inputs.length > 1 && (
+                                                    <p title='Deletar Produto' onClick={handleRemoveInput}>
+                                                        <TrashSimple />
+                                                    </p>
+                                                )}
+                                            </ButtonTPC>
+                                        </ProdutosDoRestaurante>
+                                    </>
                                 ))}
                             </CadastrarCardapio>
-                        )}
+                        )} */}
 
                         <ButtonCadastrarRestaurante
                             type='submit'
                         >Cadastrar Restaurante</ButtonCadastrarRestaurante>
                     </fieldset>
                 </Formulario>
-            </Cadastro>
+                    
+            </Cadastro >
+            <ToastContainer
+                position="top-right"
+                autoClose={850}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     )
 }

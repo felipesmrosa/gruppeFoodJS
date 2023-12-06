@@ -35,14 +35,18 @@ export function DefaultLayout({
     totalItensGeral,
     precoTotalGeral,
 
-    restaurantes
-}) {
+    restaurantes,
 
-    console.log(restaurantes, 'oi')
+    precoAdicionais,
+    setPrecoAdicionais,
+    handleImageChange
+}) {
 
     return (
         <div>
             <Header
+                handleImageChange={handleImageChange}
+
                 cart={cart}
                 combos={combos}
                 lanches={lanches}
@@ -74,6 +78,9 @@ export function DefaultLayout({
 
                 precoTotalGeral={precoTotalGeral}
                 totalItensGeral={totalItensGeral}
+
+                precoAdicionais={precoAdicionais}
+                setPrecoAdicionais={setPrecoAdicionais}
             />
             <Outlet />
             <Footer infos={infos} setInfos={setInfos} />

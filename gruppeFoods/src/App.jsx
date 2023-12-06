@@ -12,9 +12,13 @@ import { app } from "./Services/firebaseConfig";
 import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
 
 import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
+import { v4 as uuidv4 } from 'uuid'
+
 export function App() {
+  const uniqueID = uuidv4()
   //Firebase
   const db = getFirestore(app)
   const restauranteCollection = collection(db, "restaurantes")
@@ -38,22 +42,22 @@ export function App() {
     logo: '',
     horarioFuncionamentoI: '',
     horarioFuncionamentoF: '',
-    cardapio: []
+    cardapio: [],
+    src: ''
   });
 
-
-
-
-  //infos.bairro | infos.cidade | infos.cpf | infos.email | infos.endereco | infos.logo | infos.mercadoria | infos.name | infos.telefone
-  //setInfos((prevState) => ({ ...prevState, cidade: "Itajaí", bairro: "Cordeiros" }))
   const handleLogoChange = (e) => {
     if (e.target.files[0]) {
       setInfos({ ...infos, logo: e.target.files[0] });
     }
   };
-
-
+  const handleProduct = (e) => {
+    if (e.target.files[0]) {
+      setInfos({ ...infos, src: e.target.files[0] });
+    }
+  }
   const [novoItem, setNovoItem] = useState({
+    id: uniqueID,
     nameItem: '',
     priceItem: '',
     src: ''
@@ -61,24 +65,19 @@ export function App() {
   const handleChange = (e) => {
     setNovoItem({ ...novoItem, [e.target.name]: e.target.value });
   };
+
   //Criar Restaurante no Banco de Dados
   async function criarRestaurante(e) {
     e.preventDefault();
 
-
     infos.cardapio.push(novoItem)
-    console.log('infos.cardapio')
-    console.log(infos.cardapio)
-    console.log('infos.cardapio')
 
     setInfos({
       ...infos,
       cardapio: infos.cardapio,
     });
 
-    setNovoItem({ nameItem: '', priceItem: '', src: '' });
-
-    console.log('infos depois', infos)
+    setNovoItem({ id: uniqueID, nameItem: '', priceItem: '', src: '' });
 
     const {
       nome,
@@ -104,13 +103,14 @@ export function App() {
       infos.logo &&
       horarioFuncionamentoI &&
       horarioFuncionamentoF &&
-      infos.cardapio[{}]
+      infos.cardapio.length > 0
     ) {
       try {
         const storageRef = ref(storage, `logosDosRestaurantes/${infos.logo.name}`);
         await uploadBytes(storageRef, infos.logo);
 
         const imageUrl = await getDownloadURL(storageRef);
+
         const restauranteData = {
           nome: infos.nome,
           email: infos.email,
@@ -122,7 +122,7 @@ export function App() {
           logo: imageUrl,
           horarioFuncionamentoI: infos.horarioFuncionamentoI,
           horarioFuncionamentoF: infos.horarioFuncionamentoF,
-          cardapio: infos.cardapio // Aqui você está adicionando o campo cardápio ao documento do restaurante
+          cardapio: infos.cardapio
         };
 
         const docRef = await addDoc(collection(db, 'restaurantes'), restauranteData);
@@ -134,21 +134,9 @@ export function App() {
         // Trate o erro de acordo com sua lógica de aplicação
       }
     } else {
-      console.log('nome:', nome);
-      console.log('email:', email);
-      console.log('telefone:', telefone);
-      console.log('cidade:', cidade);
-      console.log('endereco:', endereco);
-      console.log('bairro:', bairro);
-      console.log('cpf:', cpf);
-      console.log('logo:', infos.logo);
-      console.log('horarioFuncionamentoI:', horarioFuncionamentoI);
-      console.log('horarioFuncionamentoF:', horarioFuncionamentoF);
-      console.log('cardapio:', cardapio);
-
-      toast('Preencha todos os campos obrigatórios', {
+      toast.warn('Preencha todos os campos!', {
         position: "top-right",
-        autoClose: 800,
+        autoClose: 850,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -170,13 +158,15 @@ export function App() {
 
   const [formaDePagamento, setFormaDePagamento] = useState('dinheiro')
 
+  const [precoAdicionais, setPrecoAdicionais] = useState(null)
+
   // Calculando o total de itens e o preço total dos combos
   const totalItensCombos = carrinho.reduce((total, item) => total + item.quantidade, 0)
-  const precoTotalCombos = carrinho.reduce((total, item) => total + item.priceItem * item.quantidade, 0);
+  const precoTotalCombos = carrinho.reduce((total, item) => total + precoAdicionais + item.priceItem * item.quantidade, 0);
 
   // Calculando o total de itens e o preço total das porções
   const totalItensPorcoes = porcoesCarrinho.reduce((total, item) => total + item.quantidade, 0);
-  const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + item.priceItem * item.quantidade, 0);
+  const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + precoAdicionais + item.priceItem * item.quantidade, 0);
 
   // Calculando o total de itens e o preço total geral
   const totalItensGeral = totalItensCombos + totalItensPorcoes;
@@ -202,10 +192,6 @@ export function App() {
   useEffect(() => {
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
   }, [carrinho]);
-
-  useEffect(() => {
-    localStorage.setItem('porcoesCarrinho', JSON.stringify(porcoesCarrinho));
-  }, [porcoesCarrinho]);
 
   const adicionarAoCarrinho = (item, tipo) => {
     toast.success(`${item.nameItem} adicionado ao carrinho!`, {
@@ -289,6 +275,8 @@ export function App() {
           formaDePagamento={formaDePagamento}
           setFormaDePagamento={setFormaDePagamento}
 
+          handleProduct={handleProduct}
+
           carrinho={carrinho}
           setCarrinho={setCarrinho}
           porcoesCarrinho={porcoesCarrinho}
@@ -314,12 +302,15 @@ export function App() {
 
           novoItem={novoItem}
           handleChange={handleChange}
+
+          precoAdicionais={precoAdicionais}
+          setPrecoAdicionais={setPrecoAdicionais}
         />
       </BrowserRouter>
       <GlobalStyle />
       <ToastContainer
         position="top-right"
-        autoClose={800}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

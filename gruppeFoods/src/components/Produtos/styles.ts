@@ -10,7 +10,16 @@ export const Dados = styled.div`
         text-align: center;
     }
 `
-
+export const DivComida = styled.div`
+    width: 20vh;
+    height: 20vh;
+    border-radius: 7px;
+    border: 2px solid #ff3939;
+    margin: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 export const Cardapio = styled.div`
     display: flex;
     align-items: center;
@@ -54,13 +63,14 @@ export const TitleSession = styled.h3`
     text-transform: uppercase;
     font-weight: bold;
     color: red;
+    margin-bottom: 0.5rem;
 `
 
 export const ImagemComida = styled.img`
     width: 20vh;
     height: 20vh;
     border-radius: 10px;
-    padding: 0.2rem;
+    padding: 0.3rem;
 `
 
 export const Combos = styled.div`
@@ -80,10 +90,11 @@ export const ProductCard = styled.div`
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    background: ${props => props.theme['red-100']};
+    background: white;
     border-radius: 8px;
-    border: 2px solid;
+    border: 1px solid #cecece;
     padding: 0.1rem 0.1rem 0.5rem;
+    box-shadow: 0px 0px 8px -2px #000;
 `
 
 export const Lanches = styled.div`
@@ -145,8 +156,8 @@ export const Bebida = styled.div`
 
 export const AddCart = styled.button`
     background: transparent;
-    border: 2px solid #f9a01b;
-    color: #f9a01b;
+    border: 2px solid #ff3939;
+    color: #ff3939;
     text-transform: uppercase;
     padding: 0.3rem 1rem;
     border-radius: 8px;

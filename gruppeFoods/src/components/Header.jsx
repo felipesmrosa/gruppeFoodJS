@@ -4,7 +4,6 @@ import {
     SearchEat,
     MenuNavigator,
     ButtonCarrinho,
-    Entregas,
     Perfil,
     QuantidadeJaDentroDoCarrinho
 } from './styles'
@@ -26,6 +25,7 @@ import { Modal } from './Carrinho/ModalPagamento';
 import { Detalhes } from './Carrinho/ModalDetalhes';
 
 export function Header({
+    handleImageChange,
     quantity,
     cart,
     combos,
@@ -50,7 +50,9 @@ export function Header({
     setMostrarDetalhes,
     precoTotalGeral,
     totalItensGeral,
-    restaurantes
+    restaurantes,
+    precoAdicionais,
+    setPrecoAdicionais
 }) {
     const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
     const [mostrarPerfil, setMostrarPerfil] = useState(false);
@@ -158,8 +160,10 @@ export function Header({
                 )}
                 {mostrarDetalhes && (
                     <center>
-                        <Detalhes 
+                        <Detalhes
                             setMostrarDetalhes={setMostrarDetalhes}
+                            precoAdicionais={precoAdicionais}
+                            setPrecoAdicionais={setPrecoAdicionais}
                         />
                     </center>
                 )}

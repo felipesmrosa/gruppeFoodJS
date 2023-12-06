@@ -87,7 +87,7 @@ export function Carrinho({
         if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
             toast.error('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.', {
                 position: "top-right",
-                autoClose: 1000,
+                autoClose: 800,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

@@ -54,6 +54,11 @@ export function Router({
     src,
     novoItem,
     handleChange,
+    precoAdicionais,
+    setPrecoAdicionais,
+    handleImageChange,
+    enviarImagem,
+    handleProduct
 }) {
 
     return (
@@ -62,6 +67,9 @@ export function Router({
             <Route path='/reset' element={<ResetPass />} />
             <Route path='/home' element={<DefaultLayout
                 carrinho={carrinho}
+
+                handleImageChange={handleImageChange}
+
                 setCarrinho={setCarrinho}
                 adicionarAoCarrinho={adicionarAoCarrinho}
                 removerDoCarrinho={removerDoCarrinho}
@@ -84,6 +92,9 @@ export function Router({
 
                 totalItensGeral={totalItensGeral}
                 precoTotalGeral={precoTotalGeral}
+
+                precoAdicionais={precoAdicionais}
+                setPrecoAdicionais={setPrecoAdicionais}
             />}>
                 <Route path='home/historico' element={
                     <HistoricoDeCompras
@@ -117,6 +128,8 @@ export function Router({
                     path='home/registerRestaurant'
                     element={
                         <RegisterYourRestaurant
+                            handleImageChange={handleImageChange}
+
                             infos={infos}
                             setInfos={setInfos}
 
@@ -129,6 +142,10 @@ export function Router({
                             novoItem={novoItem}
                             handleChange={handleChange}
                             handleProductChange={handleProductChange}
+
+                            enviarImagem={enviarImagem}
+
+                            handleProduct={handleProduct}
                         />
                     }
                 >

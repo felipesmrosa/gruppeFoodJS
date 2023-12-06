@@ -13,7 +13,8 @@ import {
     InfosRestaurante,
     LogoRestaurante,
     Cardapio,
-    InformacoesDoRestaurante
+    InformacoesDoRestaurante,
+    DivComida
 } from './styles'
 
 export function Produto({
@@ -53,10 +54,12 @@ export function Produto({
 
                             <TitleSession>Mais pedidos:</TitleSession>
                             <Cardapio>
-                                {restauranteFiltrado.cardapio.map((item, index) => (
+                                {restauranteFiltrado.cardapio.map((item) => (
                                     <>
-                                        <ProductCard key={index}>
-                                            <ImagemComida src={item.src} alt={item.nameItem} />
+                                        <ProductCard key={item.id}>
+                                            <DivComida>
+                                                <ImagemComida src={item.src} alt={item.nameItem} />
+                                            </DivComida>
                                             <div>
                                                 <h3>{item.nameItem}</h3>
                                                 <p>${item.priceItem}</p>

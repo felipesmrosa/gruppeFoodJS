@@ -27,6 +27,11 @@ export const ButtonFinalizarPedido = styled.button`
     color: #f9a01b;
     text-transform: uppercase;
     font-weight: 700;
+    transition: all .1s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 `
 
 export const FecharCarrinho = styled.button`
