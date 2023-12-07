@@ -1,68 +1,35 @@
-import { useState } from 'react';
 import {
     Formulario,
     Cadastro,
     LogoDiv,
     ButtonCadastrarRestaurante,
-    CadastrarCardapio,
-    ButtonTPC,
-    ButtonCadastroDeProdutos,
-    ProdutosDoRestaurante,
-    FecharProdutos,
     Legenda,
-    FecharProdutosHeader
 } from '../styles';
 
-import { Paperclip, Plus, TrashSimple, X } from 'phosphor-react'
+import { Paperclip } from 'phosphor-react'
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { app } from '../../Services/firebaseConfig';
+
+import { Menu } from './Menu';
 
 export function RegisterYourRestaurant({
     criarRestaurante,
 
-    handleImageChange,
-
     infos,
     setInfos,
     handleLogoChange,
-    adicionarCardapio,
-    setName,
-    name,
-    setPrice,
-    price,
-    setSrc,
-    src,
     novoItem,
-    handleChange,
-    handleProductChange,
-    enviarImagem,
-    handleProduct,
+    handleChange
 }) {
-
-    const [cadastrarCardapio, setCadastrarCardapio] = useState(false)
-    const [inputs, setInputs] = useState([''])
-
-    const handleAddInput = () => {
-        setInputs([...inputs, '']); // Adiciona um novo input ao array de inputs
-    };
-
-    const handleRemoveInput = (index) => {
-        const newInputs = [...inputs];
-        newInputs.splice(index, 1);
-        setInputs(newInputs);
-    };
-
     return (
         <>
             <Cadastro>
                 <Formulario onSubmit={criarRestaurante}>
                     <fieldset>
                         <Legenda>Cadastre seu restaurante!</Legenda>
-                        <label htmlFor='restaurante'>Nome do Restaurante
+                        <label htmlFor='restaurante'>Nome do Restaurante*
                             <input
                                 id='restaurante'
                                 type="text"
@@ -72,7 +39,7 @@ export function RegisterYourRestaurant({
                                 required
                             />
                         </label>
-                        <label htmlFor='email'>Email do Restaurante
+                        <label htmlFor='email'>Email do Restaurante*
                             <input
                                 id='email'
                                 type="text"
@@ -82,7 +49,7 @@ export function RegisterYourRestaurant({
                                 required
                             />
                         </label>
-                        <label htmlFor='telefone'>Telefone do Restaurante
+                        <label htmlFor='telefone'>Telefone do Restaurante*
                             <input
                                 id='telefone'
                                 type="text"
@@ -92,7 +59,7 @@ export function RegisterYourRestaurant({
                                 required
                             />
                         </label>
-                        <label htmlFor='cidade'>Cidade
+                        <label htmlFor='cidade'>Cidade*
                             <input
                                 id='cidade'
                                 type="text"
@@ -102,7 +69,7 @@ export function RegisterYourRestaurant({
                                 required
                             />
                         </label>
-                        <label htmlFor='endereco'>Endereço
+                        <label htmlFor='endereco'>Endereço*
                             <input
                                 id='endereco'
                                 type="text"
@@ -112,7 +79,7 @@ export function RegisterYourRestaurant({
                                 required
                             />
                         </label>
-                        <label htmlFor='bairro'>Bairro
+                        <label htmlFor='bairro'>Bairro*
                             <input
                                 id='bairro'
                                 type="text"
@@ -122,7 +89,7 @@ export function RegisterYourRestaurant({
                                 required
                             />
                         </label>
-                        <label htmlFor='cpf'>CPF
+                        <label htmlFor='cpf'>CPF*
                             <input
                                 id='cpf'
                                 type="text"
@@ -132,7 +99,7 @@ export function RegisterYourRestaurant({
                                 required
                             />
                         </label>
-                        <label htmlFor="time">Inicio do expediente
+                        <label htmlFor="time">Inicio do expediente*
                             <input
                                 id='time'
                                 name='time'
@@ -140,7 +107,7 @@ export function RegisterYourRestaurant({
                                 onChange={(e) => setInfos({ ...infos, horarioFuncionamentoI: e.target.value })}
                             />
                         </label>
-                        <label htmlFor='timeFim'>Final do expediente
+                        <label htmlFor='timeFim'>Final do expediente*
                             <input
                                 id='timeFim'
                                 name='timeFim'
@@ -149,7 +116,7 @@ export function RegisterYourRestaurant({
                             />
                         </label>
                         <LogoDiv>
-                            <label for="arquivo"><Paperclip size={32} />Enviar Logo
+                            <label for="arquivo"><Paperclip size={32} />Enviar Logo*
                                 <input
                                     id='arquivo'
                                     type="file"
@@ -159,80 +126,16 @@ export function RegisterYourRestaurant({
                                 />
                             </label>
                         </LogoDiv>
-
-                        {/* {!cadastrarCardapio && (
-                            <CadastrarCardapio>
-                                <ButtonCadastroDeProdutos onClick={() => setCadastrarCardapio(true)}>
-                                    Cadastrar Produtos <Plus />
-                                </ButtonCadastroDeProdutos>
-                            </CadastrarCardapio>
-                        )}
-                        {cadastrarCardapio && (
-                            <CadastrarCardapio>
-                                {inputs.map((value, index) => (
-                                    <>
-                                        <FecharProdutosHeader>
-                                            {inputs.length >= 1 && (
-                                                <FecharProdutos title='Fechar' onClick={() => setCadastrarCardapio(false)}>
-                                                    <X />
-                                                </FecharProdutos>
-                                            )}
-                                        </FecharProdutosHeader >
-                                        <ProdutosDoRestaurante key={index}>
-                                            <label htmlFor='product'>
-                                                Nome do Produto:
-                                                <input
-                                                    id='product'
-                                                    type="text"
-                                                    name='nameItem'
-                                                    placeholder="Nome do Produto"
-                                                    value={novoItem.nameItem}
-                                                    onChange={handleChange}
-                                                />
-                                            </label>
-                                            <label htmlFor='price'>
-                                                Preço:
-                                                <input
-                                                    id='price'
-                                                    type="number"
-                                                    name='priceItem'
-                                                    placeholder="Preço do Produto"
-                                                    value={novoItem.priceItem}
-                                                    onChange={handleChange}
-                                                />
-                                            </label>
-                                            <label htmlFor='imageSRC'>
-                                                <Paperclip />
-                                                Foto do produto
-                                                <input
-                                                    id='imageSRC'
-                                                    type="file"
-                                                    name='src'
-                                                    onChange={handleProduct}
-                                                />
-                                            </label>
-                                            <ButtonTPC>
-                                                <p title='Adicionar Produto' onClick={handleAddInput}>
-                                                    <Plus />
-                                                </p>
-                                                {inputs.length > 1 && (
-                                                    <p title='Deletar Produto' onClick={handleRemoveInput}>
-                                                        <TrashSimple />
-                                                    </p>
-                                                )}
-                                            </ButtonTPC>
-                                        </ProdutosDoRestaurante>
-                                    </>
-                                ))}
-                            </CadastrarCardapio>
-                        )} */}
-
                         <ButtonCadastrarRestaurante
                             type='submit'
                         >Cadastrar Restaurante</ButtonCadastrarRestaurante>
                     </fieldset>
+                    <Menu 
+                        infos={infos}
+                        novoItem={novoItem}
+                        handleChange={handleChange}
+                    />
                 </Formulario>
-                    
             </Cadastro >
             <ToastContainer
                 position="top-right"

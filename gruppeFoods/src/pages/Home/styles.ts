@@ -19,7 +19,7 @@ export const MenuItems = styled.div `
 `
 
 export const HighlightsForYou = styled.div `
-    margin: 2rem 22rem;
+    margin: 2rem 15rem;
     margin-bottom: 1rem;
     color: ${props => props.theme["red-100"]};
     font-size: 1.35rem;

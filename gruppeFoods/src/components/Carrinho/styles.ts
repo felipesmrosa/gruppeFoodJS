@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    display: block !important;
+    display: block!important;
     position: fixed;
-    left: 77.8%;
-    width: 22.2%;
-    max-width: 22.2%;
+    left: 71.8%;
+    width: 100%;
+    max-width: 28.2%;
     top: 0;
     height: 100vh;
-    padding: 1.5rem !important;
-    border-radius: 8px 0 0px 8px !important;
-    border: none !important;
+    padding: 1.5rem!important;
+    border-radius: 8px 0 0px 8px!important;
+    border: none!important;
     background: #f9f9f9;
     box-shadow: 14px 0px 40px 20px #c01212;
     z-index: 999;
-    overflow-y: scroll;
 `
 
 export const ButtonFinalizarPedido = styled.button`

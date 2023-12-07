@@ -7,6 +7,7 @@ import { Login } from './pages/Login';
 import { RegisterYourRestaurant } from './components/ContentFooter/RegisterYourRestaurant';
 import { ResetPass } from './pages/ResetPass';
 import { HistoricoDeCompras } from './components/ConfiguracoesPerfil/HistoricoDeCompras';
+import { Success } from './pages/Success';
 
 
 export function Router({
@@ -150,6 +151,10 @@ export function Router({
                     }
                 >
                 </Route>
+                <Route 
+                    path='home/success'
+                    element={<Success />}
+                />
             </Route>
         </Routes >
     )

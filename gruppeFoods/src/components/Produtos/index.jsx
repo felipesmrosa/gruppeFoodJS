@@ -38,7 +38,7 @@ export function Produto({
             <ContainerProdutos>
 
                 <InfosRestaurante>
-                    {restaurantes.filter(restau => restau.nome == nome).map(restauranteFiltrado => (
+                    {restaurantes.filter(restau => restau.id === restau.id).map(restauranteFiltrado => (
                         <div key={restauranteFiltrado.id}>
                             <InformacoesDoRestaurante>
                                 <LogoRestaurante src={restauranteFiltrado.logo} alt="" />

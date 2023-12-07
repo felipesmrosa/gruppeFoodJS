@@ -19,6 +19,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 export function App() {
   const uniqueID = uuidv4()
+  const navigate = useNavigate();
   //Firebase
   const db = getFirestore(app)
   const restauranteCollection = collection(db, "restaurantes")
@@ -42,8 +43,7 @@ export function App() {
     logo: '',
     horarioFuncionamentoI: '',
     horarioFuncionamentoF: '',
-    cardapio: [],
-    src: ''
+    cardapio: []
   });
 
   const handleLogoChange = (e) => {
@@ -53,14 +53,15 @@ export function App() {
   };
   const handleProduct = (e) => {
     if (e.target.files[0]) {
-      setInfos({ ...infos, src: e.target.files[0] });
+      setNovoItem({ ...novoItem, imagemProduto: e.target.files[0] });
     }
-  }
+  };
   const [novoItem, setNovoItem] = useState({
     id: uniqueID,
-    nameItem: '',
-    priceItem: '',
-    src: ''
+    nomeDoProduto: '',
+    precoDoProduto: '',
+    imagemProduto: '',
+    descricaoDoProduto: ''
   });
   const handleChange = (e) => {
     setNovoItem({ ...novoItem, [e.target.name]: e.target.value });
@@ -68,7 +69,7 @@ export function App() {
 
   //Criar Restaurante no Banco de Dados
   async function criarRestaurante(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     infos.cardapio.push(novoItem)
 
@@ -77,7 +78,7 @@ export function App() {
       cardapio: infos.cardapio,
     });
 
-    setNovoItem({ id: uniqueID, nameItem: '', priceItem: '', src: '' });
+    setNovoItem({ id: uniqueID, nomeDoProduto: '', precoDoProduto: '', imagemProduto: '', descricaoDoProduto: '' });
 
     const {
       nome,
@@ -107,9 +108,14 @@ export function App() {
     ) {
       try {
         const storageRef = ref(storage, `logosDosRestaurantes/${infos.logo.name}`);
+        const storageImageRef = ref(storage, `produtos/${novoItem.imagemProduto}`);
         await uploadBytes(storageRef, infos.logo);
+        await uploadBytes(storageImageRef, novoItem.imagemProduto);
 
         const imageUrl = await getDownloadURL(storageRef);
+        const imageProdutoUrl = await getDownloadURL(storageImageRef);
+
+        console.log(imageProdutoUrl, 'imageProdutoUrl')
 
         const restauranteData = {
           nome: infos.nome,
@@ -122,16 +128,28 @@ export function App() {
           logo: imageUrl,
           horarioFuncionamentoI: infos.horarioFuncionamentoI,
           horarioFuncionamentoF: infos.horarioFuncionamentoF,
-          cardapio: infos.cardapio
+          cardapio: infos.cardapio,
+          imagemProduto: imageProdutoUrl,
         };
 
         const docRef = await addDoc(collection(db, 'restaurantes'), restauranteData);
         console.log('Restaurante criado com sucesso:', docRef.id);
         console.log('cardapio:', cardapio);
-        // Restante do seu código...
+        toast.success('Parabéns! Seu restaurante está no ar.', {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        setTimeout(() => {
+          navigate.push('/success')
+        }, 998);
       } catch (error) {
         console.error('Erro ao criar restaurante:', error);
-        // Trate o erro de acordo com sua lógica de aplicação
       }
     } else {
       toast.warn('Preencha todos os campos!', {
@@ -146,6 +164,7 @@ export function App() {
       });
     }
   }
+  //Fim Criar Restaurante no Banco de Dados
 
   const adicionarCardapio = (menu) => {
     setInfos({ ...infos, cardapio: [...infos.cardapio, menu] })

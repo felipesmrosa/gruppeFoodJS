@@ -21,6 +21,9 @@ export const HeaderContainer = styled.header`
         gap: 1.5rem;
     }
 `
+export const TESTE = styled.div`
+
+`
 export const ProdutosDoRestaurante = styled.div`
     display: flex;
     flex-direction: column;
@@ -185,16 +188,17 @@ export const FooterPageFood = styled.footer`
 `
 export const Formulario = styled.form`
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
-    flex-direction: column;
-    width: 30%;
-    gap: 0.2rem;
+    gap: 1rem;
 
     fieldset {
-        padding: 1rem 2rem;
-        border-radius: 18px;
+        padding: 1rem 1rem;
         border: 2.5px solid #000;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        flex-direction: column;
     }
 
     input, select {
@@ -204,20 +208,14 @@ export const Formulario = styled.form`
         margin-bottom: 1rem;
         border: none;
         background-color: transparent;
-        border-bottom: 1px solid;
+        border-bottom: 1px solid #000;
     }
     input[type="file"] {
         display: none;
     }
-    label {
-        cursor: pointer;
-    }
 `
 export const Cadastro = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 3rem 0px;
+    margin: 3rem 15rem;
 `
 export const LogoDiv = styled.div`
     display: flex;
@@ -240,6 +238,6 @@ export const ButtonCadastrarRestaurante = styled.button`
     transition: all .1s ease-in-out;
 
     &:hover {
-        transform: scale(1.01);
+        transform: scale(1.02);
     }
 `
