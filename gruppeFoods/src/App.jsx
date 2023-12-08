@@ -1,12 +1,12 @@
 import { Router } from "./Router";
-import { BrowserRouter, useNavigate } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import { ThemeProvider } from "styled-components";
 
 import { defaultTheme } from "./styles/themes/default";
 import { GlobalStyle } from "./styles/global";
 
-import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore'
+import { addDoc, collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import { useEffect, useState } from "react";
 import { app } from "./Services/firebaseConfig";
 import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
@@ -19,7 +19,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 export function App() {
   const uniqueID = uuidv4()
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   //Firebase
   const db = getFirestore(app)
   const restauranteCollection = collection(db, "restaurantes")
@@ -51,11 +51,6 @@ export function App() {
       setInfos({ ...infos, logo: e.target.files[0] });
     }
   };
-  const handleProduct = (e) => {
-    if (e.target.files[0]) {
-      setNovoItem({ ...novoItem, imagemProduto: e.target.files[0] });
-    }
-  };
   const [novoItem, setNovoItem] = useState({
     id: uniqueID,
     nomeDoProduto: '',
@@ -66,6 +61,20 @@ export function App() {
   const handleChange = (e) => {
     setNovoItem({ ...novoItem, [e.target.name]: e.target.value });
   };
+  const handleProduct = (e) => {
+    const arquivo = e.target.files[0]
+    setNovoItem({ ...novoItem, imagemProduto: arquivo });
+  };
+
+  async function verificarRestauranteExistente(nomeRestaurante) {
+    const restaurantesRef = collection(db, 'restaurantes');
+    const querySnapshot = await getDocs(
+      query(restaurantesRef, where('nome', '==', nomeRestaurante))
+    );
+
+    return !querySnapshot.empty; // Retorna true se existir um restaurante com o mesmo nome, caso contrário, retorna false
+  }
+
 
   //Criar Restaurante no Banco de Dados
   async function criarRestaurante(e) {
@@ -78,7 +87,6 @@ export function App() {
       cardapio: infos.cardapio,
     });
 
-    setNovoItem({ id: uniqueID, nomeDoProduto: '', precoDoProduto: '', imagemProduto: '', descricaoDoProduto: '' });
 
     const {
       nome,
@@ -107,15 +115,35 @@ export function App() {
       infos.cardapio.length > 0
     ) {
       try {
+        const restauranteJaExistente = await verificarRestauranteExistente(nome);
+        if (restauranteJaExistente) {
+          // Restaurante com o mesmo nome já existe, trate isso aqui (ex: exiba uma mensagem para o usuário)
+          toast.error('Já existe um restaurante com esse nome.', {
+            position: "top-right",
+          });
+          return; // Encerra
+        }
+
         const storageRef = ref(storage, `logosDosRestaurantes/${infos.logo.name}`);
-        const storageImageRef = ref(storage, `produtos/${novoItem.imagemProduto}`);
         await uploadBytes(storageRef, infos.logo);
-        await uploadBytes(storageImageRef, novoItem.imagemProduto);
-
         const imageUrl = await getDownloadURL(storageRef);
-        const imageProdutoUrl = await getDownloadURL(storageImageRef);
 
-        console.log(imageProdutoUrl, 'imageProdutoUrl')
+        const cardapioComImagens = await Promise.all(
+          infos.cardapio.map(async (item) => {
+            const storageImageRef = ref(storage, `produtos/${item.imagemProduto.name}`);
+            await uploadBytes(storageImageRef, item.imagemProduto);
+            const imageProdutoUrl = await getDownloadURL(storageImageRef);
+
+            return {
+              ...item,
+              imagemProduto: imageProdutoUrl,
+            };
+          })
+        );
+        setInfos({
+          ...infos,
+          cardapio: cardapioComImagens,
+        });
 
         const restauranteData = {
           nome: infos.nome,
@@ -128,13 +156,14 @@ export function App() {
           logo: imageUrl,
           horarioFuncionamentoI: infos.horarioFuncionamentoI,
           horarioFuncionamentoF: infos.horarioFuncionamentoF,
-          cardapio: infos.cardapio,
-          imagemProduto: imageProdutoUrl,
+          cardapio: cardapioComImagens,
         };
+
+        console.log('restauranteData: ', restauranteData)
+        console.log('cardapioComImagens:', cardapioComImagens)
 
         const docRef = await addDoc(collection(db, 'restaurantes'), restauranteData);
         console.log('Restaurante criado com sucesso:', docRef.id);
-        console.log('cardapio:', cardapio);
         toast.success('Parabéns! Seu restaurante está no ar.', {
           position: "top-right",
           autoClose: 1000,
@@ -145,9 +174,6 @@ export function App() {
           progress: undefined,
           theme: "colored",
         });
-        setTimeout(() => {
-          navigate.push('/success')
-        }, 998);
       } catch (error) {
         console.error('Erro ao criar restaurante:', error);
       }
@@ -181,11 +207,11 @@ export function App() {
 
   // Calculando o total de itens e o preço total dos combos
   const totalItensCombos = carrinho.reduce((total, item) => total + item.quantidade, 0)
-  const precoTotalCombos = carrinho.reduce((total, item) => total + precoAdicionais + item.priceItem * item.quantidade, 0);
+  const precoTotalCombos = carrinho.reduce((total, item) => total + item.precoDoProduto * item.quantidade, 0);
 
   // Calculando o total de itens e o preço total das porções
   const totalItensPorcoes = porcoesCarrinho.reduce((total, item) => total + item.quantidade, 0);
-  const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + precoAdicionais + item.priceItem * item.quantidade, 0);
+  const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + item.precoDoProduto * item.quantidade, 0);
 
   // Calculando o total de itens e o preço total geral
   const totalItensGeral = totalItensCombos + totalItensPorcoes;

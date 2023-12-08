@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
     background-color: ${props => props.theme["gray-100"]};
 
     img {
-        width: 75%;
+        width: 100%;
         padding: 0.5rem;
     }
     a {
@@ -21,8 +21,8 @@ export const HeaderContainer = styled.header`
         gap: 1.5rem;
     }
 `
-export const TESTE = styled.div`
-
+export const Lembrar = styled.p`
+    font-size: 1rem;
 `
 export const ProdutosDoRestaurante = styled.div`
     display: flex;
@@ -172,8 +172,9 @@ export const QuantidadeJaDentroDoCarrinho = styled.span`
     font-size: 0.95rem;
     position: absolute;
     left: 88%;
-    bottom: 66%;
+    bottom: 76%;
     color: ${props => props.theme['white-100']};
+    padding-left: .1rem;
 `
 
 

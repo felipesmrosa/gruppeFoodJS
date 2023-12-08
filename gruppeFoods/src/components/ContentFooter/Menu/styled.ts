@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
     width: 73%;
 `
-export const Formulario = styled.form`
+export const Formulario = styled.div`
     fieldset {
         padding: 1rem 1rem;
         border: 2.5px solid #000;

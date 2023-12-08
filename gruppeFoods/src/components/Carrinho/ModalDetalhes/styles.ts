@@ -3,7 +3,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
     background-color: white;
     padding: 20px;
-    width: 30%;
+    width: 35%;
+    height: 30rem;
     border-radius: 8px;
 `
 export const SalvarPedidoButton = styled.button`
@@ -35,7 +36,7 @@ export const TextoDeObservacao = styled.textarea`
     border-radius: 10px;
 `
 export const Observacao = styled.div`
-    margin-top: 1rem;
+    margin-top: .5rem;
 `
 export const Salvar = styled.div`
     display: flex;
@@ -50,11 +51,13 @@ export const Headerzinho = styled.div`
     gap: 15.8rem;
 `
 export const Banner = styled.div`
-    background-image: url('../../../src/images/pedido.png');
+    background-image: url(../../../src/images/pedido.png);
     width: 100%;
-    height: 9rem;
+    height: 7.3rem;
     margin-bottom: 0.5rem;
     border-radius: 12px;
+    background-repeat: no-repeat;
+    background-size: contain;
 `
 export const VencimentoDoCartao = styled.div`
     display: flex;
@@ -67,7 +70,7 @@ export const Row = styled.span`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.8rem 0;
+    padding: 0.12rem 0;
 `
 export const BtnRow = styled.span`
     display: flex;
@@ -114,8 +117,8 @@ export const FecharModal = styled.button`
     border: none;
 
     svg {
-        width: 2em;
-        height: 2em;
+        width: 1.5rem;
+        height: 1.5rem;
         color: ${props => props.theme['yellow-100']};
     }
 `

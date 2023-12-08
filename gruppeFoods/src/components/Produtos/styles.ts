@@ -10,6 +10,34 @@ export const Dados = styled.div`
         text-align: center;
     }
 `
+export const InfosDoProduto = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`
+export const Descricao = styled.p`
+    overflow-y: auto;
+    height: 4rem;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    width: 22%;
+    line-height: 16px;
+    word-break: break-word;
+
+    &::-webkit-scrollbar {
+        width: 10px;               /* width of the entire scrollbar */
+    }
+    &::-webkit-scrollbar-track {
+        background: #cacaca;       /* color of the tracking area */
+        border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #ff3939;    /* color of the scroll thumb */
+        border-radius: 20px;       /* roundness of the scroll thumb */
+        border: 2px solid #cacaca;  /* creates padding around scroll thumb */
+    }
+`
 export const DivComida = styled.div`
     width: 20vh;
     height: 20vh;
@@ -24,7 +52,8 @@ export const Cardapio = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 `
 export const LogoRestaurante = styled.img`
     border-radius: 50%;
@@ -91,9 +120,10 @@ export const ProductCard = styled.div`
     flex-direction: column;
     text-align: center;
     background: white;
+    width: auto;
     border-radius: 8px;
     border: 1px solid #cecece;
-    padding: 0.1rem 0.1rem 0.5rem;
+    padding: 0.5rem 0.3rem;
     box-shadow: 0px 0px 8px -2px #000;
 `
 

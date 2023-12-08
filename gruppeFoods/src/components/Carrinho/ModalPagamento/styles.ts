@@ -4,12 +4,34 @@ export const Container = styled.div`
     background-color: white;
     padding: 20px;
     border-radius: 8px;
+    height: 31rem;
+    width: 41%;
 `
 export const Headerzinho = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15.8rem;
+`
+export const BotaoFinalizarPedido = styled.button`
+    width: 70%;
+    margin-top: 0.15rem;
+    height: 2rem;
+    border: none;
+    background-color: #ff3939;
+    border-radius: 18px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f9a01b;
+`
+export const LabelCartao = styled.label`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 75%;
+    margin: 0.1rem;
 `
 export const VencimentoDoCartao = styled.div`
     display: flex;
@@ -23,21 +45,10 @@ export const ItemUmDoLadoDoOutro = styled.div`
     align-items: center;
     justify-content: center;
     gap: 3.7rem;
-    margin: 1.25rem 0;
 `
-export const Mes = styled.input`
-    width: 19%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-`
-export const Ano = styled.input`
-    width: 19%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+export const InfomacoesDoCartao = styled.input`
+    width: 100%;
+    padding: 0.3rem 1rem;
 `
 export const FecharModal = styled.button`
     background-color: transparent;
@@ -54,12 +65,11 @@ export const Localizacao = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 1rem 0;
 
     input {
-        margin-bottom: .3rem;
+        margin-bottom: .2rem;
         width: 75%;
-        padding: .5rem 1rem;
+        padding: .3rem 1rem;
     }
 `
 export const FormularioCartao = styled.form`
@@ -67,11 +77,6 @@ export const FormularioCartao = styled.form`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
-    input {
-        width: 75%;
-        padding: .5rem 1rem;
-    }
 `
 export const ModalOverlay = styled.div`
     position: fixed;

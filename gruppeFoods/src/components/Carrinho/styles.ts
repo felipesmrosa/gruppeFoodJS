@@ -61,12 +61,14 @@ export const ProdutosNoCarrinho = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 
     img {
-        width: 35%;
+        width: 8vh;
+        height: 8vh;
         border-radius: 7px;
         padding: 0;
     }
@@ -86,8 +88,8 @@ export const QuantidadeDeleter = styled.div`
 `
 export const DetalhesModal = styled.p`
     position: absolute;
-    left: 75%;
-    top: 10.3rem;
+    left: 79%;
+    top: 3.3rem;
     cursor: pointer;
 `
 export const Minus = styled.button`

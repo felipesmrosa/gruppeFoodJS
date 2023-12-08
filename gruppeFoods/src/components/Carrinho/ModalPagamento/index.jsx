@@ -7,9 +7,9 @@ import {
     Localizacao,
     ItemUmDoLadoDoOutro,
     FecharModal,
-    VencimentoDoCartao,
-    Mes,
-    Ano
+    InfomacoesDoCartao,
+    LabelCartao,
+    BotaoFinalizarPedido
 } from './styles'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,28 +17,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 export function Modal({
-    quantity,
-    cart,
-    combos,
-    lanches,
-    porcoes,
-    sobremesas,
-    bebidas,
-    carrinho,
-    setCarrinho,
-    adicionarAoCarrinho,
-    removerDoCarrinho,
-    porcoesCarrinho,
-    setPorcoesCarrinho,
-    historico,
-    setHistorico,
-    setPedidoFinalizado,
-    formaDePagamento,
-    setFormaDePagamento,
-    mostrarModal,
     setMostrarModal,
     precoTotalGeral,
-    totalItensGeral
 }) {
     const navegar = useNavigate()
     const [pagamento, setPagamento] = useState(true)
@@ -146,43 +126,39 @@ export function Modal({
                 <h1>{pagamento ? 'Forma de pagamento: Cartão' : 'Forma de pagamento: Dinheiro'}</h1>
                 {pagamento && (
                     <FormularioCartao>
-                        <br />
-                        <label htmlFor="cartao">Digitos do Cartão
-                            <input
+                        <LabelCartao htmlFor="cartao">Digitos do Cartão
+                            <InfomacoesDoCartao
                                 name="cartao"
                                 placeholder="0000 0000 0000 0000"
                                 type="text"
                                 required
                             />
-                        </label>
-
-                        <VencimentoDoCartao>
-                            <label htmlFor="vencimento">Vencimento
-                                <Mes
-                                    type="text"
-                                    placeholder='Mês'
-                                    name="vencimento"
-                                    required
-                                />
-
-                                <Ano
-                                    type="text"
-                                    placeholder='Ano'
-                                    name="vencimento"
-                                    required
-                                />
-                            </label>
-                        </VencimentoDoCartao>
-
-                        <label htmlFor="cartao">CVV
-                            <input
+                        </LabelCartao>
+                        <LabelCartao htmlFor="vencimento">Vencimento
+                            <InfomacoesDoCartao
+                                type="text"
+                                placeholder='Mês de Vencimento'
+                                name="vencimento"
+                                required
+                            />
+                        </LabelCartao>
+                        <LabelCartao htmlFor="ano">
+                            <InfomacoesDoCartao
+                                type="text"
+                                placeholder='Ano de Vencimento'
+                                name="ano"
+                                required
+                            />
+                        </LabelCartao>
+                        <LabelCartao htmlFor="cartao">CVV
+                            <InfomacoesDoCartao
                                 name="cvv"
                                 placeholder="000"
                                 type="number"
                                 required
                             />
-                        </label>
-                        <button onClick={finalizarPedido}>Concluir Pedido</button>
+                        </LabelCartao>
+                        <BotaoFinalizarPedido onClick={finalizarPedido}>Concluir Pedido</BotaoFinalizarPedido>
                     </FormularioCartao>
                 )}
                 {!pagamento && (
@@ -208,7 +184,7 @@ export function Modal({
                                 </label>
                             </form>
                         </div>
-                        <button onClick={finalizarPedido}>Concluir Pedido</button>
+                        <BotaoFinalizarPedido onClick={finalizarPedido}>Concluir Pedido</BotaoFinalizarPedido>
                     </>
                 )}
             </Container>

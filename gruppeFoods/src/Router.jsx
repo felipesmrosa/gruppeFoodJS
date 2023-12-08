@@ -2,12 +2,10 @@ import { Routes, Route } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { DefaultLayout } from './layouts/DefaultLayout'
 import { InsideRestaurant } from './pages/InsideRestaurant'
-import { useEffect, useState } from 'react';
 import { Login } from './pages/Login';
 import { RegisterYourRestaurant } from './components/ContentFooter/RegisterYourRestaurant';
 import { ResetPass } from './pages/ResetPass';
 import { HistoricoDeCompras } from './components/ConfiguracoesPerfil/HistoricoDeCompras';
-import { Success } from './pages/Success';
 
 
 export function Router({
@@ -41,7 +39,6 @@ export function Router({
     totalItensGeral,
     precoTotalGeral,
     handleLogoChange,
-    handleProductChange,
     handleNomeChange,
     handlePriceChange,
     adicionarItem,
@@ -61,7 +58,6 @@ export function Router({
     enviarImagem,
     handleProduct
 }) {
-
     return (
         <Routes>
             <Route path='/' element={<Login />} />
@@ -104,7 +100,8 @@ export function Router({
                         restaurantes={restaurantes}
                         formaDePagamento={formaDePagamento}
                         precoTotalGeral={precoTotalGeral}
-                    />} />
+                    />} 
+                />
                 <Route path='/home/' element={<Home
                     restaurantes={restaurantes}
                     mostrarModal={mostrarModal}
@@ -125,6 +122,7 @@ export function Router({
                             setPorcoesCarrinho={setPorcoesCarrinho}
                         />}
                 />
+
                 <Route
                     path='home/registerRestaurant'
                     element={
@@ -142,7 +140,6 @@ export function Router({
                             handleLogoChange={handleLogoChange}
                             novoItem={novoItem}
                             handleChange={handleChange}
-                            handleProductChange={handleProductChange}
 
                             enviarImagem={enviarImagem}
 
@@ -151,10 +148,6 @@ export function Router({
                     }
                 >
                 </Route>
-                <Route 
-                    path='home/success'
-                    element={<Success />}
-                />
             </Route>
         </Routes >
     )

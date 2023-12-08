@@ -49,7 +49,6 @@ export function Carrinho({
     restaurantes
 }) {
 
-    console.log(restaurantes, 'meu deus')
     const produtos = [
         { combos },
         { lanches },
@@ -57,8 +56,6 @@ export function Carrinho({
         { sobremesas },
         { bebidas }
     ]
-
-    const navegar = useNavigate();
 
     const diminuirQuantidade = (id, tipo) => {
         const carrinhoAtual = tipo === 'combo' ? carrinho : porcoesCarrinho;
@@ -121,10 +118,10 @@ export function Carrinho({
 
                 {carrinho.map((item) => (
                     <ProdutosNoCarrinho key={item.id}>
-                        <img src={item.src} alt={item.name} />
+                        <img src={item.imagemProduto} alt={item.name} />
                         <NomePreco>
-                            <p>{item.nameItem}</p>
-                            <p>${item.priceItem}</p>
+                            <p>{item.nomeDoProduto}</p>
+                            <p>${item.precoDoProduto}</p>
                         </NomePreco>
                         <QuantidadeDeleter>
                             {item.quantidade > 1 && (

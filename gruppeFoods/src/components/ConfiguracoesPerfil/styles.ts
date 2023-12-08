@@ -8,11 +8,11 @@ export const Container = styled.div`
     background: #f2f2f2;
     position: absolute;
     padding: 1rem 2rem;
-    top: 5.7rem;
-    right: 24.8rem;
+    top: 5.3rem;
+    right: 18.7rem;
     border-radius: 12px;
     box-shadow: 0px 0px 15px 2px #c01212;
-    gap: .25rem;
+    gap: 0.25rem;
 `
 export const Botao = styled.button`
     width: 100%;

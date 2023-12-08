@@ -14,17 +14,16 @@ import { Paperclip } from 'phosphor-react';
 export function Menu({
     novoItem,
     handleChange,
-    infos
+    infos,
+    criarRestaurante,
+    handleProduct
 }) {
     
-    function ficarnapagina(e) {
-        e.preventDefault();
-        
-        console.log(infos, 'infos')
-    }
+
+
     return (
         <Container>
-            <Formulario>
+            <Formulario onSubmit={criarRestaurante}>
                 <fieldset>
                     <Legenda>Seus Produtos!</Legenda>
                     <label htmlFor="nomeDoProduto">Nome do Produto*
@@ -61,17 +60,15 @@ export function Menu({
                         <input
                             id='imagemProduto'
                             type="file"
-                            name='imagemProduto'
-                            value={novoItem.src}
-                            onChange={handleChange}
+                            onChange={handleProduct}
                             accept='image/*'
                         />
                     </label>
                     <br />
-                    <AdicionarProdutoPraLista onClick={ficarnapagina}>Adicionar Produto</AdicionarProdutoPraLista>
+                    <AdicionarProdutoPraLista type='submit'>Cadastrar Restaurante</AdicionarProdutoPraLista>
 
-                    <h2>Produtos Cadastrados:</h2>
-                    {/* {produtos && (
+                    {/* <h2>Produtos Cadastrados:</h2>
+                     {produtos && (
                         <Produto
                         />
                     )} */}

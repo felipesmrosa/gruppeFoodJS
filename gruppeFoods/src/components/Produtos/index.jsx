@@ -14,7 +14,9 @@ import {
     LogoRestaurante,
     Cardapio,
     InformacoesDoRestaurante,
-    DivComida
+    DivComida,
+    Descricao,
+    InfosDoProduto
 } from './styles'
 
 export function Produto({
@@ -38,7 +40,7 @@ export function Produto({
             <ContainerProdutos>
 
                 <InfosRestaurante>
-                    {restaurantes.filter(restau => restau.id === restau.id).map(restauranteFiltrado => (
+                    {restaurantes.filter(restau => restau.nome === nome).map(restauranteFiltrado => (
                         <div key={restauranteFiltrado.id}>
                             <InformacoesDoRestaurante>
                                 <LogoRestaurante src={restauranteFiltrado.logo} alt="" />
@@ -58,12 +60,12 @@ export function Produto({
                                     <>
                                         <ProductCard key={item.id}>
                                             <DivComida>
-                                                <ImagemComida src={item.src} alt={item.nameItem} />
+                                                <ImagemComida src={item.imagemProduto} alt={item.nomeDoProduto} />
                                             </DivComida>
-                                            <div>
-                                                <h3>{item.nameItem}</h3>
-                                                <p>${item.priceItem}</p>
-                                            </div>
+                                            <InfosDoProduto>
+                                                <h3>{item.nomeDoProduto}</h3>
+                                                <p>${item.precoDoProduto}</p>
+                                            </InfosDoProduto>
                                             <AddCart onClick={() => adicionarAoCarrinho(item, 'combo')}>
                                                 add to cart
                                             </AddCart>

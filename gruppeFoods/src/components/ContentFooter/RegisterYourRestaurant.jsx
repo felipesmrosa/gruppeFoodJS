@@ -4,6 +4,7 @@ import {
     LogoDiv,
     ButtonCadastrarRestaurante,
     Legenda,
+    Lembrar
 } from '../styles';
 
 import { Paperclip } from 'phosphor-react'
@@ -21,7 +22,8 @@ export function RegisterYourRestaurant({
     setInfos,
     handleLogoChange,
     novoItem,
-    handleChange
+    handleChange,
+    handleProduct
 }) {
     return (
         <>
@@ -126,14 +128,14 @@ export function RegisterYourRestaurant({
                                 />
                             </label>
                         </LogoDiv>
-                        <ButtonCadastrarRestaurante
-                            type='submit'
-                        >Cadastrar Restaurante</ButtonCadastrarRestaurante>
+                        <Lembrar>Lembre-se de cadastrar seus produtos.</Lembrar>
                     </fieldset>
-                    <Menu 
+                    <Menu
+                        handleProduct={handleProduct}
                         infos={infos}
                         novoItem={novoItem}
                         handleChange={handleChange}
+                        criarRestaurante={criarRestaurante}
                     />
                 </Formulario>
             </Cadastro >
