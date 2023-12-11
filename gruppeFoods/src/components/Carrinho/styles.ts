@@ -54,7 +54,7 @@ export const QuantidadePrecoEItem = styled.span`
 `
 export const ProdutosNoCarrinho = styled.div`
     width: 100%;
-    height: 6rem;
+    height: 5rem;
     border-radius: 8px;
     border: 2px solid;
     padding: 0.1rem 0.3rem;
@@ -67,8 +67,8 @@ export const ProdutosNoCarrinho = styled.div`
     position: relative;
 
     img {
-        width: 8vh;
-        height: 8vh;
+        width: 13vh;
+        height: 13vh;
         border-radius: 7px;
         padding: 0;
     }

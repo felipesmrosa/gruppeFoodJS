@@ -51,19 +51,39 @@ export function App() {
       setInfos({ ...infos, logo: e.target.files[0] });
     }
   };
-  const [novoItem, setNovoItem] = useState({
+  const [novoItem, setNovoItem] = useState([{
     id: uniqueID,
     nomeDoProduto: '',
     precoDoProduto: '',
-    imagemProduto: '',
+    imagemProduto: null,
     descricaoDoProduto: ''
-  });
-  const handleChange = (e) => {
-    setNovoItem({ ...novoItem, [e.target.name]: e.target.value });
+  }]);
+  const handleChange = (index, e) => {
+    const { name, value } = e.target
+    const novosItens = [...novoItem]
+    novosItens[index][name] = value;
+    setNovoItem(novosItens)
   };
-  const handleProduct = (e) => {
-    const arquivo = e.target.files[0]
-    setNovoItem({ ...novoItem, imagemProduto: arquivo });
+  const adicionarItem = () => {
+    setNovoItem([...novoItem, {
+      id: uniqueID,
+      nomeDoProduto: '',
+      precoDoProduto: '',
+      imagemProduto: null,
+      descricaoDoProduto: ''
+    }]);
+  };
+
+  console.log('Novo Item >>> ', novoItem)
+
+
+  const handleProduct = (index, e) => {
+    const novosItens = [...novoItem]
+
+    if (e.target.files && e.target.files[0]) {
+      novosItens[index].imagemProduto = e.target.files[0];
+      setNovoItem(novosItens);
+    }
   };
 
   async function verificarRestauranteExistente(nomeRestaurante) {
@@ -129,20 +149,25 @@ export function App() {
         const imageUrl = await getDownloadURL(storageRef);
 
         const cardapioComImagens = await Promise.all(
-          infos.cardapio.map(async (item) => {
-            const storageImageRef = ref(storage, `produtos/${item.imagemProduto.name}`);
-            await uploadBytes(storageImageRef, item.imagemProduto);
-            const imageProdutoUrl = await getDownloadURL(storageImageRef);
+          novoItem.map(async (item) => {
+            if (item.imagemProduto) {
+              const storageImageRef = ref(storage, `produtos/${item.imagemProduto.name}`);
+              await uploadBytes(storageImageRef, item.imagemProduto);
+              const imageProdutoUrl = await getDownloadURL(storageImageRef);
 
-            return {
-              ...item,
-              imagemProduto: imageProdutoUrl,
-            };
+              return {
+                ...item,
+                imagemProduto: imageProdutoUrl,
+              };
+            } else {
+              return item;
+            }
           })
         );
+
         setInfos({
           ...infos,
-          cardapio: cardapioComImagens,
+          novoItem: cardapioComImagens,
         });
 
         const restauranteData = {
@@ -156,7 +181,7 @@ export function App() {
           logo: imageUrl,
           horarioFuncionamentoI: infos.horarioFuncionamentoI,
           horarioFuncionamentoF: infos.horarioFuncionamentoF,
-          cardapio: cardapioComImagens,
+          novoItem: cardapioComImagens,
         };
 
         console.log('restauranteData: ', restauranteData)
@@ -176,6 +201,17 @@ export function App() {
         });
       } catch (error) {
         console.error('Erro ao criar restaurante:', error);
+        toast.error('Erro! Tente novamente.', {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        
       }
     } else {
       toast.warn('Preencha todos os campos!', {
@@ -239,7 +275,7 @@ export function App() {
   }, [carrinho]);
 
   const adicionarAoCarrinho = (item, tipo) => {
-    toast.success(`${item.nameItem} adicionado ao carrinho!`, {
+    toast.success(`${item.nomeDoProduto} adicionado ao carrinho!`, {
       position: "top-right",
       autoClose: 450,
       hideProgressBar: false,
@@ -302,6 +338,8 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <Router
+          adicionarItem={adicionarItem}
+
           handleLogoChange={handleLogoChange}
 
           historico={historico}

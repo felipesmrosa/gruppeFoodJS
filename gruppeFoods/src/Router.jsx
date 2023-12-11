@@ -6,11 +6,14 @@ import { Login } from './pages/Login';
 import { RegisterYourRestaurant } from './components/ContentFooter/RegisterYourRestaurant';
 import { ResetPass } from './pages/ResetPass';
 import { HistoricoDeCompras } from './components/ConfiguracoesPerfil/HistoricoDeCompras';
+import { Success } from './pages/Success';
 
 
 export function Router({
     restaurantes,
     setRestaurantes,
+
+    adicionarItem,
 
     criarRestaurante,
 
@@ -41,7 +44,6 @@ export function Router({
     handleLogoChange,
     handleNomeChange,
     handlePriceChange,
-    adicionarItem,
     enviarCardapio,
     adicionarCardapio,
     setName,
@@ -100,7 +102,7 @@ export function Router({
                         restaurantes={restaurantes}
                         formaDePagamento={formaDePagamento}
                         precoTotalGeral={precoTotalGeral}
-                    />} 
+                    />}
                 />
                 <Route path='/home/' element={<Home
                     restaurantes={restaurantes}
@@ -127,6 +129,7 @@ export function Router({
                     path='home/registerRestaurant'
                     element={
                         <RegisterYourRestaurant
+                            adicionarItem={adicionarItem}
                             handleImageChange={handleImageChange}
 
                             infos={infos}
@@ -147,6 +150,10 @@ export function Router({
                         />
                     }
                 >
+                    <Route
+                        path='home/registerRestaurant/success'
+                        element={<Success />}    
+                    ></Route>
                 </Route>
             </Route>
         </Routes >

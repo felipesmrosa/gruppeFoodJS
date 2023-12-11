@@ -23,7 +23,8 @@ export function RegisterYourRestaurant({
     handleLogoChange,
     novoItem,
     handleChange,
-    handleProduct
+    handleProduct,
+    adicionarItem
 }) {
     return (
         <>
@@ -131,6 +132,7 @@ export function RegisterYourRestaurant({
                         <Lembrar>Lembre-se de cadastrar seus produtos.</Lembrar>
                     </fieldset>
                     <Menu
+                        adicionarItem={adicionarItem}
                         handleProduct={handleProduct}
                         infos={infos}
                         novoItem={novoItem}

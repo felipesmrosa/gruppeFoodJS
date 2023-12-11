@@ -56,7 +56,7 @@ export function Produto({
 
                             <TitleSession>Mais pedidos:</TitleSession>
                             <Cardapio>
-                                {restauranteFiltrado.cardapio.map((item) => (
+                                {restauranteFiltrado.novoItem.map((item) => (
                                     <>
                                         <ProductCard key={item.id}>
                                             <DivComida>

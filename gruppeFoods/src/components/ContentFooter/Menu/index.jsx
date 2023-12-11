@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Produto } from '../Produto'
 import {
     Formulario,
     Legenda,
@@ -10,69 +8,75 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Paperclip } from 'phosphor-react';
+import { useNavigate } from 'react-router-dom';
 
 export function Menu({
     novoItem,
     handleChange,
     infos,
     criarRestaurante,
-    handleProduct
+    handleProduct,
+    adicionarItem
 }) {
-    
 
+    const navegar = useNavigate();
+
+    function redirecionarPagina() {
+        setTimeout(() => {
+            navegar('home/success')
+        }, 4000);
+    }
 
     return (
         <Container>
             <Formulario onSubmit={criarRestaurante}>
                 <fieldset>
                     <Legenda>Seus Produtos!</Legenda>
-                    <label htmlFor="nomeDoProduto">Nome do Produto*
-                        <input
-                            id='nomeDoProduto'
-                            placeholder='Nome'
-                            type="text"
-                            name='nomeDoProduto'
-                            value={novoItem.nome}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label htmlFor="precoDoProduto">Preço do Produto*
-                        <input
-                            id='precoDoProduto'
-                            placeholder='Preço'
-                            type="text"
-                            name='precoDoProduto'
-                            value={novoItem.preco}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label htmlFor="descricaoDoProduto">Descrição do Produto*
-                        <input
-                            id='descricaoDoProduto'
-                            placeholder='Descrição'
-                            type="text"
-                            name='descricaoDoProduto'
-                            value={novoItem.descricao}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label htmlFor="imagemProduto"><Paperclip size={32} />Imagem do Produto*
-                        <input
-                            id='imagemProduto'
-                            type="file"
-                            onChange={handleProduct}
-                            accept='image/*'
-                        />
-                    </label>
+                    {novoItem.length > 0 && novoItem.map((item, index) => (
+                        <div key={index}>
+                            <label htmlFor={`nomeDoProduto-${index}`}>Nome do Produto*
+                                <input
+                                    id={`nomeDoProduto-${index}`}
+                                    placeholder='Nome'
+                                    type="text"
+                                    name='nomeDoProduto'
+                                    value={item.nome}
+                                    onChange={(event) => handleChange(index, event)}
+                                />
+                            </label>
+                            <label htmlFor={`precoDoProduto-${index}`}>Preço do Produto*
+                                <input
+                                    id={`precoDoProduto-${index}`}
+                                    placeholder='Preço'
+                                    type="text"
+                                    name='precoDoProduto'
+                                    value={item.preco}
+                                    onChange={(event) => handleChange(index, event)}
+                                />
+                            </label>
+                            <label htmlFor={`descricaoDoProduto-${index}`}>Descrição do Produto*
+                                <input
+                                    id={`descricaoDoProduto-${index}`}
+                                    placeholder='Descrição'
+                                    type="text"
+                                    name='descricaoDoProduto'
+                                    value={item.descricao}
+                                    onChange={(event) => handleChange(index, event)}
+                                />
+                            </label>
+                            <label htmlFor={`imagemProduto-${index}`}><Paperclip size={32} />Imagem do Produto*
+                                <input
+                                    id={`imagemProduto-${index}`}
+                                    type="file"
+                                    onChange={(event) => {console.log(index, event); handleProduct(index, event)}}
+                                    accept='image/*'
+                                />
+                            </label>
+                            <p onClick={adicionarItem}>Adicionar</p>
+                        </div>
+                    ))}
                     <br />
-                    <AdicionarProdutoPraLista type='submit'>Cadastrar Restaurante</AdicionarProdutoPraLista>
-
-                    {/* <h2>Produtos Cadastrados:</h2>
-                     {produtos && (
-                        <Produto
-                        />
-                    )} */}
-
+                    <AdicionarProdutoPraLista onClick={redirecionarPagina} type='submit'>Cadastrar Restaurante</AdicionarProdutoPraLista>
                 </fieldset>
             </Formulario>
             <ToastContainer
