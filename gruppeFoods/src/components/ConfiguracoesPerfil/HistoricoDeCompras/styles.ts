@@ -20,13 +20,16 @@ export const ContainerDoProduto = styled.li`
     border-radius: 12px;
     position: relative;
     gap: 0.5rem;
+    margin-bottom: 1rem;
 `
 
-
-
-
 export const ProdutoNoHistorico = styled.li`
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-top: 1rem;
 `
 
 export const DataDaCompra = styled.p`
@@ -54,7 +57,7 @@ export const BtnConfirmar = styled.button`
 `
 
 export const TextoStatus = styled.p`
-    background-color: green;
+    background-color: #00a900;
     padding: 0.1rem 0.4rem;
     border-radius: 20px;
     font-size: .95rem;
@@ -71,5 +74,7 @@ export const ImagemDoProduto = styled.img`
 `
 
 export const Descricao = styled.p`
-    font-size: .9rem;
+    font-size: 0.875rem;
+    width: 50%; 
+    word-break: break-word;
 `

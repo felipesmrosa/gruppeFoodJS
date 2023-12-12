@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -10,18 +10,13 @@ import {
     TextoStatus,
     DataDaCompra,
     BtnConfirmar,
-    Descricao
+    Descricao,
 } from './styles'
 
 export function HistoricoDeCompras({
     historico,
     setHistorico,
 }) {
-
-    // const resetarHistorico = () => {
-    //     localStorage.removeItem('historicoCompras');
-    //     setHistorico([]);
-    // };
 
     return (
         <ConteudoHistorico>
@@ -32,9 +27,11 @@ export function HistoricoDeCompras({
                     <ContainerDoProduto key={index}>
                         <DataDaCompra>{compra.data}</DataDaCompra>
                         <Status>
-                            <p>Status:</p> <TextoStatus>Entregue</TextoStatus> 
+                            <p>Status:</p>
+                            <TextoStatus>
+                                Entregue
+                            </TextoStatus>
                         </Status>
-                        <BtnConfirmar>Confimar Entrega</BtnConfirmar>
                         <ul>
                             {compra.itens.map((item, idx) => (
                                 <ProdutoNoHistorico key={idx}>
