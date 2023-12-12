@@ -51,8 +51,6 @@ export function Header({
     precoTotalGeral,
     totalItensGeral,
     restaurantes,
-    precoAdicionais,
-    setPrecoAdicionais
 }) {
     const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
     const [mostrarPerfil, setMostrarPerfil] = useState(false);
@@ -161,9 +159,8 @@ export function Header({
                 {mostrarDetalhes && (
                     <center>
                         <Detalhes
+                            precoTotalGeral={precoTotalGeral}
                             setMostrarDetalhes={setMostrarDetalhes}
-                            precoAdicionais={precoAdicionais}
-                            setPrecoAdicionais={setPrecoAdicionais}
                         />
                     </center>
                 )}

@@ -74,6 +74,12 @@ export function App() {
     }]);
   };
 
+  const removerItem = (index) => {
+    const remove = [...novoItem]
+    remove.splice(index, 1)
+    setNovoItem(remove)
+  }
+
   console.log('Novo Item >>> ', novoItem)
 
 
@@ -211,7 +217,7 @@ export function App() {
           progress: undefined,
           theme: "colored",
         });
-        
+
       }
     } else {
       toast.warn('Preencha todos os campos!', {
@@ -239,8 +245,6 @@ export function App() {
 
   const [formaDePagamento, setFormaDePagamento] = useState('dinheiro')
 
-  const [precoAdicionais, setPrecoAdicionais] = useState(null)
-
   // Calculando o total de itens e o preço total dos combos
   const totalItensCombos = carrinho.reduce((total, item) => total + item.quantidade, 0)
   const precoTotalCombos = carrinho.reduce((total, item) => total + item.precoDoProduto * item.quantidade, 0);
@@ -260,13 +264,9 @@ export function App() {
 
   useEffect(() => {
     const carrinhoLocalStorage = localStorage.getItem('carrinho');
-    const porcoesCarrinhoLocalStorage = localStorage.getItem('porcoesCarrinho');
 
     if (carrinhoLocalStorage) {
       setCarrinho(JSON.parse(carrinhoLocalStorage));
-    }
-    if (porcoesCarrinhoLocalStorage) {
-      setPorcoesCarrinho(JSON.parse(porcoesCarrinhoLocalStorage));
     }
   }, []);
 
@@ -338,6 +338,7 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <Router
+          removerItem={removerItem}
           adicionarItem={adicionarItem}
 
           handleLogoChange={handleLogoChange}
@@ -385,9 +386,6 @@ export function App() {
 
           novoItem={novoItem}
           handleChange={handleChange}
-
-          precoAdicionais={precoAdicionais}
-          setPrecoAdicionais={setPrecoAdicionais}
         />
       </BrowserRouter>
       <GlobalStyle />

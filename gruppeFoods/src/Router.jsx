@@ -10,6 +10,8 @@ import { Success } from './pages/Success';
 
 
 export function Router({
+    removerItem,
+
     restaurantes,
     setRestaurantes,
 
@@ -147,12 +149,14 @@ export function Router({
                             enviarImagem={enviarImagem}
 
                             handleProduct={handleProduct}
+
+                            removerItem={removerItem}
                         />
                     }
                 >
                     <Route
                         path='home/registerRestaurant/success'
-                        element={<Success />}    
+                        element={<Success />}
                     ></Route>
                 </Route>
             </Route>

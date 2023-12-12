@@ -27,8 +27,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export function Detalhes({
     setMostrarDetalhes,
-    setPrecoAdicionais,
-    precoAdicionais
+    precoTotalGeral,
 }) {
 
     function SalvarPedido() {
@@ -43,8 +42,6 @@ export function Detalhes({
             theme: "colored",
         });
     }
-
-    const precoCarne = setPrecoAdicionais(5)
 
     const [quantity, setQuantity] = useState(0);
     const [quantity2, setQuantity2] = useState(0);
@@ -97,7 +94,7 @@ export function Detalhes({
                 <Title>Adicionar Itens</Title>
                 <UL>
                     <Row>
-                        <li>Carne Adicional - ${precoCarne}</li>
+                        <li>Carne Adicional - $5</li>
                         <BtnRow>
                             <BotaoDetalhes onClick={increment}>+</BotaoDetalhes>{quantity}<BotaoDetalhes onClick={decrement}>-</BotaoDetalhes>
                         </BtnRow>

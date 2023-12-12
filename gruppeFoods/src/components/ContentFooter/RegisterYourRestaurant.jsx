@@ -24,7 +24,9 @@ export function RegisterYourRestaurant({
     novoItem,
     handleChange,
     handleProduct,
-    adicionarItem
+    adicionarItem,
+
+    removerItem,
 }) {
     return (
         <>
@@ -132,6 +134,7 @@ export function RegisterYourRestaurant({
                         <Lembrar>Lembre-se de cadastrar seus produtos.</Lembrar>
                     </fieldset>
                     <Menu
+                        removerItem={removerItem}
                         adicionarItem={adicionarItem}
                         handleProduct={handleProduct}
                         infos={infos}

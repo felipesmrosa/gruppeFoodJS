@@ -37,9 +37,7 @@ export function DefaultLayout({
 
     restaurantes,
 
-    precoAdicionais,
-    setPrecoAdicionais,
-    handleImageChange
+    handleImageChange,
 }) {
 
     return (
@@ -78,9 +76,6 @@ export function DefaultLayout({
 
                 precoTotalGeral={precoTotalGeral}
                 totalItensGeral={totalItensGeral}
-
-                precoAdicionais={precoAdicionais}
-                setPrecoAdicionais={setPrecoAdicionais}
             />
             <Outlet />
             <Footer infos={infos} setInfos={setInfos} />

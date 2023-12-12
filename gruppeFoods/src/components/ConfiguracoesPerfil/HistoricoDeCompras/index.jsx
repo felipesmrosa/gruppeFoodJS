@@ -1,38 +1,53 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import {
+    ImagemDoProduto,
+    ConteudoHistorico,
+    ContainerDoProduto,
+    ProdutoNoHistorico,
+    Status,
+    TextoStatus,
+    DataDaCompra,
+    BtnConfirmar,
+    Descricao
+} from './styles'
+
 export function HistoricoDeCompras({
     historico,
-    setHistorico
+    setHistorico,
 }) {
 
-    const resetarHistorico = () => {
-        localStorage.removeItem('historicoCompras');
-        setHistorico([]);
-    };
-
-    console.log(historico)
+    // const resetarHistorico = () => {
+    //     localStorage.removeItem('historicoCompras');
+    //     setHistorico([]);
+    // };
 
     return (
-        <div>
-            <h1>Histórico de Compras</h1>
-            <button onClick={resetarHistorico}>Resetar Histórico</button>
+        <ConteudoHistorico>
+            <h1>HISTÓRICO DE COMPRAS</h1>
+            {/* <button onClick={resetarHistorico}>Resetar Histórico</button> */}
             <ul>
                 {historico.map((compra, index) => (
-                    <li key={index}>
-                        <p>Data da Compra: {compra.data}</p>
-                        <p>Status da Entrega: Entregue</p>
+                    <ContainerDoProduto key={index}>
+                        <DataDaCompra>{compra.data}</DataDaCompra>
+                        <Status>
+                            <p>Status:</p> <TextoStatus>Entregue</TextoStatus> 
+                        </Status>
+                        <BtnConfirmar>Confimar Entrega</BtnConfirmar>
                         <ul>
                             {compra.itens.map((item, idx) => (
-                                <li key={idx}>
-                                    <img src={item.src} alt="" />
-                                    {item.nameItem} - R$ {item.priceItem} - Quantidade: {item.quantidade}
-                                </li>
+                                <ProdutoNoHistorico key={idx}>
+                                    <ImagemDoProduto src={item.imagemProduto} alt="" />
+                                    <p>Quantidade: {item.quantidade}</p>
+                                    <p>{item.nomeDoProduto} - R$ {item.precoDoProduto}</p>
+                                    <Descricao>{item.descricaoDoProduto}</Descricao>
+                                </ProdutoNoHistorico>
                             ))}
                         </ul>
-                    </li>
+                    </ContainerDoProduto>
                 ))}
             </ul>
-        </div>
+        </ConteudoHistorico>
     );
 };

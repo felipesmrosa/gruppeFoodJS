@@ -49,14 +49,6 @@ export function Carrinho({
     restaurantes
 }) {
 
-    const produtos = [
-        { combos },
-        { lanches },
-        { porcoes },
-        { sobremesas },
-        { bebidas }
-    ]
-
     const diminuirQuantidade = (id, tipo) => {
         const carrinhoAtual = tipo === 'combo' ? carrinho : porcoesCarrinho;
 

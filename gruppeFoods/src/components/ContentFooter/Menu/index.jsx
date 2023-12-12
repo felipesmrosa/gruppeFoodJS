@@ -2,12 +2,13 @@ import {
     Formulario,
     Legenda,
     Container,
-    AdicionarProdutoPraLista
+    AdicionarProdutoPraLista,
+    Row
 } from './styled'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Paperclip } from 'phosphor-react';
+import { MinusCircle, Paperclip, PlusCircle } from 'phosphor-react';
 import { useNavigate } from 'react-router-dom';
 
 export function Menu({
@@ -16,7 +17,8 @@ export function Menu({
     infos,
     criarRestaurante,
     handleProduct,
-    adicionarItem
+    adicionarItem,
+    removerItem
 }) {
 
     const navegar = useNavigate();
@@ -24,7 +26,7 @@ export function Menu({
     function redirecionarPagina() {
         setTimeout(() => {
             navegar('home/success')
-        }, 4000);
+        }, 5000);
     }
 
     return (
@@ -68,11 +70,14 @@ export function Menu({
                                 <input
                                     id={`imagemProduto-${index}`}
                                     type="file"
-                                    onChange={(event) => {console.log(index, event); handleProduct(index, event)}}
+                                    onChange={(event) => { console.log(index, event); handleProduct(index, event) }}
                                     accept='image/*'
                                 />
                             </label>
-                            <p onClick={adicionarItem}>Adicionar</p>
+                            <Row>
+                                <p onClick={adicionarItem}><PlusCircle /></p>
+                                {novoItem.length > 1 && <p onClick={removerItem}><MinusCircle /></p>}
+                            </Row>
                         </div>
                     ))}
                     <br />

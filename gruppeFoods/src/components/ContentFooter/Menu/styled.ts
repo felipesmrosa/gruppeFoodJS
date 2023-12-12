@@ -23,6 +23,12 @@ export const Formulario = styled.div`
         border-bottom: 1px solid;
     }
 `
+export const Row = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+`
 export const Legenda = styled.legend`
     font-size: 28px;
     font-weight: 500;
