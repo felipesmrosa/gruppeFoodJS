@@ -16,6 +16,24 @@ export const InfosDoProduto = styled.div`
     justify-content: center;
     flex-direction: column;
 `
+export const InformacoesAMais = styled.p`
+    font-size: 1.15rem;
+`
+export const TelefoneEHorario = styled.span`
+    text-align: center;
+`
+
+export const LogoENome = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: flex;
+    flex-direction: column;
+    gap: .2rem;
+
+    font-weight: 600;
+    text-transform: uppercase;
+`
+
 export const Descricao = styled.p`
     overflow-y: auto;
     height: 4rem;
@@ -52,20 +70,25 @@ export const Cardapio = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    margin: 0 19rem;
     flex-wrap: wrap;
 `
 export const LogoRestaurante = styled.img`
     border-radius: 50%;
-    width: 18vh;
-    height: 18vh;
+    width: 15vh;
+    height: 15vh;
 `
 export const InformacoesDoRestaurante = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    margin-bottom: 3rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    background: white;
+    width: 100%;
+    box-shadow: 0px 8px 36px -18px #000;
+    padding: 1rem;
+    gap: 0.6rem;
 `
 export const ContainerProdutos = styled.div`
     margin: 2rem 15rem;
@@ -125,6 +148,7 @@ export const ProductCard = styled.div`
     border: 1px solid #cecece;
     padding: 0.5rem 0.3rem;
     box-shadow: 0px 0px 8px -2px #000;
+    margin-bottom: 1rem;
 `
 
 export const Lanches = styled.div`

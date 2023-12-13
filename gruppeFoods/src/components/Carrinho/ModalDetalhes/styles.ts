@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
     background-color: white;
     padding: 20px;
-    width: 35%;
-    height: 30rem;
+    width: 100%;
+    height: 70vh;
     border-radius: 8px;
 `
 export const SalvarPedidoButton = styled.button`
@@ -103,7 +103,6 @@ export const Title = styled.p`
 export const UL = styled.ul`
     list-style: none;
     text-align: start;
-    padding: 0 1.7rem;
 `
 export const ItemUmDoLadoDoOutro = styled.div`
     display: flex;
@@ -117,8 +116,8 @@ export const FecharModal = styled.button`
     border: none;
 
     svg {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 2em;
+        height: 2em;
         color: ${props => props.theme['yellow-100']};
     }
 `
@@ -159,5 +158,6 @@ export const ModalOverlay = styled.div`
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
+    z-index: 999;
     align-items: center;
 `

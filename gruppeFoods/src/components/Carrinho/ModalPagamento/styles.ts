@@ -4,14 +4,15 @@ export const Container = styled.div`
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    height: 31rem;
-    width: 41%;
+    height: 96vh;
+    width: 100%;
 `
 export const Headerzinho = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15.8rem;
+    gap: 6rem;
+    margin-bottom: 2rem;
 `
 export const BotaoFinalizarPedido = styled.button`
     width: 70%;
@@ -44,11 +45,14 @@ export const ItemUmDoLadoDoOutro = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3.7rem;
+    gap: 4rem;
+    margin-bottom: 1rem;
 `
 export const InfomacoesDoCartao = styled.input`
     width: 100%;
     padding: 0.3rem 1rem;
+    border-radius: 12px;
+    border: 2px solid #747474;
 `
 export const FecharModal = styled.button`
     background-color: transparent;
@@ -65,11 +69,14 @@ export const Localizacao = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-bottom: 1rem;
 
     input {
-        margin-bottom: .2rem;
-        width: 75%;
-        padding: .3rem 1rem;
+        margin-bottom: 0.2rem;
+        width: 90%;
+        padding: 0.3rem 1rem;
+        border-radius: 12px;
+        border: 2px solid #747474;
     }
 `
 export const FormularioCartao = styled.form`
@@ -91,5 +98,6 @@ export const ModalOverlay = styled.div`
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
+    z-index: 9999;
     align-items: center;
 `

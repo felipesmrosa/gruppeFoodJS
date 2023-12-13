@@ -8,6 +8,11 @@ export const ConteudoHistorico = styled.div`
     gap: 1rem;
     margin: 1rem 0px;
 `
+export const Reverse = styled.ul`
+    flex-direction: column-reverse;
+    display: flex;
+    align-items: center;
+`
 
 export const ContainerDoProduto = styled.li`
     display: flex;
@@ -21,8 +26,8 @@ export const ContainerDoProduto = styled.li`
     position: relative;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    box-shadow: 0px 0px 20px -6px black;
 `
-
 export const ProdutoNoHistorico = styled.li`
     display: flex;
     align-items: center;

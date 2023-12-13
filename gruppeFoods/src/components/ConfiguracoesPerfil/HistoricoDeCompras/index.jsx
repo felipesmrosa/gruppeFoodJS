@@ -11,6 +11,7 @@ import {
     DataDaCompra,
     BtnConfirmar,
     Descricao,
+    Reverse
 } from './styles'
 
 export function HistoricoDeCompras({
@@ -32,7 +33,7 @@ export function HistoricoDeCompras({
                                 Entregue
                             </TextoStatus>
                         </Status>
-                        <ul>
+                        <Reverse>
                             {compra.itens.map((item, idx) => (
                                 <ProdutoNoHistorico key={idx}>
                                     <ImagemDoProduto src={item.imagemProduto} alt="" />
@@ -41,7 +42,7 @@ export function HistoricoDeCompras({
                                     <Descricao>{item.descricaoDoProduto}</Descricao>
                                 </ProdutoNoHistorico>
                             ))}
-                        </ul>
+                        </Reverse>
                     </ContainerDoProduto>
                 ))}
             </ul>

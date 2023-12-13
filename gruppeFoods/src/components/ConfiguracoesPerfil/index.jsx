@@ -4,11 +4,17 @@ import { useNavigate } from 'react-router-dom'
 
 import {
     Container,
-    Botao
+    Botao,
+    Fechar,
+    Cabecalhozinho,
+    Menu
 } from './styles'
 import { HistoricoDeCompras } from './HistoricoDeCompras'
+import { XCircle } from 'phosphor-react'
 
-export function Configuracoes() {
+export function Configuracoes({
+    handleTogglePerfil
+}) {
 
     const history = useNavigate()
 
@@ -18,15 +24,21 @@ export function Configuracoes() {
 
     function LogOut() {
         signOut(database).then(val => {
-            console.log(val)
             history('/')
         })
     }
 
     return (
         <Container>
-            <Botao onClick={Historico}>Historico</Botao>
-            <Botao onClick={LogOut}>Sair</Botao>
+            <Cabecalhozinho>
+                <Fechar onClick={handleTogglePerfil}>
+                    <XCircle />
+                </Fechar>
+            </Cabecalhozinho>
+            <Menu>
+                <Botao onClick={Historico}>Historico</Botao>
+                <Botao onClick={LogOut}>Sair</Botao>
+            </Menu>
         </Container>
     )
 }

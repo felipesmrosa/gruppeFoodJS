@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: block!important;
     position: fixed;
-    left: 71.8%;
+    left: 40%;
     width: 100%;
-    max-width: 28.2%;
+    max-width: 60%;
     top: 0;
     height: 100vh;
-    padding: 1.5rem!important;
+    padding: 0.6rem !important;
     border-radius: 8px 0 0px 8px!important;
     border: none!important;
     background: #f9f9f9;
@@ -54,10 +54,10 @@ export const QuantidadePrecoEItem = styled.span`
 `
 export const ProdutosNoCarrinho = styled.div`
     width: 100%;
-    height: 5rem;
+    height: auto;
     border-radius: 8px;
     border: 2px solid;
-    padding: 0.1rem 0.3rem;
+    padding: 0.5rem 0rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: flex;
@@ -65,10 +65,11 @@ export const ProdutosNoCarrinho = styled.div`
     align-items: center;
     justify-content: space-between;
     position: relative;
+    flex-direction: column;
 
     img {
-        width: 13vh;
-        height: 13vh;
+        width: 16vh;
+        height: 16vh;
         border-radius: 7px;
         padding: 0;
     }
@@ -87,9 +88,6 @@ export const QuantidadeDeleter = styled.div`
     gap: .4rem;
 `
 export const DetalhesModal = styled.p`
-    position: absolute;
-    left: 79%;
-    top: 3.3rem;
     cursor: pointer;
 `
 export const Minus = styled.button`

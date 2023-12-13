@@ -77,8 +77,14 @@ export function Header({
             </Link>
 
             <MenuNavigator>
+
                 <Perfil onClick={handleTogglePerfil}>
                     <UserCircle />  {/* pedidos, favoritos, perfil, meus endereços, sair */}
+                    {mostrarPerfil && (
+                        <>
+                            <Configuracoes  handleTogglePerfil={handleTogglePerfil}/>
+                        </>
+                    )}
                 </Perfil>
 
                 <ButtonCarrinho onClick={handleToggleDiv}>
@@ -119,11 +125,7 @@ export function Header({
                         />
                     </>
                 )}
-                {mostrarPerfil && (
-                    <>
-                        <Configuracoes />
-                    </>
-                )}
+
 
                 {mostrarModal && (
                     <center>

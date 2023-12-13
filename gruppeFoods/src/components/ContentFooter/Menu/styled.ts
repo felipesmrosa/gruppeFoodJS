@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 73%;
+    width: 100%;
 `
 export const Formulario = styled.div`
     fieldset {
@@ -27,7 +27,14 @@ export const Row = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+`
+export const DivImagemProduto = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0.7rem 0;
 `
 export const Legenda = styled.legend`
     font-size: 28px;

@@ -3,16 +3,17 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: space-around;
     padding: 0 2rem;
     background-color: ${props => props.theme["gray-100"]};
 
     img {
-        width: 100%;
+        width: 80%;
         padding: 0.5rem;
     }
     a {
-        width: 11%;
+        width: 35%;
     }
 
     nav {
@@ -20,6 +21,33 @@ export const HeaderContainer = styled.header`
         align-items: center;
         gap: 1.5rem;
     }
+`
+export const LinkEContato = styled.div`
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+`
+export const SpanContato = styled.span`
+    margin-top: 1rem;
+
+    p {
+        font-size: .9rem;
+    }
+`
+export const Desenvolvido = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem;
+    background: #bcbcbc;
+    
+    p {
+        font-size: .8rem;
+    }
+`
+export const LogoRodape = styled.img`
+    width: 22%;
 `
 export const Lembrar = styled.p`
     font-size: 1rem;
@@ -130,7 +158,7 @@ export const ButtonCarrinho = styled.button`
     align-items: center;
     justify-content: center;
     border: 2px solid ${props => props.theme["red-100"]};
-    padding: 0.5rem;
+    padding: 0.2rem;
     border-radius: 6px;
     color: ${props => props.theme["red-100"]};
     font-size: 1.15rem;
@@ -151,9 +179,10 @@ export const Entregas = styled.button`
 export const Perfil = styled.button`
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: center;
     border: 2px solid #FF3939;
-    padding: 0.6rem;
+    padding: 0.3rem;
     border-radius: 6px;
     color: #FF3939;
     font-size: 1.85rem;
@@ -182,17 +211,17 @@ export const QuantidadeJaDentroDoCarrinho = styled.span`
 
 export const FooterPageFood = styled.footer`
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     background-color: ${props => props.theme["gray-100"]};
-    padding: 2rem;
+    padding: 1rem;
 `
 export const Formulario = styled.form`
     display: flex;
     align-items: start;
     justify-content: center;
+    flex-direction: column;
     gap: 1rem;
-
     fieldset {
         padding: 1rem 1rem;
         border: 2.5px solid #000;
@@ -216,7 +245,7 @@ export const Formulario = styled.form`
     }
 `
 export const Cadastro = styled.div`
-    margin: 3rem 15rem;
+    margin: 2rem 2rem;
 `
 export const LogoDiv = styled.div`
     display: flex;

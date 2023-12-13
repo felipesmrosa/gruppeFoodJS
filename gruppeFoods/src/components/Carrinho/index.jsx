@@ -23,30 +23,15 @@ import { Modal } from './ModalPagamento';
 
 export function Carrinho({
     handleToggleDiv,
-    quantity,
-    cart,
-    combos,
-    lanches,
-    porcoes,
-    sobremesas,
-    bebidas,
     carrinho,
     setCarrinho,
-    adicionarAoCarrinho,
     removerDoCarrinho,
     porcoesCarrinho,
     setPorcoesCarrinho,
-    historico,
-    setHistorico,
-    setPedidoFinalizado,
-    formaDePagamento,
-    setFormaDePagamento,
-    mostrarModal,
     setMostrarDetalhes,
     setMostrarModal,
     precoTotalGeral,
     totalItensGeral,
-    restaurantes
 }) {
 
     const diminuirQuantidade = (id, tipo) => {

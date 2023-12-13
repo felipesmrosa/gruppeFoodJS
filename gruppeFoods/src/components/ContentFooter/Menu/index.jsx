@@ -3,7 +3,8 @@ import {
     Legenda,
     Container,
     AdicionarProdutoPraLista,
-    Row
+    Row,
+    DivImagemProduto
 } from './styled'
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -66,14 +67,16 @@ export function Menu({
                                     onChange={(event) => handleChange(index, event)}
                                 />
                             </label>
-                            <label htmlFor={`imagemProduto-${index}`}><Paperclip size={32} />Imagem do Produto*
-                                <input
-                                    id={`imagemProduto-${index}`}
-                                    type="file"
-                                    onChange={(event) => { console.log(index, event); handleProduct(index, event) }}
-                                    accept='image/*'
-                                />
-                            </label>
+                            <DivImagemProduto>
+                                <label htmlFor={`imagemProduto-${index}`}><Paperclip size={32} />Imagem do Produto*
+                                    <input
+                                        id={`imagemProduto-${index}`}
+                                        type="file"
+                                        onChange={(event) => { console.log(index, event); handleProduct(index, event) }}
+                                        accept='image/*'
+                                    />
+                                </label>
+                            </DivImagemProduto>
                             <Row>
                                 <p onClick={adicionarItem}><PlusCircle /></p>
                                 {novoItem.length > 1 && <p onClick={removerItem}><MinusCircle /></p>}
