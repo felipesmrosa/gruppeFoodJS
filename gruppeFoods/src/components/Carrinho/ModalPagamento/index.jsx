@@ -9,7 +9,10 @@ import {
     FecharModal,
     InfomacoesDoCartao,
     LabelCartao,
-    BotaoFinalizarPedido
+    BotaoFinalizarPedido,
+    Cartao,
+    SimNao,
+    ModalSimNao
 } from './styles'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -19,15 +22,19 @@ import { useNavigate } from 'react-router-dom';
 export function Modal({
     setMostrarModal,
     precoTotalGeral,
+    value,
+    onChange
 }) {
     const navegar = useNavigate()
     const [pagamento, setPagamento] = useState(true)
     const [simSelecionado, setSimSelecionado] = useState(false);
+    const [modalSim, setModalSim] = useState(false)
     const [naoSelecionado, setNaoSelecionado] = useState(false);
 
     function handleSimChange() {
         if (!simSelecionado) {
             setSimSelecionado(true);
+            setModalSim(true)
             setNaoSelecionado(false);
         } else {
             setSimSelecionado(false);
@@ -38,63 +45,148 @@ export function Modal({
         if (!naoSelecionado) {
             setNaoSelecionado(true);
             setSimSelecionado(false);
+            setModalSim(false)
         } else {
             setNaoSelecionado(false);
+            setModalSim(false)
         }
     };
 
-    const finalizarPedido = (e) => {
-        e.preventDefault()
+    // const finalizarPedido = (e) => {
+    //     e.preventDefault()
 
-        const carrinhoLocalStorage = localStorage.getItem('carrinho');
+    //     const carrinhoLocalStorage = localStorage.getItem('carrinho');
 
-        if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
-            toast.error('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.', {
-                position: "top-right",
-                autoClose: 1500,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-            return;
-        }
+    // if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
+    //     toast.error('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.', {
+    //         position: "top-right",
+    //         autoClose: 1500,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //     });
+    //     return;
+    // }
 
-        const historicoCompras = JSON.parse(localStorage.getItem('historicoCompras')) || [];
-        const carrinho = JSON.parse(carrinhoLocalStorage);
+    // const historicoCompras = JSON.parse(localStorage.getItem('historicoCompras')) || [];
+    // const carrinho = JSON.parse(carrinhoLocalStorage);
 
-        setMostrarModal(true)
+    //     setMostrarModal(true)
 
-        toast.success('Pedido realizado com sucesso!', {
-            position: "top-right",
-            autoClose: 800,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        });
+    // toast.success('Pedido realizado com sucesso!', {
+    //     position: "top-right",
+    //     autoClose: 800,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "colored",
+    // });
 
-        const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
+    // const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
 
-        const novoHistorico = [...historicoCompras, novaCompra];
+    // const novoHistorico = [...historicoCompras, novaCompra];
 
-        localStorage.setItem('historicoCompras', JSON.stringify(novoHistorico));
-        localStorage.removeItem('carrinho');
+    // localStorage.setItem('historicoCompras', JSON.stringify(novoHistorico));
+    // localStorage.removeItem('carrinho');
 
-        setTimeout(() => {
-            setMostrarModal(false)
-        }, 800)
-        setTimeout(() => {
-            navegar('home/historico');
-            window.location.reload()
-        }, 800);
+    // setTimeout(() => {
+    //     setMostrarModal(false)
+    // }, 800)
+    // setTimeout(() => {
+    //     navegar('home/historico');
+    //     window.location.reload()
+    // }, 800);
+    // };
+
+    const [inputs, setInputs] = useState({
+        endereco: '',
+        complemento: '',
+        cartao: '',
+        vencimento: '',
+        ano: '',
+        cvv: ''
+    })
+    const [erro, setErro] = useState(false)
+
+    const handleInputChange = (e) => {
+        setInputs(e.target.value);
+        const formattedValue = formatCreditCard(e.target.value);
+        onChange(formattedValue);
     };
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        // Preenchido corretamente
+        if (inputs.trim() !== '') {
+            const carrinhoLocalStorage = localStorage.getItem('carrinho');
+
+            if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
+                // Se o carrinho estiver vazio, exiba uma mensagem de erro
+                toast.error('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.', {
+                    position: "top-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+            } else {
+                // Se o carrinho não estiver vazio, prossiga com o pedido
+                const carrinho = JSON.parse(carrinhoLocalStorage);
+                const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
+                const historicoCompras = JSON.parse(localStorage.getItem('historicoCompras')) || [];
+                const novoHistorico = [...historicoCompras, novaCompra];
+
+                localStorage.setItem('historicoCompras', JSON.stringify(novoHistorico));
+                localStorage.removeItem('carrinho');
+
+                toast.success('Pedido realizado com sucesso!', {
+                    position: "top-right",
+                    autoClose: 800,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+
+                setTimeout(() => {
+                    setMostrarModal(false);
+                    navegar('home/historico');
+                    window.location.reload();
+                }, 800);
+            }
+        } else {
+            // Se não preenchido, exiba erro
+            setErro(true);
+        }
+    };
+
+
+    function formatCreditCard(value) {
+        //Remove o que for letra e tal
+        const onlyNumber = value.replace(/[^\d]/g, '')
+
+        if (onlyNumber.length <= 16) {
+            return onlyNumber
+                .replace(/(\d{4})/g, '$1 ')
+                .trim(); // Remove espaços extras no final, se houver
+        }
+        // Limita o tamanho do número do cartão em 16 dígitos
+        return onlyNumber.slice(0, 16).replace(/(\d{4})/g, '$1 ').trim();
+    }
 
     return (
+
         <ModalOverlay>
             <Container>
                 <Headerzinho>
@@ -108,16 +200,144 @@ export function Modal({
                     <div className={pagamento == false ? 'ativarCor' : 'pointer'} onClick={() => setPagamento(false)}>Dinheiro</div>
                 </ItemUmDoLadoDoOutro>
 
-                <Localizacao>
-                    <form>
-                        <label htmlFor="localizacao">Aonde você está?
+                <h1>{pagamento ? 'Forma de pagamento: Cartão' : 'Forma de pagamento: Dinheiro'}</h1>
+                {pagamento && (
+                    <FormularioCartao onSubmit={handleSubmit}>
+                        <Localizacao>
+                            <label htmlFor="localizacao">Aonde você está?*
+                                <input
+                                    type="text"
+                                    placeholder='Endereço*'
+                                    required
+                                    value={inputs.endereco}
+                                    onChange={handleInputChange}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder='Complemento*'
+                                    required
+                                    value={inputs.complemento}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                        </Localizacao>
+
+                        <Cartao>
+                            <LabelCartao htmlFor="cartao">Digitos do Cartão*
+                                <InfomacoesDoCartao
+                                    name="cartao"
+                                    placeholder="0000 0000 0000 0000*"
+                                    type="number"
+                                    required
+                                    value={inputs.cartao}
+                                    maxLength={16}
+                                    onChange={handleInputChange}
+                                />
+                            </LabelCartao>
+                            <LabelCartao htmlFor="vencimento">Vencimento*
+                                <InfomacoesDoCartao
+                                    type="number"
+                                    placeholder='Mês de Vencimento*'
+                                    name="vencimento"
+                                    required
+                                    value={inputs.vencimento}
+                                    maxLength={2}
+                                    onChange={handleInputChange}
+                                />
+                            </LabelCartao>
+                            <LabelCartao htmlFor="ano">
+                                <InfomacoesDoCartao
+                                    type="number"
+                                    placeholder='Ano de Vencimento*'
+                                    name="ano"
+                                    required
+                                    value={inputs.ano}
+                                    maxLength={2}
+                                    onChange={handleInputChange}
+                                />
+                            </LabelCartao>
+                            <LabelCartao htmlFor="cartao">CVV*
+                                <InfomacoesDoCartao
+                                    name="cvv"
+                                    placeholder="000*"
+                                    type="number"
+                                    maxLength={3}
+                                    required
+                                    value={inputs.cvv}
+                                    onChange={handleInputChange}
+                                />
+                            </LabelCartao>
+                        </Cartao>
+                        {erro && <p style={{ color: 'red' }}>Por favor, preencha este campo.</p>}
+                        <BotaoFinalizarPedido type='submit'>Concluir Pedido</BotaoFinalizarPedido>
+                    </FormularioCartao>
+                )}
+
+                {!pagamento && (
+                    <>
+                        <div>
+                            <Localizacao>
+                                <label htmlFor="localizacao">Aonde você está?*
+                                    <input
+                                        type="text"
+                                        placeholder='Endereço*'
+                                        required
+                                        value={inputs.endereco}
+                                        onChange={handleInputChange}
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder='Complemento*'
+                                        required
+                                        value={inputs.complemento}
+                                        onChange={handleInputChange}
+                                    />
+                                </label>
+                            </Localizacao>
+                            <h1>Precisa de troco?</h1>
+                            <SimNao>
+                                <label htmlFor="teste">
+                                    <input
+                                        id='teste'
+                                        type="checkbox"
+                                        checked={simSelecionado}
+                                        onChange={handleSimChange}
+                                    />
+                                    SIM
+                                </label>
+                                <input
+                                    type="checkbox"
+                                    checked={naoSelecionado}
+                                    onChange={handleNaoChange}
+                                />
+                                NÃO
+                                {modalSim && (
+                                    <ModalSimNao>
+                                        <h3>Troco para quanto?</h3>
+                                        <input type="text" placeholder='Quanto você tem?' />
+                                    </ModalSimNao>
+                                )}
+                            </SimNao>
+                        </div>
+                        <BotaoFinalizarPedido type='submit'>Concluir Pedido</BotaoFinalizarPedido>
+                    </>
+                )}
+                {/* <Localizacao>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="localizacao">Aonde você está?*
                             <input
                                 type="text"
-                                placeholder='Endereço'
+                                placeholder='Endereço*'
+                                required
+                                value={inputs.endereco}
+                                onChange={handleInputChange}
                             />
                             <input
                                 type="text"
-                                placeholder='Complemento'
+                                placeholder='Complemento*'
+                                required
+                                value={inputs.complemento}
+                                onChange={handleInputChange}
                             />
                         </label>
                     </form>
@@ -125,47 +345,56 @@ export function Modal({
 
                 <h1>{pagamento ? 'Forma de pagamento: Cartão' : 'Forma de pagamento: Dinheiro'}</h1>
                 {pagamento && (
-                    <FormularioCartao>
-                        <LabelCartao htmlFor="cartao">Digitos do Cartão
+                    <FormularioCartao onSubmit={handleSubmit}>
+                        <LabelCartao htmlFor="cartao">Digitos do Cartão*
                             <InfomacoesDoCartao
                                 name="cartao"
-                                placeholder="0000 0000 0000 0000"
-                                type="text"
+                                placeholder="0000 0000 0000 0000*"
+                                type="number"
                                 required
+                                value={inputs.cartao}
+                                onChange={handleInputChange}
                             />
                         </LabelCartao>
-                        <LabelCartao htmlFor="vencimento">Vencimento
+                        <LabelCartao htmlFor="vencimento">Vencimento*
                             <InfomacoesDoCartao
                                 type="text"
-                                placeholder='Mês de Vencimento'
+                                placeholder='Mês de Vencimento*'
                                 name="vencimento"
                                 required
+                                value={inputs.vencimento}
+                                onChange={handleInputChange}
                             />
                         </LabelCartao>
                         <LabelCartao htmlFor="ano">
                             <InfomacoesDoCartao
                                 type="text"
-                                placeholder='Ano de Vencimento'
+                                placeholder='Ano de Vencimento*'
                                 name="ano"
                                 required
+                                value={inputs.ano}
+                                onChange={handleInputChange}
                             />
                         </LabelCartao>
-                        <LabelCartao htmlFor="cartao">CVV
+                        <LabelCartao htmlFor="cartao">CVV*
                             <InfomacoesDoCartao
                                 name="cvv"
-                                placeholder="000"
+                                placeholder="000*"
                                 type="number"
                                 required
+                                value={inputs.cvv}
+                                onChange={handleInputChange}
                             />
                         </LabelCartao>
-                        <BotaoFinalizarPedido onClick={finalizarPedido}>Concluir Pedido</BotaoFinalizarPedido>
+                        {erro && <p style={{ color: 'red' }}>Por favor, preencha este campo.</p>}
+                        <BotaoFinalizarPedido type='submit'>Concluir Pedido</BotaoFinalizarPedido>
                     </FormularioCartao>
                 )}
                 {!pagamento && (
                     <>
                         <div>
                             <h1>Precisa de troco?</h1>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <label>
                                     <input
                                         type="checkbox"
@@ -184,10 +413,10 @@ export function Modal({
                                 </label>
                             </form>
                         </div>
-                        <BotaoFinalizarPedido onClick={finalizarPedido}>Concluir Pedido</BotaoFinalizarPedido>
+                        <BotaoFinalizarPedido type='submit' >Concluir Pedido</BotaoFinalizarPedido>
                     </>
-                )}
+                )} */}
             </Container>
-        </ModalOverlay>
+        </ModalOverlay >
     )
 }

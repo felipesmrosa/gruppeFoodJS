@@ -19,20 +19,26 @@ export function Menu({
     criarRestaurante,
     handleProduct,
     adicionarItem,
-    removerItem
+    removerItem,
+    redirecionarPagina
 }) {
-
     const navegar = useNavigate();
 
-    function redirecionarPagina() {
+    function criarERedirecionar() {
+        if (typeof criarRestaurante === 'function') {
+            criarRestaurante();
+        }
+    }
+    function redirecionaParaHome() {
         setTimeout(() => {
-            navegar('home/success')
+            navegar('/home');
+            window.location.reload();
         }, 5000);
     }
 
     return (
         <Container>
-            <Formulario onSubmit={criarRestaurante}>
+            <Formulario onSubmit={criarERedirecionar}>
                 <fieldset>
                     <Legenda>Seus Produtos!</Legenda>
                     {novoItem.length > 0 && novoItem.map((item, index) => (
@@ -84,7 +90,7 @@ export function Menu({
                         </div>
                     ))}
                     <br />
-                    <AdicionarProdutoPraLista onClick={redirecionarPagina} type='submit'>Cadastrar Restaurante</AdicionarProdutoPraLista>
+                    <AdicionarProdutoPraLista onClick={redirecionaParaHome} type='submit'>Cadastrar Restaurante</AdicionarProdutoPraLista>
                 </fieldset>
             </Formulario>
             <ToastContainer

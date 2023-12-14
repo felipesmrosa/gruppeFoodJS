@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { DefaultLayout } from './layouts/DefaultLayout'
 import { InsideRestaurant } from './pages/InsideRestaurant'
@@ -6,14 +6,12 @@ import { Login } from './pages/Login';
 import { RegisterYourRestaurant } from './components/ContentFooter/RegisterYourRestaurant';
 import { ResetPass } from './pages/ResetPass';
 import { HistoricoDeCompras } from './components/ConfiguracoesPerfil/HistoricoDeCompras';
-import { Success } from './pages/Success';
 
 
 export function Router({
     removerItem,
 
     restaurantes,
-    setRestaurantes,
 
     adicionarItem,
 
@@ -44,16 +42,6 @@ export function Router({
     totalItensGeral,
     precoTotalGeral,
     handleLogoChange,
-    handleNomeChange,
-    handlePriceChange,
-    enviarCardapio,
-    adicionarCardapio,
-    setName,
-    setPrice,
-    setSrc,
-    name,
-    price,
-    src,
     novoItem,
     handleChange,
     precoAdicionais,
@@ -112,6 +100,7 @@ export function Router({
                     setMostrarModal={setMostrarModal}
 
                 />} />
+
                 <Route
                     path='home/restaurante/:nome'
                     element={
@@ -154,11 +143,8 @@ export function Router({
                         />
                     }
                 >
-                    <Route
-                        path='home/registerRestaurant/success'
-                        element={<Success />}
-                    ></Route>
                 </Route>
+
             </Route>
         </Routes >
     )

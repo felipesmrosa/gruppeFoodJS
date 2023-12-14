@@ -6,14 +6,23 @@ export const Container = styled.div`
     left: 40%;
     width: 100%;
     max-width: 60%;
+    overflow-y: auto;
     top: 0;
     height: 100vh;
-    padding: 0.6rem !important;
+    padding: 0.6rem!important;
     border-radius: 8px 0 0px 8px!important;
     border: none!important;
     background: #f9f9f9;
     box-shadow: 14px 0px 40px 20px #c01212;
     z-index: 999;
+    @media screen and (min-width: 1000px) and (max-width: 1366px){
+        left: 60%;
+        max-width: 40%;
+    }
+    @media screen and (min-width: 1366px){
+        left: 70%;
+        max-width: 30%;
+    }
 `
 
 export const ButtonFinalizarPedido = styled.button`

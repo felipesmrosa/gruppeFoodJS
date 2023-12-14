@@ -13,6 +13,12 @@ export const Reverse = styled.ul`
     display: flex;
     align-items: center;
 `
+export const ListaColumn = styled.ul`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+`
 
 export const ContainerDoProduto = styled.li`
     display: flex;
@@ -23,6 +29,7 @@ export const ContainerDoProduto = styled.li`
     padding: 1rem;
     padding-top: 1.5rem;
     border-radius: 12px;
+    width: 75%;
     position: relative;
     gap: 0.5rem;
     margin-bottom: 1rem;
@@ -80,6 +87,8 @@ export const ImagemDoProduto = styled.img`
 
 export const Descricao = styled.p`
     font-size: 0.875rem;
-    width: 50%; 
+    width: 75%;
     word-break: break-word;
+    height: 3rem;
+    overflow-y: auto;
 `

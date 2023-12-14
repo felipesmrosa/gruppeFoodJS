@@ -11,7 +11,8 @@ import {
     DataDaCompra,
     BtnConfirmar,
     Descricao,
-    Reverse
+    Reverse,
+    ListaColumn
 } from './styles'
 
 export function HistoricoDeCompras({
@@ -23,7 +24,7 @@ export function HistoricoDeCompras({
         <ConteudoHistorico>
             <h1>HISTÓRICO DE COMPRAS</h1>
             {/* <button onClick={resetarHistorico}>Resetar Histórico</button> */}
-            <ul>
+            <ListaColumn>
                 {historico.map((compra, index) => (
                     <ContainerDoProduto key={index}>
                         <DataDaCompra>{compra.data}</DataDaCompra>
@@ -45,7 +46,7 @@ export function HistoricoDeCompras({
                         </Reverse>
                     </ContainerDoProduto>
                 ))}
-            </ul>
+            </ListaColumn>
         </ConteudoHistorico>
     );
 };

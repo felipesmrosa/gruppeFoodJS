@@ -19,7 +19,7 @@ export const MenuItems = styled.div `
 `
 
 export const HighlightsForYou = styled.div `
-    margin: 2rem 2rem;
+    margin: 1rem 2rem;
     margin-bottom: 1rem;
     color: ${props => props.theme["red-100"]};
     font-size: 1.35rem;
@@ -31,7 +31,7 @@ export const Restaurants = styled.div `
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    margin: 1rem 0;
+    margin: 1rem 0 4rem;
     flex-wrap: wrap;
     align-content: center;
     flex-direction: row;
@@ -50,7 +50,7 @@ export const Restaurant = styled.div `
     }
 `
 export const Logo = styled.img`
-    width: 20vh;
-    height: 20vh;
+    width: 14vh;
+    height: 14vh;
     border-radius: 20px;
 `

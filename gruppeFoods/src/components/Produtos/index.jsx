@@ -14,6 +14,7 @@ import {
     LogoENome,
     InformacoesAMais,
     TelefoneEHorario,
+    LocalDoRestaurante
 } from './styles'
 
 export function Produto({
@@ -21,7 +22,6 @@ export function Produto({
     restaurantes,
     nome
 }) {
-
 
     const preencherBackground = keyframes`
         from {
@@ -84,8 +84,10 @@ export function Produto({
                             >
                                 {seguindo ? 'Seguindo' : 'Seguir'}
                             </Seguir>
-                            <p>{restauranteFiltrado.endereco}</p>
-                            <p>{restauranteFiltrado.bairro} - {restauranteFiltrado.cidade}</p>
+                            <LocalDoRestaurante>
+                                <p>{restauranteFiltrado.endereco}</p>
+                                <p>{restauranteFiltrado.bairro} - {restauranteFiltrado.cidade}</p>
+                            </LocalDoRestaurante>
                             <TelefoneEHorario>
                                 <h6>Telefone para Contato</h6>
                                 <InformacoesAMais>{restauranteFiltrado.telefone}</InformacoesAMais>
@@ -95,6 +97,25 @@ export function Produto({
                         </InformacoesDoRestaurante>
 
                         <TitleSession>Mais pedidos:</TitleSession>
+                        <Cardapio>
+                            {restauranteFiltrado.novoItem.slice(0, 5).map((item) => (
+                                <>
+                                    <ProductCard key={item.id}>
+                                        <DivComida>
+                                            <ImagemComida src={item.imagemProduto} alt={item.nomeDoProduto} />
+                                        </DivComida>
+                                        <InfosDoProduto>
+                                            <h3>{item.nomeDoProduto}</h3>
+                                            <p>${item.precoDoProduto}</p>
+                                        </InfosDoProduto>
+                                        <AddCart onClick={() => adicionarAoCarrinho(item, 'combo')}>
+                                            add to cart
+                                        </AddCart>
+                                    </ProductCard>
+                                </>
+                            ))}
+                        </Cardapio>
+                        <TitleSession>Cardapio</TitleSession>
                         <Cardapio>
                             {restauranteFiltrado.novoItem.map((item) => (
                                 <>

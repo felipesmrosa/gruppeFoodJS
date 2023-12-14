@@ -1,5 +1,5 @@
 import { Router } from "./Router";
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, useNavigate } from 'react-router-dom'
 
 import { ThemeProvider } from "styled-components";
 
@@ -79,9 +79,6 @@ export function App() {
     remove.splice(index, 1)
     setNovoItem(remove)
   }
-
-  console.log('Novo Item >>> ', novoItem)
-
 
   const handleProduct = (index, e) => {
     const novosItens = [...novoItem]
@@ -190,11 +187,7 @@ export function App() {
           novoItem: cardapioComImagens,
         };
 
-        console.log('restauranteData: ', restauranteData)
-        console.log('cardapioComImagens:', cardapioComImagens)
-
         const docRef = await addDoc(collection(db, 'restaurantes'), restauranteData);
-        console.log('Restaurante criado com sucesso:', docRef.id);
         toast.success('Parabéns! Seu restaurante está no ar.', {
           position: "top-right",
           autoClose: 1000,
@@ -206,7 +199,6 @@ export function App() {
           theme: "colored",
         });
       } catch (error) {
-        console.error('Erro ao criar restaurante:', error);
         toast.error('Erro! Tente novamente.', {
           position: "top-right",
           autoClose: 1000,
@@ -217,7 +209,6 @@ export function App() {
           progress: undefined,
           theme: "colored",
         });
-
       }
     } else {
       toast.warn('Preencha todos os campos!', {
@@ -248,7 +239,6 @@ export function App() {
   // Calculando o total de itens e o preço total dos combos
   const totalItensCombos = carrinho.reduce((total, item) => total + item.quantidade, 0)
   const precoTotalCombos = carrinho.reduce((total, item) => total + item.precoDoProduto * item.quantidade, 0);
-
   // Calculando o total de itens e o preço total das porções
   const totalItensPorcoes = porcoesCarrinho.reduce((total, item) => total + item.quantidade, 0);
   const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + item.precoDoProduto * item.quantidade, 0);

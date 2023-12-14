@@ -9,11 +9,8 @@ export const HeaderContainer = styled.header`
     background-color: ${props => props.theme["gray-100"]};
 
     img {
-        width: 80%;
+        width: 18vh;
         padding: 0.5rem;
-    }
-    a {
-        width: 35%;
     }
 
     nav {
@@ -47,7 +44,7 @@ export const Desenvolvido = styled.div`
     }
 `
 export const LogoRodape = styled.img`
-    width: 22%;
+    width: 12vh;
 `
 export const Lembrar = styled.p`
     font-size: 1rem;
@@ -147,7 +144,7 @@ export const SearchEat = styled.form`
 export const MenuNavigator = styled.div`
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 
     p {
         font-size: .875rem;
@@ -158,7 +155,7 @@ export const ButtonCarrinho = styled.button`
     align-items: center;
     justify-content: center;
     border: 2px solid ${props => props.theme["red-100"]};
-    padding: 0.2rem;
+    padding: 0.4rem;
     border-radius: 6px;
     color: ${props => props.theme["red-100"]};
     font-size: 1.15rem;
@@ -182,7 +179,7 @@ export const Perfil = styled.button`
     position: relative;
     justify-content: center;
     border: 2px solid #FF3939;
-    padding: 0.3rem;
+    padding: 0.5rem;
     border-radius: 6px;
     color: #FF3939;
     font-size: 1.85rem;

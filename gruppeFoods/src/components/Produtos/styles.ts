@@ -22,7 +22,9 @@ export const InformacoesAMais = styled.p`
 export const TelefoneEHorario = styled.span`
     text-align: center;
 `
+export const LocalDoRestaurante = styled.div`
 
+`
 export const LogoENome = styled.span`
     display: flex;
     align-items: center;
@@ -70,8 +72,10 @@ export const Cardapio = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 19rem;
+    margin: 0 4rem;
     flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
 `
 export const LogoRestaurante = styled.img`
     border-radius: 50%;
@@ -89,6 +93,11 @@ export const InformacoesDoRestaurante = styled.div`
     box-shadow: 0px 8px 36px -18px #000;
     padding: 1rem;
     gap: 0.6rem;
+
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
+        gap: 4rem;
+    }
 `
 export const ContainerProdutos = styled.div`
     margin: 2rem 15rem;
@@ -148,7 +157,6 @@ export const ProductCard = styled.div`
     border: 1px solid #cecece;
     padding: 0.5rem 0.3rem;
     box-shadow: 0px 0px 8px -2px #000;
-    margin-bottom: 1rem;
 `
 
 export const Lanches = styled.div`

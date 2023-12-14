@@ -8,7 +8,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import {
     BotaoCadastrarLogar,
     ContainerFragment,
-    Formulario
+    Formulario,
+    BarraLateral,
+    ConteudoDeLogin,
+    InputLoginECadastro,
+    LogarOuCadastrar,
+    Titulo,
+    EsqueceuASenha
 } from './styles'
 
 import './Login.css'
@@ -25,19 +31,35 @@ export function Login() {
 
         if (type === 'Cadastrar') {
             createUserWithEmailAndPassword(database, email, password).then(data => {
-                console.log(data, "authData")          
             }).catch(err => {
-                alert('Email já cadastrado')
+                toast.warning('Email já cadastrado', {
+                    position: "top-right",
+                    autoClose: 800,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
                 history('/')
                 setLogin(true)
             })
         } else {
             signInWithEmailAndPassword(database, email, password).then(data => {
-                console.log(data, "authData")
                 sessionStorage.setItem('userEmail', email); // Salvando o e-mail na sessão
                 history('/home')
             }).catch(err => {
-                alert('Email ou senha incorreto')
+                toast.error('Email ou senha incorreto', {
+                    position: "top-right",
+                    autoClose: 800,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
             })
         }
     }
@@ -48,26 +70,35 @@ export function Login() {
 
     return (
         <ContainerFragment>
-            <h1>{login ? 'Logar' : 'Cadastrar'}</h1>
-            <Formulario onSubmit={(e) => handleSubmit(e, login ? 'Logar' : 'Cadastrar')}>
-                <input
-                    name="email"
-                    type="text"
-                    placeholder="Email"
-                />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Senha"
-                />
-                <button>{login ? 'Logar' : 'Cadastrar'}</button>
-            </Formulario>
-            <p onClick={handleResetPassword}>Esqueceu sua senha?</p>
-            <BotaoCadastrarLogar>
-                <div className={login ? 'ativarCor' : 'pointer'} onClick={() => setLogin(true)}>Logar</div>
-                <div className={!login ? 'ativarCor' : 'pointer'} onClick={() => setLogin(false)}>Cadastrar</div>
-            </BotaoCadastrarLogar>
-            <ToastContainer/>
+            <BarraLateral>
+
+            </BarraLateral>
+
+            <ConteudoDeLogin>
+                <BotaoCadastrarLogar>
+                    <div className={login ? 'ativarCor' : 'pointer'} onClick={() => setLogin(true)}>Logar</div>
+                    <div className={!login ? 'ativarCor' : 'pointer'} onClick={() => setLogin(false)}>Cadastrar</div>
+                </BotaoCadastrarLogar>
+                <Titulo>{login ? 'Logar' : 'Cadastrar'}</Titulo>
+                <Formulario onSubmit={(e) => handleSubmit(e, login ? 'Logar' : 'Cadastrar')}>
+                    <InputLoginECadastro
+                        name="email"
+                        type="text"
+                        placeholder="Email"
+                        autocomplete="off"
+                    />
+                    <InputLoginECadastro
+                        name="password"
+                        type="password"
+                        placeholder="Senha"
+                        autocomplete="off"
+                    />
+                    {login && (
+                        <EsqueceuASenha onClick={handleResetPassword}>Esqueceu sua senha?</EsqueceuASenha>
+                    )}
+                    <LogarOuCadastrar>{login ? 'Logar' : 'Cadastrar'}</LogarOuCadastrar>
+                </Formulario>
+            </ConteudoDeLogin>
         </ContainerFragment>
     )
 }

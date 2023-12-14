@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const GlobalStyle = createGlobalStyle `
+export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
@@ -24,5 +24,15 @@ export const GlobalStyle = createGlobalStyle `
     }
     ul {
         list-style: none;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }   
+    a {
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        color: #000;
     }
 `
