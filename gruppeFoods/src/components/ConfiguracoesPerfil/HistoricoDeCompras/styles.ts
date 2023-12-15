@@ -19,6 +19,13 @@ export const ListaColumn = styled.ul`
     justify-content: center;
     flex-direction: column-reverse;
 `
+export const NadaEncontrado = styled.div`
+    margin: 5.8rem;
+
+    @media screen and (min-width: 1530px){
+        margin: 10.8rem;
+    }
+`
 
 export const ContainerDoProduto = styled.li`
     display: flex;

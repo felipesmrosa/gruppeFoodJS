@@ -108,7 +108,7 @@ export function Modal({
                     progress: undefined,
                     theme: "colored",
                 });
-
+                localStorage.removeItem('valorTotal');
                 setTimeout(() => {
                     setMostrarModal(false);
                     navegar('home/historico');

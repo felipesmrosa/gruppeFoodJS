@@ -41,6 +41,7 @@ export function Produto({
         border-radius: 9px;
         text-transform: uppercase;
         font-weight: 600;
+        display: none;
 
         cursor: pointer;
         background-color: ${props => (props.seguindo ? '#fff' : '#f9a01b')};

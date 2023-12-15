@@ -70,7 +70,8 @@ export function App() {
       nomeDoProduto: '',
       precoDoProduto: '',
       imagemProduto: null,
-      descricaoDoProduto: ''
+      descricaoDoProduto: '',
+      adicional: ''
     }]);
   };
 
@@ -236,16 +237,21 @@ export function App() {
 
   const [formaDePagamento, setFormaDePagamento] = useState('dinheiro')
 
+  // Recuperando o valor do 'valorTotal' do localStorage
+  const valorTotalArmazenado = JSON.parse(localStorage.getItem('valorTotal')) || 0;
+
   // Calculando o total de itens e o preço total dos combos
-  const totalItensCombos = carrinho.reduce((total, item) => total + item.quantidade, 0)
+  const totalItensCombos = carrinho.reduce((total, item) => total + item.quantidade, 0);
   const precoTotalCombos = carrinho.reduce((total, item) => total + item.precoDoProduto * item.quantidade, 0);
+
   // Calculando o total de itens e o preço total das porções
   const totalItensPorcoes = porcoesCarrinho.reduce((total, item) => total + item.quantidade, 0);
   const precoTotalPorcoes = porcoesCarrinho.reduce((total, item) => total + item.precoDoProduto * item.quantidade, 0);
 
-  // Calculando o total de itens e o preço total geral
+  // Calculando o total de itens e o preço total geral, incluindo o valor do localStorage
   const totalItensGeral = totalItensCombos + totalItensPorcoes;
-  const precoTotalGeral = precoTotalCombos + precoTotalPorcoes;
+  const precoTotalGeral = precoTotalCombos + precoTotalPorcoes + valorTotalArmazenado;
+
 
   useEffect(() => {
     const historicoArmazenado = JSON.parse(localStorage.getItem('historicoCompras')) || [];

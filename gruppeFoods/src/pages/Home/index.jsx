@@ -12,8 +12,8 @@ export function Home({
     restaurantes
 }) {
 
-    const destaquesEmbaralhados = restaurantes.sort(() => Math.random() - 0.5);
-
+    const novoRestauranteProsDestaques = restaurantes;
+    const destaquesEmbaralhados = novoRestauranteProsDestaques.sort(() => Math.random() - 0.5);
     const destaques = destaquesEmbaralhados.slice(0, 5);
 
     return (

@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 100%;
+
+    @media screen and (min-width: 1024px) {
+        width: 30%;
+    }
 `
 export const Formulario = styled.div`
     fieldset {
@@ -27,6 +31,11 @@ export const Row = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    svg {
+        width: 2em;
+        height: 2em;
+    }
 `
 export const DivImagemProduto = styled.div`
     display: flex;

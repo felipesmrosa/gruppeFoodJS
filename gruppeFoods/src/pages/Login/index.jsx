@@ -31,8 +31,22 @@ export function Login() {
 
         if (type === 'Cadastrar') {
             createUserWithEmailAndPassword(database, email, password).then(data => {
+                toast.success('Conta criada com sucesso!', {
+                    position: "top-right",
+                    autoClose: 800,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                })
+                setTimeout(() => {
+                    history('/')
+                    setLogin(true)
+                }, 1000);
             }).catch(err => {
-                toast.warning('Email já cadastrado', {
+                toast.warning('Email já cadastrado ou inválido', {
                     position: "top-right",
                     autoClose: 800,
                     hideProgressBar: false,
@@ -42,8 +56,6 @@ export function Login() {
                     progress: undefined,
                     theme: "colored",
                 });
-                history('/')
-                setLogin(true)
             })
         } else {
             signInWithEmailAndPassword(database, email, password).then(data => {

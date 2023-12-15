@@ -23,14 +23,14 @@ export const BarraLateral = styled.div`
         display: block;
         width: 33%;
         background-repeat: no-repeat;
-        background-image: url(../../src/images/bannerPequenoLogin.png);
+        background-image: url('../../src/images/bannerPequenoLogin.png');
         height: 100vh;
         box-shadow: 0px 0px 12px 0px #000;
     }
     @media screen and (min-width: 1530px){
         display: block;
         width: 40%;
-        background-image: url(../../src/images/banner.png);
+        background-image: url('../../src/images/banner.png');
         height: 100vh;
         box-shadow: 0px 0px 12px 0px #000;
     }

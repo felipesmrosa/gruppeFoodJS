@@ -76,6 +76,15 @@ export const Cardapio = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 1rem;
+
+    @media screen and (min-width: 1024px) {
+        margin: 0 8rem;
+        margin-bottom: 1.5rem;
+    }
+    @media screen and (min-width: 1530px) {
+        margin: 0 14rem;
+        margin-bottom: 2rem;
+    }
 `
 export const LogoRestaurante = styled.img`
     border-radius: 50%;
@@ -152,11 +161,19 @@ export const ProductCard = styled.div`
     flex-direction: column;
     text-align: center;
     background: white;
-    width: auto;
+    width: 90%;
     border-radius: 8px;
     border: 1px solid #cecece;
     padding: 0.5rem 0.3rem;
     box-shadow: 0px 0px 8px -2px #000;
+    text-transform: uppercase;
+
+    @media screen and (min-width: 1024px) {
+        width: 26%;
+    }
+    @media screen and (min-width: 1530px) {
+        width: auto;
+    }
 `
 
 export const Lanches = styled.div`

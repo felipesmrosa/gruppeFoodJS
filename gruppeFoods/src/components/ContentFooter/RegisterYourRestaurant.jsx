@@ -42,26 +42,29 @@ export function RegisterYourRestaurant({
                                 defaultValue={infos.nome}
                                 onChange={(e) => setInfos({ ...infos, nome: e.target.value })}
                                 required
+                                autocomplete='off'
                             />
                         </label>
                         <label htmlFor='email'>Email do Restaurante*
                             <input
                                 id='email'
-                                type="text"
+                                type="mail"
                                 placeholder='Email do Restaurante'
                                 onChange={(e) => setInfos({ ...infos, email: e.target.value })}
                                 defaultValue={infos.email}
                                 required
+                                autocomplete='off'
                             />
                         </label>
                         <label htmlFor='telefone'>Telefone do Restaurante*
                             <input
                                 id='telefone'
-                                type="text"
-                                placeholder='Telefone do Restaurante'
+                                type="number"
+                                placeholder='Telefone do Restaurante (somente numero)'
                                 onChange={(e) => setInfos({ ...infos, telefone: e.target.value })}
                                 defaultValue={infos.telefone}
                                 required
+                                autocomplete='off'
                             />
                         </label>
                         <label htmlFor='cidade'>Cidade*
@@ -72,6 +75,7 @@ export function RegisterYourRestaurant({
                                 onChange={(e) => setInfos({ ...infos, cidade: e.target.value })}
                                 defaultValue={infos.cidade}
                                 required
+                                autocomplete='off'
                             />
                         </label>
                         <label htmlFor='endereco'>Endereço*
@@ -82,6 +86,7 @@ export function RegisterYourRestaurant({
                                 onChange={(e) => setInfos({ ...infos, endereco: e.target.value })}
                                 defaultValue={infos.endereco}
                                 required
+                                autocomplete='off'
                             />
                         </label>
                         <label htmlFor='bairro'>Bairro*
@@ -92,16 +97,18 @@ export function RegisterYourRestaurant({
                                 onChange={(e) => setInfos({ ...infos, bairro: e.target.value })}
                                 defaultValue={infos.bairro}
                                 required
+                                autocomplete='off'
                             />
                         </label>
                         <label htmlFor='cpf'>CPF*
                             <input
                                 id='cpf'
-                                type="text"
-                                placeholder='CPF'
+                                type="number"
+                                placeholder='CPF OU CNPJ (somente numeros)'
                                 onChange={(e) => setInfos({ ...infos, cpf: e.target.value })}
                                 defaultValue={infos.cpf}
                                 required
+                                autocomplete='off'
                             />
                         </label>
                         <label htmlFor="time">Inicio do expediente*
@@ -128,6 +135,7 @@ export function RegisterYourRestaurant({
                                     onChange={handleLogoChange}
                                     accept='image/*'
                                     required
+                                    autocomplete='off'
                                 />
                             </label>
                         </LogoDiv>

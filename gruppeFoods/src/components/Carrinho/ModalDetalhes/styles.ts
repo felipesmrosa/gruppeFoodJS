@@ -6,6 +6,15 @@ export const Container = styled.div`
     width: 100%;
     height: 70vh;
     border-radius: 8px;
+
+    @media screen and (min-width: 1024px) {
+        width: 35%;
+        height: 96vh;
+    }
+    @media screen and (min-width: 1530px) {
+        width: 24%;
+        height: 74vh;
+    }
 `
 export const SalvarPedidoButton = styled.button`
     background-color: #ff3939;
@@ -48,7 +57,7 @@ export const Headerzinho = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 15.8rem;
+    gap: 5.5rem;
 `
 export const Banner = styled.div`
     background-image: url(../../../src/images/pedido.png);
@@ -71,6 +80,13 @@ export const Row = styled.span`
     align-items: center;
     justify-content: space-between;
     padding: 0.12rem 0;
+
+    @media screen and (min-width: 1530px) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.52rem 0;
+    }
 `
 export const BtnRow = styled.span`
     display: flex;
@@ -103,6 +119,12 @@ export const Title = styled.p`
 export const UL = styled.ul`
     list-style: none;
     text-align: start;
+
+    @media screen and (min-width: 1530px) {
+        list-style: none;
+        text-align: start;
+        padding: 0.5rem 1rem;
+    }
 `
 export const ItemUmDoLadoDoOutro = styled.div`
     display: flex;

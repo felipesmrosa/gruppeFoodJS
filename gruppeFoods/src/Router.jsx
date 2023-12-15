@@ -6,6 +6,7 @@ import { Login } from './pages/Login';
 import { RegisterYourRestaurant } from './components/ContentFooter/RegisterYourRestaurant';
 import { ResetPass } from './pages/ResetPass';
 import { HistoricoDeCompras } from './components/ConfiguracoesPerfil/HistoricoDeCompras';
+import { Teste } from './Teste';
 
 
 export function Router({
@@ -52,6 +53,7 @@ export function Router({
 }) {
     return (
         <Routes>
+            <Route path='/teste' element={<Teste />}></Route>
             <Route path='/' element={<Login />} />
             <Route path='/reset' element={<ResetPass />} />
             <Route path='/home' element={<DefaultLayout

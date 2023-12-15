@@ -57,7 +57,7 @@ export function Menu({
                                 <input
                                     id={`precoDoProduto-${index}`}
                                     placeholder='Preço'
-                                    type="text"
+                                    type="number"
                                     name='precoDoProduto'
                                     value={item.preco}
                                     onChange={(event) => handleChange(index, event)}
@@ -84,8 +84,8 @@ export function Menu({
                                 </label>
                             </DivImagemProduto>
                             <Row>
-                                <p onClick={adicionarItem}><PlusCircle /></p>
-                                {novoItem.length > 1 && <p onClick={removerItem}><MinusCircle /></p>}
+                                <p title='Adicionar Item' onClick={adicionarItem}><PlusCircle /></p>
+                                {novoItem.length > 1 && <p  title='Remover Item' onClick={removerItem}><MinusCircle /></p>}
                             </Row>
                         </div>
                     ))}

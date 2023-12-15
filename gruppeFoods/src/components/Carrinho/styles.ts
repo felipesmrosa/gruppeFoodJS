@@ -15,6 +15,8 @@ export const Container = styled.div`
     background: #f9f9f9;
     box-shadow: 14px 0px 40px 20px #c01212;
     z-index: 999;
+    overflow-x: hidden;
+
     @media screen and (min-width: 1000px) and (max-width: 1366px){
         left: 60%;
         max-width: 40%;
@@ -85,6 +87,8 @@ export const ProdutosNoCarrinho = styled.div`
 
     @media screen and (min-width: 1024px) {
         flex-direction: row;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 `
 export const NomePreco = styled.span`

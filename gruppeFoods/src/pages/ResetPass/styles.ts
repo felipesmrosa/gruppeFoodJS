@@ -4,6 +4,13 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (min-width: 1024px){
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 13rem;
+    }
 `
 
 export const BarraLateral = styled.div`
@@ -13,6 +20,21 @@ export const BarraLateral = styled.div`
     background-image: url('../../src/images/bannerReset.png');
     height: 100vh;
     box-shadow: 0px 0px 12px 0px #000; */
+    @media screen and (min-width: 1024px){
+        display: block;
+        width: 35%;
+        background-image: url('../../src/images/bannerReset.png');
+        height: 100vh;
+        box-shadow: 0px 0px 12px 0px #000;
+        background-size: cover;
+    }
+    @media screen and (min-width: 1530px){
+        display: block;
+        width: 40%;
+        background-image: url('../../src/images/bannerReset.png');
+        height: 100vh;
+        box-shadow: 0px 0px 12px 0px #000;
+    }
 `
 export const LINKVOLTAR = styled.span`
     position: absolute;
@@ -29,7 +51,10 @@ export const ConteudoDeResetarSenha = styled.div`
     box-shadow: 0px 0px 20px 0px #ff3939;
     margin-top: 12rem;
 
-    
+    @media screen and (min-width: 1024px) {
+        width: 28%;
+        margin-top: 0rem;
+    }
 `
 
 export const InputEmail = styled.input`

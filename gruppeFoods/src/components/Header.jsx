@@ -82,7 +82,7 @@ export function Header({
                     <UserCircle />  {/* pedidos, favoritos, perfil, meus endereços, sair */}
                     {mostrarPerfil && (
                         <>
-                            <Configuracoes  handleTogglePerfil={handleTogglePerfil}/>
+                            <Configuracoes handleTogglePerfil={handleTogglePerfil} />
                         </>
                     )}
                 </Perfil>
@@ -161,6 +161,7 @@ export function Header({
                 {mostrarDetalhes && (
                     <center>
                         <Detalhes
+                            carrinho={carrinho}
                             precoTotalGeral={precoTotalGeral}
                             setMostrarDetalhes={setMostrarDetalhes}
                         />

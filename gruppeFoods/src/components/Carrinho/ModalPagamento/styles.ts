@@ -5,14 +5,34 @@ export const Container = styled.div`
     padding: 20px;
     border-radius: 8px;
     height: 80vh;
-    width: 35%;
+    width: 100%;
+
+    @media screen and (min-width: 1024px){
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        height: 98vh;
+        width: 53%;
+    }
+    @media screen and (min-width: 1530px) {
+        height: 75vh;
+        width: 40%;
+    }
 `
 export const Headerzinho = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 19rem;
+    gap: 9rem;
     margin-bottom: 2rem;
+
+    @media screen and (min-width: 1024px){
+        gap: 21rem;
+        margin-bottom: 0rem;
+    }
+    @media screen and (min-width: 1530px) {
+        gap: 24rem;
+    }
 `
 export const BotaoFinalizarPedido = styled.button`
     width: 70%;
@@ -71,6 +91,13 @@ export const ItemUmDoLadoDoOutro = styled.div`
     justify-content: center;
     gap: 4rem;
     margin-bottom: 1rem;
+
+    @media screen and (min-width: 1024px) {
+        margin-bottom: 0rem;
+    }
+    @media screen and (min-width: 1530px) {
+        margin-bottom: 2rem;
+    }
 `
 export const InfomacoesDoCartao = styled.input`
     width: 100%;
@@ -97,6 +124,10 @@ export const Localizacao = styled.div`
         padding: 0.3rem 1rem;
         border-radius: 12px;
         border: 2px solid #747474;
+    }
+
+    @media screen and (min-width: 1024px) {
+        margin-bottom: 0.5rem;
     }
 `
 export const FormularioCartao = styled.form`

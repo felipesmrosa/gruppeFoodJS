@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
     Container,
     ModalOverlay,
@@ -21,6 +21,8 @@ import {
 } from './styles'
 import { XCircle } from 'phosphor-react'
 
+import { v4 as uuidv4 } from 'uuid'
+
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,6 +31,79 @@ export function Detalhes({
     setMostrarDetalhes,
     precoTotalGeral,
 }) {
+    const uniqueID = uuidv4()
+
+    const adicionais = [
+        { id: 1, nome: 'Carne Adicional', preco: 5 },
+        { id: 2, nome: 'Bacon Adicional', preco: 3 },
+        { id: 3, nome: 'Queijo Adicional', preco: 2 },
+        { id: 4, nome: 'Cheddar Adicional', preco: 3 },
+    ];
+
+    const [itensSelecionados, setItensSelecionados] = useState([]);
+    const [valorTotal, setValorTotal] = useState(0);
+
+    // Carregar itens do localStorage quando o componente for montado
+    useEffect(() => {
+        const savedItens = JSON.parse(localStorage.getItem('itensSelecionados'));
+        const savedTotal = JSON.parse(localStorage.getItem('valorTotal'));
+
+        if (savedItens) {
+            setItensSelecionados(savedItens);
+        }
+
+        if (savedTotal) {
+            setValorTotal(savedTotal);
+        }
+    }, []);
+
+    // Salvar itens no localStorage sempre que houver uma alteração
+    useEffect(() => {
+        localStorage.setItem('itensSelecionados', JSON.stringify(itensSelecionados));
+        localStorage.setItem('valorTotal', JSON.stringify(valorTotal));
+    }, [itensSelecionados, valorTotal]);
+
+    const adicionarItem = (id) => {
+        const itemSelecionado = adicionais.find(item => item.id === id);
+
+        if (itemSelecionado) {
+            const novosItens = { ...itensSelecionados };
+            if (novosItens[id]) {
+                novosItens[id].quantidade += 1;
+            } else {
+                novosItens[id] = { ...itemSelecionado, quantidade: 1, adicional: '' };
+            }
+
+            setItensSelecionados(novosItens);
+
+            const precoTotal = calcularPrecoTotal(novosItens);
+            setValorTotal(precoTotal);
+        }
+    };
+
+    const removerItem = (id) => {
+        const novosItens = { ...itensSelecionados };
+        if (novosItens[id] && novosItens[id].quantidade > 0) {
+            novosItens[id].quantidade -= 1;
+
+            // if (novosItens[id].quantidade === 0) {
+            //     delete novosItens[id]; // Remove o item se a quantidade for zero
+            // }
+
+            setItensSelecionados(novosItens);
+
+            const precoTotal = calcularPrecoTotal(novosItens);
+            setValorTotal(precoTotal);
+        }
+    };
+
+    const calcularPrecoTotal = (itens) => {
+        return Object.values(itens).reduce(
+            (total, currentItem) => total + currentItem.preco * currentItem.quantidade,
+            0
+        );
+    };
+
 
     function SalvarPedido() {
         toast.success('Pedido Salvo', {
@@ -43,45 +118,6 @@ export function Detalhes({
         });
     }
 
-    const [quantity, setQuantity] = useState(0);
-    const [quantity2, setQuantity2] = useState(0);
-    const [quantity3, setQuantity3] = useState(0);
-    const [quantity4, setQuantity4] = useState(0);
-
-    const increment = () => {
-        setQuantity(quantity + 1);
-    };
-    const increment2 = () => {
-        setQuantity2(quantity2 + 1);
-    };
-    const increment3 = () => {
-        setQuantity3(quantity3 + 1);
-    };
-    const increment4 = () => {
-        setQuantity4(quantity4 + 1);
-    };
-
-    const decrement = () => {
-        if (quantity > 0) {
-            setQuantity(quantity - 1);
-        }
-    };
-    const decrement2 = () => {
-        if (quantity2 > 0) {
-            setQuantity2(quantity2 - 1);
-        }
-    };
-    const decrement3 = () => {
-        if (quantity3 > 0) {
-            setQuantity3(quantity3 - 1);
-        }
-    };
-    const decrement4 = () => {
-        if (quantity4 > 0) {
-            setQuantity4(quantity4 - 1);
-        }
-    };
-
     return (
         <ModalOverlay>
             <Container>
@@ -89,34 +125,25 @@ export function Detalhes({
                     <FecharModal onClick={() => setMostrarDetalhes(false)}>
                         <XCircle />
                     </FecharModal>
+                    <h3>Preço dos Adicionais: {valorTotal}</h3>
                 </Headerzinho>
                 <Banner />
                 <Title>Adicionar Itens</Title>
                 <UL>
-                    <Row>
-                        <li>Carne Adicional - $5</li>
-                        <BtnRow>
-                            <BotaoDetalhes onClick={increment}>+</BotaoDetalhes>{quantity}<BotaoDetalhes onClick={decrement}>-</BotaoDetalhes>
-                        </BtnRow>
-                    </Row>
-                    <Row>
-                        <li>Bacon Adicional - $3</li>
-                        <BtnRow>
-                            <BotaoDetalhes onClick={increment2}>+</BotaoDetalhes>{quantity2}<BotaoDetalhes onClick={decrement2}>-</BotaoDetalhes>
-                        </BtnRow>
-                    </Row>
-                    <Row>
-                        <li>Queijo Adicional - $2</li>
-                        <BtnRow>
-                            <BotaoDetalhes onClick={increment3}>+</BotaoDetalhes>{quantity3}<BotaoDetalhes onClick={decrement3}>-</BotaoDetalhes>
-                        </BtnRow>
-                    </Row>
-                    <Row>
-                        <li>Cheddar Adicional - $3</li>
-                        <BtnRow>
-                            <BotaoDetalhes onClick={increment4}>+</BotaoDetalhes>{quantity4}<BotaoDetalhes onClick={decrement4}>-</BotaoDetalhes>
-                        </BtnRow>
-                    </Row>
+                    {adicionais.map((item) => (
+                        <Row key={item.id}>
+                            <li>{item.nome} - ${item.preco}</li>
+                            <BtnRow>
+                                <BotaoDetalhes onClick={() => adicionarItem(item.id)}>+</BotaoDetalhes>
+                                {itensSelecionados[item.id] !== undefined ? (
+                                    <span>{itensSelecionados[item.id].quantidade}</span>
+                                ) : (
+                                    <span>0</span>
+                                )}
+                                <BotaoDetalhes onClick={() => removerItem(item.id)}>-</BotaoDetalhes>
+                            </BtnRow>
+                        </Row>
+                    ))}
                 </UL>
                 <Title>Alguma observação?</Title>
                 <Observacao>
@@ -127,7 +154,7 @@ export function Detalhes({
                     ></TextoDeObservacao>
                 </Observacao>
                 <Salvar>
-                    <SalvarPedidoButton onClick={SalvarPedido}>Salvar Pedido</SalvarPedidoButton>
+                    <SalvarPedidoButton onClick={SalvarPedido}>Salvar</SalvarPedidoButton>
                 </Salvar>
             </Container>
             <ToastContainer

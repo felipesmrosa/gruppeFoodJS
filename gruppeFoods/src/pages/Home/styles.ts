@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const MenuInteractiveIcons = styled.div `
+export const MenuInteractiveIcons = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 2rem 18.5rem;
 `
-export const MenuItems = styled.div `
+export const MenuItems = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,15 +18,22 @@ export const MenuItems = styled.div `
     }
 `
 
-export const HighlightsForYou = styled.div `
+export const HighlightsForYou = styled.div`
     margin: 1rem 2rem;
     margin-bottom: 1rem;
     color: ${props => props.theme["red-100"]};
     font-size: 1.35rem;
     text-transform: uppercase;
+    
+    @media screen and (min-width: 1024px) {
+        margin: 1rem 15rem;
+    }
+    @media screen and (min-width: 1530px) {
+        margin: 1rem 25rem;
+    }
 `
 
-export const Restaurants = styled.div `
+export const Restaurants = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,9 +42,12 @@ export const Restaurants = styled.div `
     flex-wrap: wrap;
     align-content: center;
     flex-direction: row;
+    @media screen and (min-width: 1530px) {
+        gap: 2.15rem;
+    }
 `
 
-export const Restaurant = styled.div `
+export const Restaurant = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;

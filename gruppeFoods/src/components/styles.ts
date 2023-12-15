@@ -44,7 +44,7 @@ export const Desenvolvido = styled.div`
     }
 `
 export const LogoRodape = styled.img`
-    width: 12vh;
+    width: 17vh;
 `
 export const Lembrar = styled.p`
     font-size: 1rem;
@@ -239,6 +239,9 @@ export const Formulario = styled.form`
     }
     input[type="file"] {
         display: none;
+    }
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
     }
 `
 export const Cadastro = styled.div`
