@@ -52,64 +52,14 @@ export function Modal({
         }
     };
 
-    // const finalizarPedido = (e) => {
-    //     e.preventDefault()
-
-    //     const carrinhoLocalStorage = localStorage.getItem('carrinho');
-
-    // if (!carrinhoLocalStorage || JSON.parse(carrinhoLocalStorage).length === 0) {
-    //     toast.error('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.', {
-    //         position: "top-right",
-    //         autoClose: 1500,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "colored",
-    //     });
-    //     return;
-    // }
-
-    // const historicoCompras = JSON.parse(localStorage.getItem('historicoCompras')) || [];
-    // const carrinho = JSON.parse(carrinhoLocalStorage);
-
-    //     setMostrarModal(true)
-
-    // toast.success('Pedido realizado com sucesso!', {
-    //     position: "top-right",
-    //     autoClose: 800,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "colored",
-    // });
-
-    // const novaCompra = { itens: carrinho, data: new Date().toLocaleString() };
-
-    // const novoHistorico = [...historicoCompras, novaCompra];
-
-    // localStorage.setItem('historicoCompras', JSON.stringify(novoHistorico));
-    // localStorage.removeItem('carrinho');
-
-    // setTimeout(() => {
-    //     setMostrarModal(false)
-    // }, 800)
-    // setTimeout(() => {
-    //     navegar('home/historico');
-    //     window.location.reload()
-    // }, 800);
-    // };
-
     const [inputs, setInputs] = useState({
         endereco: '',
         complemento: '',
         cartao: '',
         vencimento: '',
         ano: '',
-        cvv: ''
+        cvv: '',
+        troco: ''
     })
     const [erro, setErro] = useState(false)
 
@@ -275,7 +225,7 @@ export function Modal({
 
                 {!pagamento && (
                     <>
-                        <div>
+                        <FormularioCartao onSubmit={handleSubmit}>
                             <Localizacao>
                                 <label htmlFor="localizacao">Aonde você está?*
                                     <input
@@ -296,30 +246,39 @@ export function Modal({
                             </Localizacao>
                             <h1>Precisa de troco?</h1>
                             <SimNao>
-                                <label htmlFor="teste">
+                                <label htmlFor="sim">
                                     <input
-                                        id='teste'
+                                        id='sim'
                                         type="checkbox"
                                         checked={simSelecionado}
                                         onChange={handleSimChange}
                                     />
                                     SIM
                                 </label>
-                                <input
-                                    type="checkbox"
-                                    checked={naoSelecionado}
-                                    onChange={handleNaoChange}
-                                />
-                                NÃO
+                                <label htmlFor="nao">
+                                    <input
+                                        id='nao'
+                                        type="checkbox"
+                                        checked={naoSelecionado}
+                                        onChange={handleNaoChange}
+                                    />
+                                    NÃO
+                                </label>
                                 {modalSim && (
                                     <ModalSimNao>
                                         <h3>Troco para quanto?</h3>
-                                        <input type="text" placeholder='Quanto você tem?' />
+                                        <input
+                                            type="number"
+                                            placeholder='Quanto você tem?'
+                                            value={inputs.troco}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </ModalSimNao>
                                 )}
                             </SimNao>
-                        </div>
-                        <BotaoFinalizarPedido type='submit'>Concluir Pedido</BotaoFinalizarPedido>
+                            <BotaoFinalizarPedido type='submit'>Concluir Pedido</BotaoFinalizarPedido>
+                        </FormularioCartao>
                     </>
                 )}
                 {/* <Localizacao>

@@ -82,6 +82,10 @@ export const ProdutosNoCarrinho = styled.div`
         border-radius: 7px;
         padding: 0;
     }
+
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
+    }
 `
 export const NomePreco = styled.span`
     p {
@@ -98,6 +102,12 @@ export const QuantidadeDeleter = styled.div`
 `
 export const DetalhesModal = styled.p`
     cursor: pointer;
+
+    @media screen and (min-width: 1024px) {
+        position: absolute;
+        left: 84%;
+        top: 81%;
+    }
 `
 export const Minus = styled.button`
     background: transparent;

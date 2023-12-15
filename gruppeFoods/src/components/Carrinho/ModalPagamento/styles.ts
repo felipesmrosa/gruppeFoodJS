@@ -4,14 +4,14 @@ export const Container = styled.div`
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    height: 96vh;
-    width: 100%;
+    height: 80vh;
+    width: 35%;
 `
 export const Headerzinho = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6rem;
+    gap: 19rem;
     margin-bottom: 2rem;
 `
 export const BotaoFinalizarPedido = styled.button`
